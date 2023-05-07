@@ -1,5 +1,5 @@
 const apiUrl = "http://localhost/ligth-weight-limo-api/public/api/";
-// const apiUrl = 'http://localhost/ligth-weight-limo-api/public/api';
+// const apiUrl = 'https://api.limewaterlimo.com/public/api';
 
 var current_fs, next_fs, previous_fs; //fieldsets
 var opacity;
