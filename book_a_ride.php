@@ -13,7 +13,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDV0Tvft7MF9QaOdFLGCXMp9g0LQdzZp5s&libraries=places" async></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=KEY&libraries=places" async></script>
 	<script data-require="jquery@3.1.1" data-semver="3.1.1" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 
@@ -354,7 +354,7 @@
 													<input type="hidden" value="1" class="_vehicleTypeId notranslate" id="_vehicle_1">
 													<input type="hidden" value="Sedan" class="_vehicleSummary notranslate">
 													<input type="hidden" value="false" class="_vehicleZeroRateDisableBooking notranslate">
-													<button type="button" class="car picked">
+													<button type="button" class="car picked" onclick="selectVehicleType(1)">
 
 														<div class="pop">
 															<a type="popu" class="popp" data-toggle="modal" data-target="#exampleModalCenter"><span class="icon info" title="More Info"><i class="fa fa-info"></i></span></a>
@@ -378,7 +378,7 @@
 													<input type="hidden" value="1" class="_vehicleTypeId notranslate" id="_vehicle_1">
 													<input type="hidden" value="Sedan" class="_vehicleSummary notranslate">
 													<input type="hidden" value="false" class="_vehicleZeroRateDisableBooking notranslate">
-													<button type="button" class="car picked">
+													<button type="button" class="car picked" onclick="selectVehicleType(2)">
 														<div class="pop">
 															<a type="popu" class="popp" data-toggle="modal" data-target="#exampleModalCenterSuv"><span class="icon info" title="More Info"><i class="fa fa-info"></i></span></a>
 
@@ -401,7 +401,7 @@
 													<input type="hidden" value="1" class="_vehicleTypeId notranslate" id="_vehicle_1">
 													<input type="hidden" value="Sedan" class="_vehicleSummary notranslate">
 													<input type="hidden" value="false" class="_vehicleZeroRateDisableBooking notranslate">
-													<button type="button" class="car picked own">
+													<button type="button" class="car picked own" onclick="selectVehicleType(3)">
 														<div class="pop">
 															<a type="popu" class="popp" data-toggle="modal" data-target="#exampleModalCenterOther"><span class="icon info" title="More Info"><i class="fa fa-info"></i></span></a>
 
@@ -517,7 +517,7 @@
 									</div>
 								</div>
 								<input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-								<input type="button" name="next" class="next action-button" value="Next" />
+								<input type="button" name="next" id="next-step-checkout" class="next action-button" value="Next" />
 							</fieldset>
 
 							<fieldset>
@@ -560,9 +560,9 @@
 													</div>
 												</div>
 												<div class="row">
-													<div class="col-md-6">
+													<!-- <div class="col-md-6">
 														<input type="email" name="cemail" id="cemail" placeholder="*Contact Email">
-													</div>
+													</div> -->
 													<div class="col-md-6">
 														<input type="text" name="tip" id="tip" placeholder="*Enter Tip For the Driver">
 													</div>
@@ -572,7 +572,9 @@
 
 											<div class="payop">
 												<h4>Payment Info</h4>
-												<div class="row">
+
+												<!-- STRIPE UI WILL COME HERE -->
+												<!-- <div class="row">
 													<div class="col-md-6">
 
 
@@ -624,7 +626,7 @@
 														<option value="30"> 2030</option>
 													</select>
 												</div>
-											</div>
+											</div> -->
 
 											<div class="xtra">
 												<h4>Special Instructions</h4>
@@ -641,7 +643,7 @@
 															<h4>Pickup Date</h4>
 														</div>
 														<div class="col-md-6">
-															<p>10-2-2020</p>
+															<p id="pickup-date-summary">10-2-2020</p>
 														</div>
 													</div>
 												</div>
@@ -652,7 +654,7 @@
 															<h4>Pickup time</h4>
 														</div>
 														<div class="col-md-6">
-															<p>10:00 AM</p>
+															<p id="time-summary">10:00 AM</p>
 														</div>
 													</div>
 												</div>
@@ -663,7 +665,7 @@
 															<h4>Pickup Location</h4>
 														</div>
 														<div class="col-md-6">
-															<p>Lorem Ipsum</p>
+															<p id="pickup-location-summary">Lorem Ipsum</p>
 														</div>
 													</div>
 												</div>
@@ -674,7 +676,7 @@
 															<h4>Dropoff Location</h4>
 														</div>
 														<div class="col-md-6">
-															<p>Lorem Ipsum</p>
+															<p id="drop-location-summary">Lorem Ipsum</p>
 														</div>
 													</div>
 												</div>
@@ -685,7 +687,7 @@
 															<h4>No. Of Passenger</h4>
 														</div>
 														<div class="col-md-6">
-															<p>2</p>
+															<p id="passenger-number-summary">2</p>
 														</div>
 													</div>
 												</div>
@@ -696,7 +698,7 @@
 															<h4>No. Of Childern</h4>
 														</div>
 														<div class="col-md-6">
-															<p>1</p>
+															<p id="children-number-summary">1</p>
 														</div>
 													</div>
 												</div>
@@ -707,7 +709,7 @@
 															<h4>No. Of Bags</h4>
 														</div>
 														<div class="col-md-6">
-															<p>2</p>
+															<p id="bags-number-summary">2</p>
 														</div>
 													</div>
 												</div>
@@ -717,11 +719,11 @@
 															<h4>Car Selected</h4>
 														</div>
 														<div class="col-md-6">
-															<p>SUV</p>
+															<p id="car-selected-summary">SUV</p>
 														</div>
 													</div>
 												</div>
-												<div class="pname">
+												<!-- <div class="pname">
 													<div class="row">
 														<div class="col-md-6">
 															<h4>Name</h4>
@@ -760,7 +762,7 @@
 															<p>xxx</p>
 														</div>
 													</div>
-												</div>
+												</div> -->
 
 												<div class="lne"></div>
 												<div class="amount">
@@ -769,7 +771,7 @@
 															<h4>Total</h4>
 														</div>
 														<div class="col-md-6">
-															<h4>$1240.20</h4>
+															<h4 id="total-charges">$1240.20</h4>
 														</div>
 													</div>
 												</div>
@@ -778,7 +780,7 @@
 									</div>
 								</div>
 								<input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-								<a href="https://localhost/junaid/thankyou_for_booking"><input type="submit" name="sub" class="next action-button submit_btn" value="Confirm" /></a>
+								<a href="https://localhost/junaid/thankyou_for_booking"><input type="submit" name="sub" class="next action-button submit_btn" value="Confirm" onclick="proceedToCheckout()"/></a>
 							</fieldset>
 
 						</form>
