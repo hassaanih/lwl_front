@@ -13,7 +13,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&libraries=places" async></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDV0Tvft7MF9QaOdFLGCXMp9g0LQdzZp5s&libraries=places" async></script>
 	<script data-require="jquery@3.1.1" data-semver="3.1.1" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 
@@ -149,20 +149,20 @@
 											<div class="col-md-3">
 												<label for="address">*Travellers:</label>
 												<div class="quantity buttons_added">
-													<input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
+													<input type="button" value="-" class="minus"><input id="travellerNumber" type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
 												</div>
 											</div>
 
 											<div class="col-md-3">
 												<label for="address">*Bags:</label>
 												<div class="quantity buttons_added">
-													<input type="button" value="-" class="minus"><input type="number" step="1" min="0" max="" name="quantity" value="0" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
+													<input type="button" value="-" class="minus"><input id="kidsNumber" type="number" step="1" min="0" max="" name="quantity" value="0" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
 												</div>
 											</div>
 											<div class="col-md-3">
 												<label for="address">Child Seat:</label>
 												<div class="quantity buttons_added">
-													<input type="button" value="-" class="minus"><input type="number" step="1" min="0" max="" name="quantity" value="0" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
+													<input type="button" value="-" class="minus"><input id="bagsNumber" type="number" step="1" min="0" max="" name="quantity" value="0" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
 												</div>
 											</div>
 											<div class="col-md-3 ds">
@@ -184,7 +184,7 @@
 									</div>
 								</div>
 
-								<input type="button" name="next" class="next action-button" value="Next" />
+								<input type="button" name="next" class="next action-button" value="Next" onclick="submitBookingDetails()"/>
 							</fieldset>
 
 
@@ -430,7 +430,7 @@
 															<h4>Pickup Date</h4>
 														</div>
 														<div class="col-md-6">
-															<p>10-2-2020</p>
+															<p id="pickup-date-summary">10-2-2020</p>
 														</div>
 													</div>
 												</div>
@@ -441,7 +441,7 @@
 															<h4>Pickup time</h4>
 														</div>
 														<div class="col-md-6">
-															<p>10:00 AM</p>
+															<p id="time-summary">10:00 AM</p>
 														</div>
 													</div>
 												</div>
@@ -452,7 +452,7 @@
 															<h4>Pickup Location</h4>
 														</div>
 														<div class="col-md-6">
-															<p>Lorem Ipsum</p>
+															<p id="pickup-location-summary">Lorem Ipsum</p>
 														</div>
 													</div>
 												</div>
@@ -463,7 +463,7 @@
 															<h4>Dropoff Location</h4>
 														</div>
 														<div class="col-md-6">
-															<p>Lorem Ipsum</p>
+															<p id="drop-location-summary">Lorem Ipsum</p>
 														</div>
 													</div>
 												</div>
@@ -474,7 +474,7 @@
 															<h4>No. Of Passenger</h4>
 														</div>
 														<div class="col-md-6">
-															<p>2</p>
+															<p id="passenger-number-summary">2</p>
 														</div>
 													</div>
 												</div>
@@ -485,7 +485,7 @@
 															<h4>No. Of Childern</h4>
 														</div>
 														<div class="col-md-6">
-															<p>1</p>
+															<p id="children-number-summary">1</p>
 														</div>
 													</div>
 												</div>
@@ -496,7 +496,7 @@
 															<h4>No. Of Bags</h4>
 														</div>
 														<div class="col-md-6">
-															<p>2</p>
+															<p id="bags-number-summary">2</p>
 														</div>
 													</div>
 												</div>
@@ -508,7 +508,7 @@
 															<h4>Total</h4>
 														</div>
 														<div class="col-md-6">
-															<h4>$1240.20</h4>
+															<h4 id="total-charges">$1240.20</h4>
 														</div>
 													</div>
 												</div>
@@ -917,6 +917,7 @@
 		});
 	</script>
 	<script src="assets/js/googlemap.js"></script>
+	<script src="assets/js/apilinking.js"></script>
 </body>
 
 </html>
