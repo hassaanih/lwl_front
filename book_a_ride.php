@@ -119,6 +119,7 @@
 														</div>
 
 													</div>
+													<input type="hidden" id="totalkms">
 												</div>
 												<div class="for">
 													<label id="addEmail" class="link">Add Additional Pickup Location</label>

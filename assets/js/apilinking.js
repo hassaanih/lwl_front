@@ -19,7 +19,7 @@ function submitBookingDetails() {
     kids: $("#kidsNumber").val(),
     bags: $("#bagsNumber").val(),
     baby_chair: $("#kidsNumber").val(),
-    total_km: 32,
+    total_km: $("#totalkms").val(),
   };
 
   $.ajax({
@@ -77,6 +77,7 @@ function selectVehicleType(vehicleType){
       nextButton = false;
       // setSummaryView(result.booking_details);
       document.getElementById('car-selected-summary').innerHTML = result.booking_details.vehicle_type_id != 3 ? result.booking_details.vehicle_type.name : result.booking_details.vehicle.name;
+      setSummaryView(result.booking_details);
       console.log(bookingDetailsId);
     },
     error: function (error) {
