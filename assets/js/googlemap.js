@@ -77,7 +77,8 @@ function initMaps() {
           let milesDistance = convertMetersToMiles(
             response.routes[0].legs[0].distance.value
           );
-          document.getElementById('#totalkms').value = milesDistance;
+          console.log(milesDistance);
+          document.getElementById('totalkms').value = milesDistance;
           console.log(milesDistance);
         } else {
           window.alert("Directions request failed due to " + status);

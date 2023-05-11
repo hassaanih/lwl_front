@@ -13,7 +13,8 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=KEY&libraries=places" async></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDV0Tvft7MF9QaOdFLGCXMp9g0LQdzZp5s&libraries=places" async></script>
+	<script src="https://js.stripe.com/v3/"></script>
 	<script data-require="jquery@3.1.1" data-semver="3.1.1" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 
@@ -185,7 +186,7 @@
 									</div>
 								</div>
 
-								<input type="button" name="next" class="next action-button" value="Next" onclick="submitBookingDetails()"/>
+								<input type="button" name="next" class="next action-button" value="Next" onclick="submitBookingDetails()" />
 							</fieldset>
 
 
@@ -571,63 +572,22 @@
 											</div>
 
 
-											<div class="payop">
-												<h4>Payment Info</h4>
+											<div class="payop" id="stripe">
 
-												<!-- STRIPE UI WILL COME HERE -->
-												<!-- <div class="row">
-													<div class="col-md-6">
-
-
-														<input type="text" id="owner" placeholder="Card Holder Name">
-
+												<form id="payment-form">
+													<div id="link-authentication-element">
+														<!--Stripe.js injects the Link Authentication Element-->
 													</div>
-													<div class="col-md-6">
-
-
-														<input type="text" id="cvv" placeholder="CVV">
-
+													<div id="payment-element">
+														<!--Stripe.js injects the Payment Element-->
 													</div>
-												</div>
-
-
-												<input type="text" id="cardNumber" placeholder="Credit Card Number">
-
-												<div class="form-group" id="expiration-date">
-													<label class="ex">Select Expiry Date</label> <br>
-													<select class="mnth">
-														<option value="01">January</option>
-														<option value="02">February </option>
-														<option value="03">March</option>
-														<option value="04">April</option>
-														<option value="05">May</option>
-														<option value="06">June</option>
-														<option value="07">July</option>
-														<option value="08">August</option>
-														<option value="09">September</option>
-														<option value="10">October</option>
-														<option value="11">November</option>
-														<option value="12">December</option>
-													</select>
-													<select class="yrs">
-														<option value="16"> 2016</option>
-														<option value="17"> 2017</option>
-														<option value="18"> 2018</option>
-														<option value="19"> 2019</option>
-														<option value="20"> 2020</option>
-														<option value="21"> 2021</option>
-														<option value="22"> 2022</option>
-														<option value="23"> 2023</option>
-														<option value="24"> 2024</option>
-														<option value="25"> 2025</option>
-														<option value="26"> 2026</option>
-														<option value="27"> 2027</option>
-														<option value="28"> 2028</option>
-														<option value="29"> 2029</option>
-														<option value="30"> 2030</option>
-													</select>
-												</div>
-											</div> -->
+													<!-- <button id="submit">
+														<div class="spinner hidden" id="spinner"></div>
+														<span id="button-text">Pay now</span>
+													</button> -->
+													<div id="payment-message" class="hidden"></div>
+												</form>
+											</div>
 
 											<div class="xtra">
 												<h4>Special Instructions</h4>
@@ -781,7 +741,7 @@
 									</div>
 								</div>
 								<input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-								<a href="https://localhost/junaid/thankyou_for_booking"><input type="submit" name="sub" class="next action-button submit_btn" value="Confirm" onclick="proceedToCheckout()"/></a>
+								<a href="https://localhost/junaid/thankyou_for_booking"><input type="submit" name="sub" class="next action-button submit_btn" value="Confirm" onclick="proceedToCheckout()" /></a>
 							</fieldset>
 
 						</form>
