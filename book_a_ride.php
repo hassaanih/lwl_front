@@ -14,7 +14,6 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDV0Tvft7MF9QaOdFLGCXMp9g0LQdzZp5s&libraries=places" async></script>
-	<script src="https://js.stripe.com/v3/"></script>
 	<script data-require="jquery@3.1.1" data-semver="3.1.1" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 
@@ -186,7 +185,7 @@
 									</div>
 								</div>
 
-								<input type="button" name="next" class="next action-button" value="Next" onclick="submitBookingDetails()" />
+								<input type="button" name="next" class="next action-button" value="Next" onclick="submitBookingDetails()"/>
 							</fieldset>
 
 
@@ -356,7 +355,7 @@
 													<input type="hidden" value="1" class="_vehicleTypeId notranslate" id="_vehicle_1">
 													<input type="hidden" value="Sedan" class="_vehicleSummary notranslate">
 													<input type="hidden" value="false" class="_vehicleZeroRateDisableBooking notranslate">
-													<button type="button" class="car picked" onclick="selectVehicleType(1)">
+													<button type="button" class="car picked" onclick="selectVehicleType(1, 0)">
 
 														<div class="pop">
 															<a type="popu" class="popp" data-toggle="modal" data-target="#exampleModalCenter"><span class="icon info" title="More Info"><i class="fa fa-info"></i></span></a>
@@ -380,7 +379,7 @@
 													<input type="hidden" value="1" class="_vehicleTypeId notranslate" id="_vehicle_1">
 													<input type="hidden" value="Sedan" class="_vehicleSummary notranslate">
 													<input type="hidden" value="false" class="_vehicleZeroRateDisableBooking notranslate">
-													<button type="button" class="car picked" onclick="selectVehicleType(2)">
+													<button type="button" class="car picked" onclick="selectVehicleType(2, 0)">
 														<div class="pop">
 															<a type="popu" class="popp" data-toggle="modal" data-target="#exampleModalCenterSuv"><span class="icon info" title="More Info"><i class="fa fa-info"></i></span></a>
 
@@ -400,26 +399,12 @@
 													</button>
 												</div>
 												<div class="col-md-12">
-													<input type="hidden" value="1" class="_vehicleTypeId notranslate" id="_vehicle_1">
-													<input type="hidden" value="Sedan" class="_vehicleSummary notranslate">
-													<input type="hidden" value="false" class="_vehicleZeroRateDisableBooking notranslate">
-													<button type="button" class="car picked own" onclick="selectVehicleType(3)">
-														<div class="pop">
-															<a type="popu" class="popp" data-toggle="modal" data-target="#exampleModalCenterOther"><span class="icon info" title="More Info"><i class="fa fa-info"></i></span></a>
-
-														</div>
-														<!-- <div class="car_img">
-                 								<img src="assets/images/sedan.png">
-                 							</div> -->
-														<div class="car-info">
-															<p>Choose Your Own Car</p>
-														</div>
-														<!-- <div class="car-volume">
-                      							<span class="icon"><i class="fa fa-users" aria-hidden="true"></i>2</span>
-                        						<span class="icon"><i class="fa fa-suitcase" aria-hidden="true"></i>3</span>
-                    						</div>
-                    						<div class="car-price _vehiclePrice"><ins>USD</ins>$1,306.28</div> -->
-													</button>
+												<div class="select-dropdown">
+													<select id="vehicles" onchange="handleOnchange(this)">
+													<option value="Option 1" class="op1">Choose Your Own Car</option>
+													
+													</select>
+												</div>
 												</div>
 											</div>
 										</div>
@@ -572,22 +557,63 @@
 											</div>
 
 
-											<div class="payop" id="stripe">
+											<!-- <div class="payop">
+												<h4>Payment Info</h4>
 
-												<form id="payment-form">
-													<div id="link-authentication-element">
-														<!--Stripe.js injects the Link Authentication Element-->
+												STRIPE UI WILL COME HERE
+												<div class="row">
+													<div class="col-md-6">
+
+
+														<input type="text" id="owner" placeholder="Card Holder Name">
+
 													</div>
-													<div id="payment-element">
-														<!--Stripe.js injects the Payment Element-->
+													<div class="col-md-6">
+
+
+														<input type="text" id="cvv" placeholder="CVV">
+
 													</div>
-													<!-- <button id="submit">
-														<div class="spinner hidden" id="spinner"></div>
-														<span id="button-text">Pay now</span>
-													</button> -->
-													<div id="payment-message" class="hidden"></div>
-												</form>
-											</div>
+												</div>
+
+
+												<input type="text" id="cardNumber" placeholder="Credit Card Number">
+
+												<div class="form-group" id="expiration-date">
+													<label class="ex">Select Expiry Date</label> <br>
+													<select class="mnth">
+														<option value="01">January</option>
+														<option value="02">February </option>
+														<option value="03">March</option>
+														<option value="04">April</option>
+														<option value="05">May</option>
+														<option value="06">June</option>
+														<option value="07">July</option>
+														<option value="08">August</option>
+														<option value="09">September</option>
+														<option value="10">October</option>
+														<option value="11">November</option>
+														<option value="12">December</option>
+													</select>
+													<select class="yrs">
+														<option value="16"> 2016</option>
+														<option value="17"> 2017</option>
+														<option value="18"> 2018</option>
+														<option value="19"> 2019</option>
+														<option value="20"> 2020</option>
+														<option value="21"> 2021</option>
+														<option value="22"> 2022</option>
+														<option value="23"> 2023</option>
+														<option value="24"> 2024</option>
+														<option value="25"> 2025</option>
+														<option value="26"> 2026</option>
+														<option value="27"> 2027</option>
+														<option value="28"> 2028</option>
+														<option value="29"> 2029</option>
+														<option value="30"> 2030</option>
+													</select>
+												</div>
+											</div> -->
 
 											<div class="xtra">
 												<h4>Special Instructions</h4>
@@ -741,7 +767,7 @@
 									</div>
 								</div>
 								<input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-								<a href="https://localhost/junaid/thankyou_for_booking"><input type="submit" name="sub" class="next action-button submit_btn" value="Confirm" onclick="proceedToCheckout()" /></a>
+								<a href="https://localhost/junaid/thankyou_for_booking"><input type="submit" name="sub" class="next action-button submit_btn" value="Confirm" onclick="proceedToCheckout()"/></a>
 							</fieldset>
 
 						</form>
