@@ -13,8 +13,8 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=KEY&libraries=places" async></script>
 	<script data-require="jquery@3.1.1" data-semver="3.1.1" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNCYnCArZoOrroMJTcZZQddwSqiAvtWm4&libraries=places" async></script>
 
 
 	<?php
@@ -95,7 +95,7 @@
 												<input type="checkbox" id="myCheck" class="hourly">
 												<div class="for">
 													<label for="exampleInputEmail1">Pickup Location</label>
-													<input type="text" class="form-control" id="ploc">
+													<input type="text" class="form-control" id="ploc" pattern="^\d+\s[a-zA-Z]+\s[a-zA-Z]+\,\s[a-zA-Z]+\,\sIllinois\s\d{5}\,\s[a-zA-Z]+\s*$">
 													<div class="row">
 														<div class="col-md-12">
 															<p id="text" style="display:none"><input type="text" class="form-control" id="flghno" placeholder="Flight No*"><input type="text" class="form-control" id="flghtm" placeholder="Arrival Timing*"><input type="text" class="form-control" id="airlineName" placeholder="Name Of Airline"><input type="text" class="form-control" id="card" placeholder="Inside Meetup"></p>
@@ -119,7 +119,7 @@
 										<div class="row in3">
 											<div class="col-md-12">
 												<label for="address">* Dropoff Location:</label>
-												<br><input type="text" id="daddress" name="daddress">
+												<br><input type="text" id="daddress" name="daddress" pattern="^\d+\s[a-zA-Z]+\s[a-zA-Z]+\,\s[a-zA-Z]+\,\sIllinois\s\d{5}\,\s[a-zA-Z]+\s*$">
 											</div>
 										</div>
 										<div class="row in4">
@@ -142,9 +142,9 @@
 													<input type="button" value="-" class="minus"><input id="bagsNumber" type="number" step="1" min="0" max="" name="quantity" value="0" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
 												</div>
 											</div>
-											<div class="col-md-3 ds">
-												<h3>Disclaimer:</h3>
-												<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+											<div class="col-md-12 ds">
+												<h3 class="mb-2">Disclaimer:</h3>
+												<p>The Child Passenger Protection Act requires that all children under age 8 be properly secured in an appropriate child safety restraint system. This includes the use of booster seats, which must only be used with a lap/shoulder safety belt. </p>
 											</div>
 										</div>
 
@@ -156,7 +156,7 @@
 									<div class="col-md-5">
 										<div class="maph">
 											<h4>Check Your Distance Here</h4>
-											<div id="maps"></div>
+												<div id="maps"></div>
 										</div>
 									</div>
 								</div>

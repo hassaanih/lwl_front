@@ -1,42 +1,17 @@
 function initMaps() {
-  var geocoder = new google.maps.Geocoder();
-
-  // Set the geocoding options to restrict to Illinois
-  var geocodeOptions = {
-    componentRestrictions: {
-      country: "US",
-      administrativeArea: "IL",
-    },
-  };
-
-  const illinoisBounds = {
-    north: 42.5083,
-    south: 36.9861,
-    west: -91.5131,
-    east: -87.0199,
-  };
   var directionsService = new google.maps.DirectionsService();
   var directionsRenderer = new google.maps.DirectionsRenderer();
-  var map = new google.maps.Map(document.getElementById("maps"), {
-    zoom: 10,
-    center: { lat: 40.0, lng: -89.0 },
-    restriction: {
-      latLngBounds: illinoisBounds,
-      strictBounds: false,
-    },
+  var mapDiv = document.getElementById('maps');
+  var map = new google.maps.Map(mapDiv, {
+    center: {lat: 40.0000, lng: -89.0000},
+    zoom: 8
   });
   directionsRenderer.setMap(map);
 
   var pickupInput = document.getElementById("ploc");
   var dropInput = document.getElementById("daddress");
-  var pickupAutocomplete = new google.maps.places.Autocomplete(pickupInput, {
-    // types: ["address"],
-    // componentRestrictions: { country: "US", administrativeArea: "IL" },
-  });
-  var dropAutocomplete = new google.maps.places.Autocomplete(dropInput, {
-    // types: ["address"],
-    // componentRestrictions: { country: "US", administrativeArea: "IL" },
-  });
+  var pickupAutocomplete = new google.maps.places.Autocomplete(pickupInput);
+  var dropAutocomplete = new google.maps.places.Autocomplete(dropInput);
 
   var pickupMarker = new google.maps.Marker({ map: map });
   var dropMarker = new google.maps.Marker({ map: map });
