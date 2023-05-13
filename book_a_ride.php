@@ -13,7 +13,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDV0Tvft7MF9QaOdFLGCXMp9g0LQdzZp5s&libraries=places" async></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=KEY&libraries=places" async></script>
 	<script data-require="jquery@3.1.1" data-semver="3.1.1" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 
@@ -93,26 +93,12 @@
 												<input type="checkbox" id="myCheck" onclick="myFunction()"> &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
 												<label for="myCheck">Hourly:</label>
 												<input type="checkbox" id="myCheck" class="hourly">
-
-
-
-												<script>
-													function myFunction() {
-														var checkBox = document.getElementById("myCheck");
-														var text = document.getElementById("text");
-														if (checkBox.checked == true) {
-															text.style.display = "block";
-														} else {
-															text.style.display = "none";
-														}
-													}
-												</script>
 												<div class="for">
 													<label for="exampleInputEmail1">Pickup Location</label>
 													<input type="text" class="form-control" id="ploc">
 													<div class="row">
 														<div class="col-md-12">
-															<p id="text" style="display:none"><input type="text" class="form-control" id="flghno" placeholder="Flight No*"><input type="text" class="form-control" id="flghtm" placeholder="Arrival Timing*"><input type="text" class="form-control" id="card" placeholder="Name Of Airline"><input type="text" class="form-control" id="card" placeholder="Inside Meetup"></p>
+															<p id="text" style="display:none"><input type="text" class="form-control" id="flghno" placeholder="Flight No*"><input type="text" class="form-control" id="flghtm" placeholder="Arrival Timing*"><input type="text" class="form-control" id="airlineName" placeholder="Name Of Airline"><input type="text" class="form-control" id="card" placeholder="Inside Meetup"></p>
 															<!-- <p id="text" style="display:none"><input type="text" class="form-control" id="flghtm" placeholder="Arrival Timing*"></p>
                         <p id="text"  style="display:none"><input type="text" class="form-control" id="card" placeholder="Name Of Airline"></p> -->
 															<!-- <p id="text"  style="display:none"><input type="text" class="form-control" id="card" placeholder="Inside Meetup"></p> -->
@@ -122,24 +108,14 @@
 													<input type="hidden" id="totalkms">
 												</div>
 												<div class="for">
-													<label id="addEmail" class="link">Add Additional Pickup Location</label>
-													<label id="removeEmail" class="link">Remove Additional Pickup Location</label>
+													<label id="addEmail" class="link" onclick="addStop()">Add Additional Pickup Location</label>
+													<label id="removeEmail" class="link" onclick="removeStop()">Remove Additional Pickup Location</label>
 
 												</div>
 												<div id="more-email"></div>
 											</div>
 										</div>
-										<script>
-											$(document).ready(function() {
-												$("#addEmail").on("click", function() {
-													$("#more-email").append("<div class='for'><input type='text' class='form-control' id='' placeholder='Add Additional Pickup Location'/></div>");
-												});
-												$("#removeEmail").on("click", function() {
-													$("#more-email").children().last().remove();
-												});
-
-											});
-										</script>
+										
 										<div class="row in3">
 											<div class="col-md-12">
 												<label for="address">* Dropoff Location:</label>
@@ -226,7 +202,7 @@
 													</div>
 													<div class="col-md-6">
 														<div class="info2_pop">
-															<h4>$1,306.28</h4>
+															<h4>$95</h4>
 														</div>
 													</div>
 												</div>
@@ -267,7 +243,7 @@
 													</div>
 													<div class="col-md-6">
 														<div class="info2_pop">
-															<h4>$1,306.28</h4>
+															<h4>$115</h4>
 														</div>
 													</div>
 												</div>
@@ -372,7 +348,7 @@
 															<span class="icon"><i class="fa fa-users" aria-hidden="true"></i>2</span>
 															<span class="icon"><i class="fa fa-suitcase" aria-hidden="true"></i>3</span>
 														</div>
-														<div class="car-price _vehiclePrice"><ins>USD</ins>$1,306.28</div>
+														<div class="car-price _vehiclePrice"><ins>USD</ins>$95</div>
 													</button>
 												</div>
 												<div class="col-md-12">
@@ -395,7 +371,7 @@
 															<span class="icon"><i class="fa fa-users" aria-hidden="true"></i>2</span>
 															<span class="icon"><i class="fa fa-suitcase" aria-hidden="true"></i>3</span>
 														</div>
-														<div class="car-price _vehiclePrice"><ins>USD</ins>$1,306.28</div>
+														<div class="car-price _vehiclePrice"><ins>USD</ins>$115</div>
 													</button>
 												</div>
 												<div class="col-md-12">
@@ -417,7 +393,7 @@
 															<h4>Pickup Date</h4>
 														</div>
 														<div class="col-md-6">
-															<p id="pickup-date-summary">10-2-2020</p>
+															<p id="pickup-date-summary">N/A</p>
 														</div>
 													</div>
 												</div>
@@ -428,7 +404,7 @@
 															<h4>Pickup time</h4>
 														</div>
 														<div class="col-md-6">
-															<p id="time-summary">10:00 AM</p>
+															<p id="time-summary">N/A</p>
 														</div>
 													</div>
 												</div>
@@ -439,7 +415,7 @@
 															<h4>Pickup Location</h4>
 														</div>
 														<div class="col-md-6">
-															<p id="pickup-location-summary">Lorem Ipsum</p>
+															<p id="pickup-location-summary">N/A</p>
 														</div>
 													</div>
 												</div>
@@ -450,7 +426,7 @@
 															<h4>Dropoff Location</h4>
 														</div>
 														<div class="col-md-6">
-															<p id="drop-location-summary">Lorem Ipsum</p>
+															<p id="drop-location-summary">N/A</p>
 														</div>
 													</div>
 												</div>
@@ -461,7 +437,7 @@
 															<h4>No. Of Passenger</h4>
 														</div>
 														<div class="col-md-6">
-															<p id="passenger-number-summary">2</p>
+															<p id="passenger-number-summary">N/A</p>
 														</div>
 													</div>
 												</div>
@@ -472,7 +448,7 @@
 															<h4>No. Of Childern</h4>
 														</div>
 														<div class="col-md-6">
-															<p id="children-number-summary">1</p>
+															<p id="children-number-summary">N/A</p>
 														</div>
 													</div>
 												</div>
@@ -483,7 +459,7 @@
 															<h4>No. Of Bags</h4>
 														</div>
 														<div class="col-md-6">
-															<p id="bags-number-summary">2</p>
+															<p id="bags-number-summary">N/A</p>
 														</div>
 													</div>
 												</div>
@@ -495,7 +471,7 @@
 															<h4>Total</h4>
 														</div>
 														<div class="col-md-6">
-															<h4 id="total-charges">$1240.20</h4>
+															<h4 id="total-charges">N/A</h4>
 														</div>
 													</div>
 												</div>
@@ -504,7 +480,7 @@
 									</div>
 								</div>
 								<input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-								<input type="button" name="next" id="next-step-checkout" class="next action-button" value="Next" />
+								<!-- <input type="button" name="next" id="next-step-checkout" class="next action-button" value="Next"/> -->
 							</fieldset>
 
 							<fieldset>
@@ -557,10 +533,10 @@
 											</div>
 
 
-											<!-- <div class="payop">
+											<div class="payop">
 												<h4>Payment Info</h4>
 
-												STRIPE UI WILL COME HERE
+												<!-- STRIPE UI WILL COME HERE -->
 												<div class="row">
 													<div class="col-md-6">
 
@@ -581,7 +557,7 @@
 
 												<div class="form-group" id="expiration-date">
 													<label class="ex">Select Expiry Date</label> <br>
-													<select class="mnth">
+													<select class="mnth" id="month">
 														<option value="01">January</option>
 														<option value="02">February </option>
 														<option value="03">March</option>
@@ -595,25 +571,17 @@
 														<option value="11">November</option>
 														<option value="12">December</option>
 													</select>
-													<select class="yrs">
-														<option value="16"> 2016</option>
-														<option value="17"> 2017</option>
-														<option value="18"> 2018</option>
-														<option value="19"> 2019</option>
-														<option value="20"> 2020</option>
-														<option value="21"> 2021</option>
-														<option value="22"> 2022</option>
-														<option value="23"> 2023</option>
-														<option value="24"> 2024</option>
-														<option value="25"> 2025</option>
-														<option value="26"> 2026</option>
-														<option value="27"> 2027</option>
-														<option value="28"> 2028</option>
-														<option value="29"> 2029</option>
-														<option value="30"> 2030</option>
+													<select class="yrs" id="year">
+														
+														<?php
+															$currentYear = date("Y");
+															for ($i = $currentYear; $i <= $currentYear + 10; $i++) {
+																echo "<option value=\"$i\">$i</option>";
+															}
+														?>
 													</select>
 												</div>
-											</div> -->
+											</div>
 
 											<div class="xtra">
 												<h4>Special Instructions</h4>
@@ -630,7 +598,7 @@
 															<h4>Pickup Date</h4>
 														</div>
 														<div class="col-md-6">
-															<p id="pickup-date-summary">10-2-2020</p>
+															<p id="pickup-date-summary-checkout">N/A</p>
 														</div>
 													</div>
 												</div>
@@ -641,7 +609,7 @@
 															<h4>Pickup time</h4>
 														</div>
 														<div class="col-md-6">
-															<p id="time-summary">10:00 AM</p>
+															<p id="time-summary-checkout">N/A</p>
 														</div>
 													</div>
 												</div>
@@ -652,7 +620,7 @@
 															<h4>Pickup Location</h4>
 														</div>
 														<div class="col-md-6">
-															<p id="pickup-location-summary">Lorem Ipsum</p>
+															<p id="pickup-location-summary-checkout">N/A</p>
 														</div>
 													</div>
 												</div>
@@ -663,7 +631,7 @@
 															<h4>Dropoff Location</h4>
 														</div>
 														<div class="col-md-6">
-															<p id="drop-location-summary">Lorem Ipsum</p>
+															<p id="drop-location-summary-checkout">N/A</p>
 														</div>
 													</div>
 												</div>
@@ -674,7 +642,7 @@
 															<h4>No. Of Passenger</h4>
 														</div>
 														<div class="col-md-6">
-															<p id="passenger-number-summary">2</p>
+															<p id="passenger-number-summary-checkout">N/A</p>
 														</div>
 													</div>
 												</div>
@@ -685,7 +653,7 @@
 															<h4>No. Of Childern</h4>
 														</div>
 														<div class="col-md-6">
-															<p id="children-number-summary">1</p>
+															<p id="children-number-summary-checkout">N/A</p>
 														</div>
 													</div>
 												</div>
@@ -696,7 +664,7 @@
 															<h4>No. Of Bags</h4>
 														</div>
 														<div class="col-md-6">
-															<p id="bags-number-summary">2</p>
+															<p id="bags-number-summary-checkout">N/A</p>
 														</div>
 													</div>
 												</div>
@@ -706,7 +674,7 @@
 															<h4>Car Selected</h4>
 														</div>
 														<div class="col-md-6">
-															<p id="car-selected-summary">SUV</p>
+															<p id="car-selected-summary-checkout">N/A</p>
 														</div>
 													</div>
 												</div>
@@ -758,7 +726,7 @@
 															<h4>Total</h4>
 														</div>
 														<div class="col-md-6">
-															<h4 id="total-charges">$1240.20</h4>
+															<h4 id="total-charges-checkout">N/A</h4>
 														</div>
 													</div>
 												</div>
@@ -767,7 +735,7 @@
 									</div>
 								</div>
 								<input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-								<a href="https://localhost/junaid/thankyou_for_booking"><input type="submit" name="sub" class="next action-button submit_btn" value="Confirm" onclick="proceedToCheckout()"/></a>
+								<input type="button" name="sub" class="action-button submit_btn" value="Confirm" onclick="proceedToCheckout()"/>
 							</fieldset>
 
 						</form>
@@ -829,36 +797,7 @@
 
 			setProgressBar(current);
 
-			$(".next").click(function() {
-
-				current_fs = $(this).parent();
-				next_fs = $(this).parent().next();
-
-				//Add Class Active
-				$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-
-				//show the next fieldset
-				next_fs.show();
-				//hide the current fieldset with style
-				current_fs.animate({
-					opacity: 0
-				}, {
-					step: function(now) {
-						// for making fielset appear animation
-						opacity = 1 - now;
-
-						current_fs.css({
-							'display': 'none',
-							'position': 'relative'
-						});
-						next_fs.css({
-							'opacity': opacity
-						});
-					},
-					duration: 500
-				});
-				setProgressBar(++current);
-			});
+			
 
 			$(".previous").click(function() {
 
@@ -892,12 +831,7 @@
 				setProgressBar(--current);
 			});
 
-			function setProgressBar(curStep) {
-				var percent = parseFloat(100 / steps) * curStep;
-				percent = percent.toFixed();
-				$(".progress-bar")
-					.css("width", percent + "%")
-			}
+			
 
 			$(".submit").click(function() {
 				return false;
