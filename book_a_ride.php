@@ -15,6 +15,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script data-require="jquery@3.1.1" data-semver="3.1.1" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNCYnCArZoOrroMJTcZZQddwSqiAvtWm4&libraries=places" async></script>
+	<script src="env.js"></script>
 
 
 	<?php
@@ -93,15 +94,13 @@
 												<input type="checkbox" id="myCheck" onclick="myFunction()"> &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
 												<label for="myCheck">Hourly:</label>
 												<input type="checkbox" id="myCheck" class="hourly">
+
 												<div class="for">
 													<label for="exampleInputEmail1">Pickup Location</label>
 													<input type="text" class="form-control" id="ploc" pattern="^\d+\s[a-zA-Z]+\s[a-zA-Z]+\,\s[a-zA-Z]+\,\sIllinois\s\d{5}\,\s[a-zA-Z]+\s*$">
 													<div class="row">
 														<div class="col-md-12">
 															<p id="text" style="display:none"><input type="text" class="form-control" id="flghno" placeholder="Flight No*"><input type="text" class="form-control" id="flghtm" placeholder="Arrival Timing*"><input type="text" class="form-control" id="airlineName" placeholder="Name Of Airline"><input type="text" class="form-control" id="card" placeholder="Inside Meetup"></p>
-															<!-- <p id="text" style="display:none"><input type="text" class="form-control" id="flghtm" placeholder="Arrival Timing*"></p>
-                        <p id="text"  style="display:none"><input type="text" class="form-control" id="card" placeholder="Name Of Airline"></p> -->
-															<!-- <p id="text"  style="display:none"><input type="text" class="form-control" id="card" placeholder="Inside Meetup"></p> -->
 														</div>
 
 													</div>
@@ -115,7 +114,7 @@
 												<div id="more-email"></div>
 											</div>
 										</div>
-										
+
 										<div class="row in3">
 											<div class="col-md-12">
 												<label for="address">* Dropoff Location:</label>
@@ -156,12 +155,12 @@
 									<div class="col-md-5">
 										<div class="maph">
 											<h4>Check Your Distance Here</h4>
-												<div id="maps"></div>
+											<div id="maps"></div>
 										</div>
 									</div>
 								</div>
 
-								<input type="button" name="next" class="next action-button" value="Next" onclick="submitBookingDetails()"/>
+								<input type="button" name="next" class="next action-button" value="Next" onclick="submitBookingDetails()" />
 							</fieldset>
 
 
@@ -196,8 +195,8 @@
 												<div class="row">
 													<div class="col-md-6">
 														<div class="info_pop">
-															<span class="icon"><i class="fa fa-users" aria-hidden="true"></i>2</span>
-															<span class="icon"><i class="fa fa-suitcase" aria-hidden="true"></i>3</span>
+															<span class="icon"><i class="fa fa-users" aria-hidden="true"></i>4</span>
+															<span class="icon"><i class="fa fa-suitcase" aria-hidden="true"></i>2</span>
 														</div>
 													</div>
 													<div class="col-md-6">
@@ -237,7 +236,7 @@
 												<div class="row">
 													<div class="col-md-6">
 														<div class="info_pop">
-															<span class="icon"><i class="fa fa-users" aria-hidden="true"></i>2</span>
+															<span class="icon"><i class="fa fa-users" aria-hidden="true"></i>5</span>
 															<span class="icon"><i class="fa fa-suitcase" aria-hidden="true"></i>3</span>
 														</div>
 													</div>
@@ -275,10 +274,10 @@
 																<div><img src="assets/images/sedan1.jpg">
 
 																</div>
-																<div><img src="assets/images/sedan1.jpg"></div>
-																<div><img src="assets/images/sedan1.jpg"></div>
-																<div><img src="assets/images/sedan1.jpg"></div>
-																<div><img src="assets/images/sedan1.jpg"></div>
+																<div><img src="assets/images/audi.png"></div>
+																<div><img src="assets/images/bmw.png"></div>
+																<div><img src="assets/images/cad.png"></div>
+																<div><img src="assets/images/chev.jpg"></div>
 															</div>
 															<script>
 																$(".cs-slider").slick({
@@ -345,8 +344,8 @@
 															<p>Sedan</p>
 														</div>
 														<div class="car-volume">
-															<span class="icon"><i class="fa fa-users" aria-hidden="true"></i>2</span>
-															<span class="icon"><i class="fa fa-suitcase" aria-hidden="true"></i>3</span>
+															<span class="icon"><i class="fa fa-users" aria-hidden="true"></i>4</span>
+															<span class="icon"><i class="fa fa-suitcase" aria-hidden="true"></i>2</span>
 														</div>
 														<div class="car-price _vehiclePrice"><ins>USD</ins>$95</div>
 													</button>
@@ -362,25 +361,25 @@
 														</div>
 
 														<div class="car_img">
-															<img src="assets/images/sedan.png">
+															<img src="assets/images/suv1.jpg">
 														</div>
 														<div class="car-info">
 															<p>SUV</p>
 														</div>
 														<div class="car-volume">
-															<span class="icon"><i class="fa fa-users" aria-hidden="true"></i>2</span>
+															<span class="icon"><i class="fa fa-users" aria-hidden="true"></i>5</span>
 															<span class="icon"><i class="fa fa-suitcase" aria-hidden="true"></i>3</span>
 														</div>
 														<div class="car-price _vehiclePrice"><ins>USD</ins>$115</div>
 													</button>
 												</div>
 												<div class="col-md-12">
-												<div class="select-dropdown">
-													<select id="vehicles" onchange="handleOnchange(this)">
-													<option value="Option 1" class="op1">Choose Your Own Car</option>
-													
-													</select>
-												</div>
+													<div class="select-dropdown">
+														<select id="vehicles" onchange="handleOnchange(this)">
+															<option value="Option 1" class="op1">Choose Your Own Car</option>
+
+														</select>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -572,12 +571,12 @@
 														<option value="12">December</option>
 													</select>
 													<select class="yrs" id="year">
-														
+
 														<?php
-															$currentYear = date("Y");
-															for ($i = $currentYear; $i <= $currentYear + 10; $i++) {
-																echo "<option value=\"$i\">$i</option>";
-															}
+														$currentYear = date("Y");
+														for ($i = $currentYear; $i <= $currentYear + 10; $i++) {
+															echo "<option value=\"$i\">$i</option>";
+														}
 														?>
 													</select>
 												</div>
@@ -735,7 +734,7 @@
 									</div>
 								</div>
 								<input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-								<input type="button" name="sub" class="action-button submit_btn" value="Confirm" onclick="proceedToCheckout()"/>
+								<input type="button" name="sub" class="action-button submit_btn" value="Confirm" onclick="proceedToCheckout()" />
 							</fieldset>
 
 						</form>
@@ -797,7 +796,7 @@
 
 			setProgressBar(current);
 
-			
+
 
 			$(".previous").click(function() {
 
@@ -831,7 +830,7 @@
 				setProgressBar(--current);
 			});
 
-			
+
 
 			$(".submit").click(function() {
 				return false;

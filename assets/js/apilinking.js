@@ -1,9 +1,3 @@
-// const apiUrl = "http://localhost/ligth-weight-limo-api/public/api/";
-const apiUrl = 'https://api.lightwaterlimo.com/public/api';
-
-// const appUrl = "http://localhost/lwl_front/"
-const appUrl = "http://lightwaterlimo.com/lwl_front/"
-
 var bookingDetailsId = 0;
 var vehicleSelected;
 var bookingDetailsRequestBody = {};
@@ -291,4 +285,32 @@ function myFunction() {
   } else {
     text.style.display = "none";
   }
+}
+
+
+// Assign to driver.
+
+function assignDriver() {
+  let data = {
+    id: $('#booking_id').val(),
+    driver_name: $('#drv_name').val()
+  }
+
+  $.ajax({
+    url: apiUrl + "bookings/assign/driver",
+    type: "POST",
+    data: data,
+    dataType: "json",
+    success: function (result) {
+      // result contains the response from the server-side PHP script
+      // you can use this result to update the UI or perform other operations
+      // sendToNextView();
+      $('#drv_name').val('');
+      $('#exampleModal').modal('hide');
+      console.log(result);
+    },
+    error: function (error) {
+      console.log("Error: " + error);
+    },
+  });
 }
