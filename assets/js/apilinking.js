@@ -87,6 +87,8 @@ function submitBookingDetails() {
     airline_name: $("#airlineName").val(),
     onsight_meetup: $("#card").val(),
     arrival_time: $("#flghtm").val(),
+    total_duration_hours: $("#hour").val(),
+    total_duration_minutes: $("#minutes").val()
   };
 
   $.ajax({
