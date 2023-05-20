@@ -278,13 +278,27 @@ function proceedToCheckout() {
 }
 
 function myFunction() {
-  var checkBox = document.getElementById("myCheck");
   var text = document.getElementById("text");
-  if (checkBox.checked == true) {
-    text.style.display = "block";
-  } else {
-    text.style.display = "none";
-  }
+  var button = document.getElementById("airportButton");
+  var hourlyDiv = document.getElementById("hourlyEnable");
+  var hourlyButton = document.getElementById("hourlyButton");
+  text.style.display = "block";
+  button.classList.add("active-option");
+  hourlyButton.classList.remove("active-option");
+  hourlyDiv.style.display = "none";
+
+  
+}
+
+function selectHourlyOption() {
+  var airportButton = document.getElementById("airportButton");
+  var text = document.getElementById("text");
+  var hourlyDiv = document.getElementById("hourlyEnable");
+  var hourlyButton = document.getElementById("hourlyButton");
+  hourlyDiv.style.display = "flex";
+  hourlyButton.classList.add("active-option");
+  airportButton.classList.remove("active-option");
+  text.style.display = "none";
 }
 
 

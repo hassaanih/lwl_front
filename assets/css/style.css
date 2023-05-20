@@ -1113,3 +1113,16 @@ input#myCheck {
 .select-dropdown select option {
   font-size: 16px !important;
 }
+
+.step-1-button {
+  background-color: white;
+  border: 1px solid;
+  padding: 0px 10px;
+}
+
+.active-option{
+  background-color: #3e7d8e;
+    color: white;
+    border: 1px solid #3e7d8e;
+
+}

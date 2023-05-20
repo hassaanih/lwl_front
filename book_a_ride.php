@@ -78,6 +78,18 @@
 												<h2 class="steps">Step 1 - 3</h2>
 											</div>
 										</div>
+										<div class="d-flex justify-content-end mb-4">
+											<div class="step-1-button" onclick="myFunction()" id="airportButton"> Airport</div>
+											<div class="step-1-button" onclick="selectHourlyOption()" id="hourlyButton"> Hourly</div>
+										</div>
+										<div class="row" id="hourlyEnable" style="display: none;">
+														<div class="col-md-6">
+															<input type="number" id="hour" placeholder="Hours" min="0" max="24">
+														</div>
+														<div class="col-md-6">
+															<input type="number" id="minutes" placeholder="Minutes" min="0" max="24">
+														</div>
+													</div>
 										<div class="row in1">
 											<div class="col-md-6">
 												<label for="pickupdate">* Pick Up Date:</label><input type="date" id="pick" name="pick" placeholder="Pick Up Date">
@@ -89,12 +101,6 @@
 										</div>
 										<div class="row in2">
 											<div class="col-md-12">
-
-												<label for="myCheck">Airport:</label>
-												<input type="checkbox" id="myCheck" onclick="myFunction()"> &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-												<label for="myCheck">Hourly:</label>
-												<input type="checkbox" id="myCheck" class="hourly">
-
 												<div class="for">
 													<label for="exampleInputEmail1">Pickup Location</label>
 													<input type="text" class="form-control" id="ploc" pattern="^\d+\s[a-zA-Z]+\s[a-zA-Z]+\,\s[a-zA-Z]+\,\sIllinois\s\d{5}\,\s[a-zA-Z]+\s*$">
@@ -104,6 +110,7 @@
 														</div>
 
 													</div>
+													
 													<input type="hidden" id="totalkms">
 												</div>
 												<div class="for">
