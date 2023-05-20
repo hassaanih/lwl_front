@@ -293,7 +293,8 @@ function myFunction() {
 function assignDriver() {
   let data = {
     id: $('#booking_id').val(),
-    driver_name: $('#drv_name').val()
+    driver_name: $('#drv_name').val(),
+    driver_payment: $('#drv_payment').val(),
   }
 
   $.ajax({
@@ -306,6 +307,7 @@ function assignDriver() {
       // you can use this result to update the UI or perform other operations
       // sendToNextView();
       $('#drv_name').val('');
+      $('#drv_payment').val('');
       $('#exampleModal').modal('hide');
       console.log(result);
     },

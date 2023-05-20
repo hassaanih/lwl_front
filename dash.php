@@ -100,7 +100,7 @@
         </div>
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Assign Driver</h5>
@@ -110,8 +110,22 @@
                 </div>
                 <div class="modal-body">
                     <input type="hidden" id="booking_id">
-                    <label class="form-control">Driver's Name:</label>
-                    <input type="text" id="drv_name" class="form-control">
+                    <div class="row">
+                        <div class="col-3">
+                            <label class="form-control">Driver's Name:</label>
+                        </div>
+                        <div class="col-9">
+                            <input type="text" id="drv_name" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <label class="form-control">Driver Payment</label>
+                        </div>
+                        <div class="col-9">
+                            <input type="number" class="form-control" id="drv_payment">
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
