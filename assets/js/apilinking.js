@@ -281,6 +281,8 @@ function proceedToCheckout() {
 
 function myFunction() {
   var text = document.getElementById("text");
+  var transferButton = document.getElementById("transferButton");
+  transferButton.classList.remove("active-option");
   var button = document.getElementById("airportButton");
   var hourlyDiv = document.getElementById("hourlyEnable");
   var hourlyButton = document.getElementById("hourlyButton");
@@ -297,8 +299,23 @@ function selectHourlyOption() {
   var text = document.getElementById("text");
   var hourlyDiv = document.getElementById("hourlyEnable");
   var hourlyButton = document.getElementById("hourlyButton");
+  var transferButton = document.getElementById("transferButton");
+  transferButton.classList.remove("active-option");
   hourlyDiv.style.display = "flex";
   hourlyButton.classList.add("active-option");
+  airportButton.classList.remove("active-option");
+  text.style.display = "none";
+}
+
+function selectTransferOption() {
+  var airportButton = document.getElementById("airportButton");
+  var text = document.getElementById("text");
+  var hourlyDiv = document.getElementById("hourlyEnable");
+  var hourlyButton = document.getElementById("hourlyButton");
+  var transferButton = document.getElementById("transferButton");
+  transferButton.classList.add("active-option");
+  hourlyDiv.style.display = "none";
+  hourlyButton.classList.remove("active-option");
   airportButton.classList.remove("active-option");
   text.style.display = "none";
 }

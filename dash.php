@@ -20,32 +20,53 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="env.js"></script>
 
-    <?php
-    $srcurl = "includes/";
-    $basesurl = "assets/";
-    ?>
+    
 
 
 
+    
 
-    <?php
-    $style = $_SERVER['HTTP_HOST'];
-    $style = $srcurl . "style.php";
-    include($style);
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link href="assets/css/m-style.css" rel="stylesheet" type="text/css" />
+<link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+<link href="assets/css/newcss.css" rel="stylesheet" type="text/css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 
-    $urhere = "homepage";
-    ?>
+
+<!--[if IE]>
+  <script src="assets/js/html5.js"></script>
+<![endif]-->
 
     <style type="text/css">
-        .tb .container-fluid {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: white;
-            margin-top: 10%;
-            padding: 30px 0;
-            box-shadow: 0px 0px 10px 0px #ccc;
-        }
+        section.foot {
+    
+    padding:20px 0 ;
+}
+
+section.foot p {
+    color: black;
+    padding: 0;
+    font-size: 15px;
+    font-weight: 700;
+
+}
+       .tb .container-fluid {
+    display: block;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    margin-top: 0;
+    padding: 50px 20px !IMPORTANT;
+    box-shadow: unset;
+    margin: 0 0 0 -10px;
+}
 
         table#myTable {
             margin: 0 auto;
@@ -66,11 +87,174 @@
         table#myTable tbody tr td {
             padding: 10px 20px;
         }
+        .odd .drv {
+    border: unset;
+    width: 100%;
+    height: 31px;
+    padding: 0;
+}
+
+        button.self {
+    padding: 0;
+    background-color: #9a4d55;
+    color: white;
+    text-transform: uppercase;
+    border: unset;
+    font-size: 15px;
+    width: 100%;
+    height: 31px;
+    margin-top: 3px;
+}
+.log_img img {width: 21%;filter: brightness(0) invert(1);}
+
+.logo {
+    padding: 30px 0;
+    background-color: #111c30;
+}
+
+
+/* @media (max-width: 1600px) {
+    /* section.logo:before {
+    content: '';
+    background-color: #111c30;
+    width: 126%;
+    position: absolute;
+    height: 137px;
+    top: 0;
+} 
+}
+@media (max-width: 1366px) {
+     section.logo:before {
+    content: '';
+    background-color: #111c30;
+    width: 150%;
+    position: absolute;
+    height: 137px;
+    top: 0;
+} 
+}*/
+@media (max-width: 1280px) {
+    section.logo:before {
+    content: '';
+    background-color: #111c30;
+    width: 20px;
+    position: absolute;
+    height: 137px;
+    top: 0;
+    right: -10px;
+}
+}
+@media (max-width: 1024px) {
+    section.logo:before {
+    content: '';
+    background-color: #111c30;
+    width: 470px;
+    position: absolute;
+    height: 125px;
+    top: 0;
+    right: -270px;
+}
+
+}
+@media (max-width: 800px) {
+    .log_img img {
+    width: 28%;
+    filter: brightness(0) invert(1);
+}
+section.logo:before {
+    content: '';
+    background-color: #111c30;
+    width: 540px;
+    position: absolute;
+    height: 125px;
+    top: 0;
+    right: -510px;
+}
+.odd .drv {
+    border: unset;
+    width: 100%;
+    height: 31px;
+    padding: 0 10px;
+}
+}
+
+@media (max-width: 768px) {}
+@media (max-width: 480px) {
+    .log_img img {
+    width: 43%;
+    filter: brightness(0) invert(1);
+}
+section.logo:before {
+    content: '';
+    background-color: #111c30;
+    width: 940px;
+    position: absolute;
+    height: 125px;
+    top: 0;
+    right: -830px;
+}
+   
+}
+
+@media (max-width: 430px) {
+    .log_img img {
+    width: 100%;
+    filter: brightness(0) invert(1);
+}
+section.foot p {
+    color: white;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 700;
+
+}
+section.logo:before {
+    content: '';
+    background-color: #111c30;
+    width: 970px;
+    position: absolute;
+    height: 175px;
+    top: 0;
+    right: -950px;
+}
+}
+
+@media (max-width: 375px) {
+    section.logo:before {
+    content: '';
+    background-color: #111c30;
+    width: 970px;
+    position: absolute;
+    height: 175px;
+    top: 0;
+    right: -950px;
+}
+}
+@media (max-width: 360px) {
+    section.logo:before {
+    content: '';
+    background-color: #111c30;
+    width: 970px;
+    position: absolute;
+    height: 175px;
+    top: 0;
+    right: -950px;
+}
+} */
     </style>
 
 </head>
 
 <body class="hompg">
+<section class="logo">
+        <div class="container">
+            <div class="row">
+                <div class="log_img">
+                    <img src="assets/images/LIGHT-WATER-LOGO.png">
+                </div>
+            </div>
+        </div>
+</section>
     <div class="tb">
         <div class="container-fluid">
             <div class="row">
@@ -123,7 +307,7 @@
                             <label class="form-control">Driver Payment</label>
                         </div>
                         <div class="col-9">
-                            <input type="number" class="form-control" id="drv_payment">
+                            <input type="number" class="form-control" id="drv_payment" placeholder="$">
                         </div>
                     </div>
                 </div>
@@ -134,6 +318,15 @@
             </div>
         </div>
     </div>
+    <section class="foot">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                <p>ALL RIGHTS RESERVED BY LIGHT WATER LIMO. DEVELOPED BY 1SOL.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
     <script type="text/javascript">
@@ -169,7 +362,7 @@
                         name: 'mobile_number',
                         className: 'align-top',
                         orderable: true,
-                        searchable: false
+                        searchable: true
                     },
                     // {
                     //     data: 'contact_phone',
@@ -183,28 +376,28 @@
                         name: 'tip_for_driver',
                         className: 'align-top',
                         orderable: true,
-                        searchable: false
+                        searchable: true
                     },
                     {
                         data: 'total_charges',
                         name: 'total_charges',
                         className: 'align-top',
                         orderable: true,
-                        searchable: false
+                        searchable: true
                     },
                     {
                         data: 'details.pickup_location',
                         name: 'details.pickup_location',
                         className: 'align-top',
                         orderable: true,
-                        searchable: false
+                        searchable: true
                     },
                     {
                         data: 'details.drop_location',
                         name: 'details.drop_location',
                         className: 'align-top',
                         orderable: true,
-                        searchable: false
+                        searchable: true
                     },
                     {
                         data: 'details.pickup_date',
@@ -216,33 +409,34 @@
                         },
                         className: 'align-top',
                         orderable: true,
-                        searchable: false
+                        searchable: true
                     },
                     {
                         data: 'details.pickup_time',
                         name: 'details.pickup_time',
                         className: 'align-top',
                         orderable: true,
-                        searchable: false
+                        searchable: true
                     },
                     {
                         data: 'details.travellers',
                         name: 'details.travellers',
                         className: 'align-top',
                         orderable: true,
-                        searchable: false
+                        searchable: true
                     },
                     {
                         data: 'details.total_km',
                         name: 'details.total_km',
                         className: 'align-top',
                         orderable: true,
-                        searchable: false
+                        searchable: true
                     },
                     {
                         render: function(data, type, row) {
                             // Modify the data for the first column
-                            return `<button type="button" class="btn btn-dark open-modal-button">Assign To Driver</button>`
+                            return `<button type="button" class="btn btn-dark open-modal-button drv">Assign To Driver</button>
+                            <button type="button" class="self">Self</button>`
                         },
                     }
                 ]

@@ -63,7 +63,10 @@ include($header);
 						
 					</div>
 				</div>
+				<p style="padding:20px 0;font-family:'poppins'; color:black; font-weight:600; text-align:center;">ALL RIGHTS RESERVED BY LIGHT WATER LIMO. DEVELOPED BY 1SOL.</p>
+
 			</div>
+			
 		</div>
 	</div>
 </section>

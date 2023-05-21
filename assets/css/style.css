@@ -7,6 +7,9 @@
   src: url(../fonts/Nexa-light.otf);
 }
 */
+.form-card.frm2 .row.fi1 button.car .car_img img {
+    width: 100%;
+}
 #jqcheck {
   background: #fff9d7;
   text-align: center;
@@ -1125,4 +1128,8 @@ input#myCheck {
     color: white;
     border: 1px solid #3e7d8e;
 
+}
+
+.pointer{
+  cursor: pointer;
 }
