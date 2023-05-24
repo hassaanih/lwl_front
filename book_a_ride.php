@@ -79,19 +79,19 @@
 											</div>
 										</div>
 										<div class="d-flex justify-content-end mb-4">
-											<div class="step-1-button active-option pointer" onclick="selectTransferOption()" id="transferButton" > Transfer</div>
+											<div class="step-1-button active-option pointer" onclick="selectTransferOption()" id="transferButton"> Transfer</div>
 											<div class="step-1-button pointer" onclick="myFunction()" id="airportButton"> Airport</div>
 											<div class="step-1-button pointer" onclick="selectHourlyOption()" id="hourlyButton"> Hourly</div>
-											
+
 										</div>
 										<div class="row" id="hourlyEnable" style="display: none;">
-														<div class="col-md-6">
-															<input type="number" id="hour" placeholder="Hours" min="0" max="24">
-														</div>
-														<div class="col-md-6">
-															<input type="number" id="minutes" placeholder="Minutes" min="0" max="24">
-														</div>
-													</div>
+											<div class="col-md-6">
+												<input type="number" id="hour" placeholder="Hours" min="0" max="24">
+											</div>
+											<div class="col-md-6">
+												<input type="number" id="minutes" placeholder="Minutes" min="0" max="24">
+											</div>
+										</div>
 										<div class="row in1">
 											<div class="col-md-6">
 												<label for="pickupdate">* Pick Up Date:</label><input type="date" id="pick" name="pick" placeholder="Pick Up Date">
@@ -109,59 +109,52 @@
 													<div class="row">
 														<div class="col-md-12">
 															<p id="text" style="display:none"><input type="text" class="form-control" id="flghno" placeholder="Flight No*">
-																<label for="appt">* Flight time:</label><br><input type="time" id="flghtm" name="time"><input type="text" class="form-control" id="airlineName" placeholder="Name Of Airline"><script>
-    function toggleTextField() {
-      var checkbox = document.getElementById("checkbox");
-      var textField = document.getElementById("text-field");
+																<label for="appt">* Flight time:</label><br><input type="time" id="flghtm" name="time"><input type="text" class="form-control" id="airlineName" placeholder="Name Of Airline">
 
-      if (checkbox.checked) {
-        textField.style.display = "block";
-      } else {
-        textField.style.display = "none";
-      }
-    }
-  </script>
-</head>
-<body>
-  <label for="checkbox">Inside Meetup:<span style="color: red; font-size: 14px;"> &nbsp; (If you want us to welcome you inside the airport with a Card.)</span></label> <br>
-  <input type="checkbox" id="checkbox" value="yes" onclick="toggleTextField()"><label for="vehicle1" class="in_yesno"> Yes</label>
-  <input type="checkbox" id="checkbox" value="no" checked="checked"><label for="vehicle1" class="in_yesno"> No</label>
-  
-  <div class="text-field" id="text-field">
-    <label for="text-input">Additional Message:</label>
-    <textarea id="txtarea_inside" placeholder=""></textarea>
-  </div>
-  
-  <script>
-    // Set the default value to "No"
-    var checkbox = document.getElementById("checkbox");
-    checkbox.checked = false;
-    toggleTextField();
-  </script>
-  <style>
-  	#msform label.in_yesno {
-    padding: 0 10px 0 10px;
-    font-family: 'Poppins';
-    font-size: 18px;
-    font-weight: 600;
-}
-    #msform .text-field {
-      display: none;
-    }
-    #msform input#checkbox {
-    padding: 0 0px 0 0px !IMPORTANT;
-    margin: unset !important;
-    box-shadow: unset;
-    width: auto;
-}
-  </style>
+																</head>
+
+																<body>
+																	<label for="checkbox">Inside Meetup:<span style="color: red; font-size: 14px;"> &nbsp; (If you want us to welcome you inside the airport with a Card.)</span></label> <br>
+																	<input type="checkbox" id="checkbox" value="yes" onclick="toggleTextField()"><label for="vehicle1" class="in_yesno"> Yes</label>
+																	<input type="checkbox" id="checkbox" value="no" checked="checked"><label for="vehicle1" class="in_yesno"> No</label>
+
+																	<div class="text-field" id="text-field">
+																		<label for="text-input">Additional Message:</label>
+																		<textarea id="txtarea_inside" placeholder="" id="card"></textarea>
+																	</div>
+
+																	<script>
+																		// Set the default value to "No"
+																		var checkbox = document.getElementById("checkbox");
+																		checkbox.checked = false;
+																		toggleTextField();
+																	</script>
+																	<style>
+																		#msform label.in_yesno {
+																			padding: 0 10px 0 10px;
+																			font-family: 'Poppins';
+																			font-size: 18px;
+																			font-weight: 600;
+																		}
+
+																		#msform .text-field {
+																			display: none;
+																		}
+
+																		#msform input#checkbox {
+																			padding: 0 0px 0 0px !IMPORTANT;
+																			margin: unset !important;
+																			box-shadow: unset;
+																			width: auto;
+																		}
+																	</style>
 
 
-</p>
+															</p>
 														</div>
 
 													</div>
-													
+
 													<input type="hidden" id="totalkms">
 												</div>
 												<div class="for">
@@ -521,6 +514,17 @@
 													</div>
 												</div>
 
+												<div class="bag">
+													<div class="row">
+														<div class="col-md-6">
+															<h4>Total Miles</h4>
+														</div>
+														<div class="col-md-6">
+															<p id="total_miles_summary">N/A</p>
+														</div>
+													</div>
+												</div>
+
 												<div class="lne"></div>
 												<div class="amount">
 													<div class="row">
@@ -732,6 +736,16 @@
 														</div>
 														<div class="col-md-6">
 															<p id="car-selected-summary-checkout">N/A</p>
+														</div>
+													</div>
+												</div>
+												<div class="bag">
+													<div class="row">
+														<div class="col-md-6">
+															<h4>Total Miles</h4>
+														</div>
+														<div class="col-md-6">
+															<p id="total_miles_summary_checkout">N/A</p>
 														</div>
 													</div>
 												</div>

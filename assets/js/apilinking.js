@@ -62,7 +62,6 @@ function handleClickNext() {
       nextFs.style.display = "block";
       setProgressBar(current + 1);
     }
-    
   }, 50);
 }
 
@@ -70,6 +69,17 @@ function setProgressBar(curStep) {
   var percent = parseFloat(100 / steps) * curStep;
   percent = percent.toFixed();
   $(".progress-bar").css("width", percent + "%");
+}
+
+function toggleTextField() {
+  var checkbox = document.getElementById("checkbox");
+  var textField = document.getElementById("text-field");
+
+  if (checkbox.checked) {
+    textField.style.display = "block";
+  } else {
+    textField.style.display = "none";
+  }
 }
 
 function submitBookingDetails() {
@@ -88,7 +98,7 @@ function submitBookingDetails() {
     onsight_meetup: $("#card").val(),
     arrival_time: $("#flghtm").val(),
     total_duration_hours: $("#hour").val(),
-    total_duration_minutes: $("#minutes").val()
+    total_duration_minutes: $("#minutes").val(),
   };
 
   $.ajax({
@@ -132,6 +142,8 @@ function setSummaryView(bookingDetails) {
     bookingDetails.total_charges == undefined
       ? 0
       : "$ " + bookingDetails.total_charges;
+  document.getElementById("total_miles_summary").innerHTML =
+    bookingDetails.total_km + " mi";
 }
 
 function setCheckoutPageSummaryView(bookingDetails) {
@@ -150,8 +162,11 @@ function setCheckoutPageSummaryView(bookingDetails) {
     bookingDetails.kids;
   document.getElementById("bags-number-summary-checkout").innerHTML =
     bookingDetails.bags;
-  document.getElementById("car-selected-summary-checkout").innerHTML =
-    vehicleSelected;
+  document.getElementById("total_miles_summary_checkout").innerHTML =
+    bookingDetails.total_km + " mi";
+  document.getElementById(
+    "car-selected-summary-checkout"
+  ).innerHTML = vehicleSelected;
   document.getElementById("total-charges-checkout").innerHTML =
     bookingDetails.total_charges == undefined
       ? 0
@@ -271,7 +286,7 @@ function proceedToCheckout() {
       // sendToNextView();
 
       console.log(bookingDetailsId);
-      window.location.href = appUrl + 'thankyou_for_booking.php';
+      window.location.href = appUrl + "thankyou_for_booking.php";
     },
     error: function (error) {
       console.log("Error: " + error);
@@ -290,8 +305,6 @@ function myFunction() {
   button.classList.add("active-option");
   hourlyButton.classList.remove("active-option");
   hourlyDiv.style.display = "none";
-
-  
 }
 
 function selectHourlyOption() {
@@ -320,15 +333,14 @@ function selectTransferOption() {
   text.style.display = "none";
 }
 
-
 // Assign to driver.
 
 function assignDriver() {
   let data = {
-    id: $('#booking_id').val(),
-    driver_name: $('#drv_name').val(),
-    driver_payment: $('#drv_payment').val(),
-  }
+    id: $("#booking_id").val(),
+    driver_name: $("#drv_name").val(),
+    driver_payment: $("#drv_payment").val(),
+  };
 
   $.ajax({
     url: apiUrl + "bookings/assign/driver",
@@ -339,9 +351,9 @@ function assignDriver() {
       // result contains the response from the server-side PHP script
       // you can use this result to update the UI or perform other operations
       // sendToNextView();
-      $('#drv_name').val('');
-      $('#drv_payment').val('');
-      $('#exampleModal').modal('hide');
+      $("#drv_name").val("");
+      $("#drv_payment").val("");
+      $("#exampleModal").modal("hide");
       console.log(result);
     },
     error: function (error) {
