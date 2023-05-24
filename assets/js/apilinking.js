@@ -354,10 +354,83 @@ function assignDriver() {
       $("#drv_name").val("");
       $("#drv_payment").val("");
       $("#exampleModal").modal("hide");
+      $('.page-datatable-ajax').DataTable().ajax.reload(null, false);
       console.log(result);
     },
     error: function (error) {
       console.log("Error: " + error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong! Please check all the details are correct?',
+      })
     },
   });
+}
+
+
+function cancelRide(id) {
+  let data = {
+    id: id,
+  };
+
+  $.ajax({
+    url: apiUrl + "bookings/cancel",
+    type: "POST",
+    data: data,
+    dataType: "json",
+    success: function (result) {
+      // result contains the response from the server-side PHP script
+      // you can use this result to update the UI or perform other operations
+      // sendToNextView();
+      $('.user-datatable-ajax').DataTable().ajax.reload(null, false);
+      console.log(result);
+    },
+    error: function (error) {
+      console.log("Error: " + error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong! Please check all the details are correct?',
+      })
+    },
+  });
+}
+
+function assignSelf() {
+  let data = {
+    id: $("#booking_id").val(),
+    driver_name: $("#drv_name").val(),
+    driver_payment: $("#drv_payment").val(),
+  };
+
+  $.ajax({
+    url: apiUrl + "bookings/assign/self",
+    type: "POST",
+    data: data,
+    dataType: "json",
+    success: function (result) {
+      // result contains the response from the server-side PHP script
+      // you can use this result to update the UI or perform other operations
+      // sendToNextView();
+      $("#drv_name_self").val("");
+      $("#drv_payment_self").val("");
+      $("#self-assign-modal").modal('hide');
+      $('.page-datatable-ajax').DataTable().ajax.reload(null, false);
+      console.log(result);
+    },
+    error: function (error) {
+      console.log("Error: " + error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong! Please check all the details are correct?',
+      })
+    },
+  });
+}
+
+function showCurrentUserRides(){
+  console.log('hello');
+  $('.user-datatable-ajax').DataTable().ajax.reload();
 }

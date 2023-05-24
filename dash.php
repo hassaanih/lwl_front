@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="env.js"></script>
 
     
@@ -266,7 +267,8 @@ section.logo:before {
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Contact Number</th>
-                                <!-- <th>Phone Number</th> -->
+                                <th>Driver Name</th>
+                                <th>Driver Price</th>
                                 <th>Tip for driver</th>
                                 <th>Total Charges</th>
                                 <th>Pickup Location</th>
@@ -318,6 +320,42 @@ section.logo:before {
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="self-assign-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Assign Self</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="booking_id">
+                    <div class="row">
+                        <div class="col-3">
+                            <label class="form-control">Self Name:</label>
+                        </div>
+                        <div class="col-9">
+                            <input type="text" id="drv_name_self" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <label class="form-control">Self Payment</label>
+                        </div>
+                        <div class="col-9">
+                            <input type="number" class="form-control" id="drv_payment_self" placeholder="$">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="assignSelf()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <section class="foot">
         <div class="container">
             <div class="row">
@@ -364,13 +402,32 @@ section.logo:before {
                         orderable: true,
                         searchable: true
                     },
-                    // {
-                    //     data: 'contact_phone',
-                    //     name: 'contact_phone',
-                    //     className: 'align-top',
-                    //     orderable: true,
-                    //     searchable: true
-                    // },
+                    {
+                        data: 'driver_name',
+                        name: 'driver_name',
+                        className: 'align-top',
+                        render: function(data, type, row) {
+                            // Modify the data for the first column
+                            if(data == null){
+                                return 'Not Assigned';
+                            }
+                        },
+                        orderable: true,
+                        searchable: true
+                    },
+                    {
+                        data: 'driver_payment',
+                        name: 'driver_payment',
+                        className: 'align-top',
+                        render: function(data, type, row) {
+                            // Modify the data for the first column
+                            if(data == null){
+                                return 'N/A';
+                            }
+                        },
+                        orderable: true,
+                        searchable: true
+                    },
                     {
                         data: 'tip_for_driver',
                         name: 'tip_for_driver',
@@ -456,12 +513,24 @@ section.logo:before {
                 openModal();
             });
 
-            function openModal() {
-                // Logic to open the modal and populate the data
-                // You can use your preferred method to open the modal, such as Bootstrap modal or a custom solution
-                // Example:
-                $('#exampleModal').modal('show');
+            $('.page-datatable-ajax').on('click', '.self', function() {
+                // Get the data from the DataTable row
+                const table = $('.page-datatable-ajax').DataTable();
+                const rowData = table.row($(this).closest('tr')).data();
+                $('#booking_id').val(rowData.id);
+                console.log(rowData.id);
+                // Extract the necessary data from the row
 
+                // Open the modal and populate the data
+                openAssignToSelfModal();
+            });
+
+            function openModal() {
+                $('#exampleModal').modal('show');
+            }
+
+            function openAssignToSelfModal(){
+                $("#self-assign-modal").modal('show');
             }
         });
     </script>
