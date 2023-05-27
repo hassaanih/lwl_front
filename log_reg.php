@@ -361,7 +361,12 @@ button{
 .img-text p {color: white;font-size: 29px;line-height: 39px;font-family: 'Poppins';text-transform: uppercase;font-weight: 800;}
 
 </style>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="env.js"></script>
 </head>
 <body class="hompg">
 
@@ -378,14 +383,14 @@ include($header);
       <h2>LOG IN</h2>
       <label>
         <h4>Email Address</h4>
-        <input type="email" name="email">
+        <input type="email" name="email" id="signinEmail">
       </label>
       <label>
         <h4>Password</h4>
-        <input type="password" name="password">
+        <input type="password" name="password" id="signinPassword">
       </label>
-      <button class="submit" type="button">Sign In</button>
-      <p class="forgot-pass">Forgot Password ?</p>
+      <button class="submit" type="button" onclick="signin()">Sign In</button>
+      <!-- <p class="forgot-pass">Forgot Password ?</p> -->
       <br>
       <p style="font-family:'poppins'; color:black; font-weight:600; text-align:center;">ALL RIGHTS RESERVED BY LIGHT WATER LIMO. DEVELOPED BY 1SOL.</p>
     </div>
@@ -409,21 +414,21 @@ include($header);
         <h2>Sign Up</h2>
         <label>
           <span>Name</span>
-          <input type="text">
+          <input type="text" id="signupName">
         </label>
         <label>
           <span>Email</span>
-          <input type="email">
+          <input type="email" id="signupEmail">
         </label>
         <label>
           <span>Password</span>
-          <input type="password">
+          <input type="password" id="signupPassword">
         </label>
         <label>
           <span>Confirm Password</span>
-          <input type="password">
+          <input type="password" id="signupConfirmPassword">
         </label>
-        <button type="button" class="submit">Sign Up Now</button>
+        <button type="button" class="submit" onclick="signup()">Sign Up Now</button>
         
       </div>
       
@@ -448,6 +453,7 @@ document.querySelector('.img-btn').addEventListener('click', function()
 );
 
 </script>
+<script src="assets/js/apilinking.js"></script>
 
 
 </body>

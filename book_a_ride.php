@@ -123,12 +123,12 @@
 																		<textarea id="txtarea_inside" placeholder="" id="card"></textarea>
 																	</div>
 
-																	<script>
+																	<!-- <script>
 																		// Set the default value to "No"
 																		var checkbox = document.getElementById("checkbox");
 																		checkbox.checked = false;
 																		toggleTextField();
-																	</script>
+																	</script> -->
 																	<style>
 																		#msform label.in_yesno {
 																			padding: 0 10px 0 10px;
@@ -588,7 +588,12 @@
 														<input type="email" name="cemail" id="cemail" placeholder="*Contact Email">
 													</div> -->
 													<div class="col-md-6">
-														<input type="text" name="tip" id="tip" placeholder="*Enter Tip For the Driver">
+														<input type="text" name="tip" id="tip" placeholder="*Enter Tip For the Driver" onchange="addTipForDriver(event)">
+													</div>
+
+													<div class="col-md-6 d-flex">
+														<input type="text" id="coupon-code" placeholder="Coupon Code" width="60%">
+														<button type="button" onclick="applyCoupon()">Apply</button>
 													</div>
 												</div>
 											</div>

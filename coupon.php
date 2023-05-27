@@ -275,24 +275,21 @@
     </section>
     <div class="tb">
         <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-md-12 d-flex justify-content-end">
+                    <button type="button" class="btn" onclick="openAddCouponModal()">Add</button>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-12">
-                    <table id="myTable" class="cell-border user-datatable-ajax p-2">
+                    <table id="myTable" class="cell-border coupon-datatable-ajax p-2">
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Contact Number</th>
+                                <th>Code</th>
+                                <th>Discount</th>
+                                <th>Usage Count</th>
                                 <!-- <th>Phone Number</th> -->
-                                <th>Tip for driver</th>
-                                <th>Total Charges</th>
-                                <th>Pickup Location</th>
-                                <th>Drop Location</th>
-                                <th>Pickup Date</th>
-                                <th>Pickup Time</th>
-                                <th>Traveller</th>
-                                <th>Total Kms</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -301,11 +298,11 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="couponModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Assign Driver</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Add Coupon</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -314,24 +311,32 @@
                     <input type="hidden" id="booking_id">
                     <div class="row">
                         <div class="col-3">
-                            <label class="form-control">Driver's Name:</label>
+                            <label class="form-control"><span class="text-danger">*</span> Code:</label>
                         </div>
                         <div class="col-9">
-                            <input type="text" id="drv_name" class="form-control">
+                            <input type="text" id="codeTxt" class="form-control">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-3">
-                            <label class="form-control">Driver Payment</label>
+                            <label class="form-control"><span class="text-danger">*</span> Discount (In Number):</label>
                         </div>
                         <div class="col-9">
-                            <input type="number" class="form-control" id="drv_payment" placeholder="$">
+                            <input type="number" min="0" id="discountTxt" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <label class="form-control"><span class="text-danger">*</span> Coupon Limit:</label>
+                        </div>
+                        <div class="col-9">
+                            <input type="number" min="1" max="10" id="usageCountTxt" class="form-control">
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="assignDriver()">Save changes</button>
+                    <button type="button" class="btn btn-primary" onclick="addCoupon()">Save changes</button>
                 </div>
             </div>
         </div>
@@ -349,17 +354,12 @@
 
     <script type="text/javascript">
         $(function() {
-            $('.user-datatable-ajax').dataTable({
+            $('.coupon-datatable-ajax').dataTable({
                 order: [0, "asc"],
                 ajax: {
-                    "url": apiUrl + 'bookings/find/' + localStorage.getItem('userEmail'),
+                    "url": apiUrl + 'coupons/list',
                     "type": "GET",
-                    "data": function(d) {
-                        // Add your request parameters here
-                        d.email = $("#email").val()
-                        // You can also use dynamic values based on user input or other variables
-                        // d.param3 = $('#inputField').val();
-                    }
+
                 },
                 lengthMenu: [10, 25, 50, 100, 500],
                 responsive: true,
@@ -371,90 +371,22 @@
                         searchable: true
                     },
                     {
-                        data: 'first_name',
-                        name: 'first_name',
+                        data: 'code',
+                        name: 'code',
                         className: 'align-top',
                         orderable: true,
                         searchable: true
                     },
                     {
-                        data: 'last_name',
-                        name: 'last_name',
+                        data: 'total_discount',
+                        name: 'total_discount',
                         className: 'align-top',
                         orderable: true,
                         searchable: true
                     },
                     {
-                        data: 'mobile_number',
-                        name: 'mobile_number',
-                        className: 'align-top',
-                        orderable: true,
-                        searchable: true
-                    },
-                    // {
-                    //     data: 'contact_phone',
-                    //     name: 'contact_phone',
-                    //     className: 'align-top',
-                    //     orderable: true,
-                    //     searchable: true
-                    // },
-                    {
-                        data: 'tip_for_driver',
-                        name: 'tip_for_driver',
-                        className: 'align-top',
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: 'total_charges',
-                        name: 'total_charges',
-                        className: 'align-top',
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: 'details.pickup_location',
-                        name: 'details.pickup_location',
-                        className: 'align-top',
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: 'details.drop_location',
-                        name: 'details.drop_location',
-                        className: 'align-top',
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: 'details.pickup_date',
-                        name: 'details.pickup_date',
-                        render: function(data, type, row) {
-                            // Modify the data for the first column
-                            var date = new Date(data);
-                            return date.toDateString();
-                        },
-                        className: 'align-top',
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: 'details.pickup_time',
-                        name: 'details.pickup_time',
-                        className: 'align-top',
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: 'details.travellers',
-                        name: 'details.travellers',
-                        className: 'align-top',
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: 'details.total_km',
-                        name: 'details.total_km',
+                        data: 'usage_count',
+                        name: 'usage_count',
                         className: 'align-top',
                         orderable: true,
                         searchable: true
@@ -462,28 +394,56 @@
                     {
                         render: function(data, type, row) {
                             // Modify the data for the first column
-                            return `<button type="button" class="btn btn-danger open-modal-button drv">Cancel Ride</button>`
+                            return `<button type="button" class="btn btn-danger open-add-coupon-modal-button drv">Delete</button>`
                         },
                     }
                 ]
             });
-            
+
         });
         $(document).ready(function() {
-            
-            $('.user-datatable-ajax').on('click', '.open-modal-button', function() {
+            $('#codeTxt').on('keyup', function() {
+                var inputValue = $(this).val();
+                var uppercaseValue = inputValue.toUpperCase();
+                $(this).val(uppercaseValue);
+            });
+
+            $('.coupon-datatable-ajax').on('click', '.open-add-coupon-modal-button', function() {
                 // Get the data from the DataTable row
-                const table = $('.user-datatable-ajax').DataTable();
+                const table = $('.coupon-datatable-ajax').DataTable();
                 const rowData = table.row($(this).closest('tr')).data();
-                $('#booking_id').val(rowData.id);
                 console.log(rowData.id);
                 // Extract the necessary data from the row
 
                 // Open the modal and populate the data
-                cancelRide(rowData.id);
+                deleteCoupon(rowData.id);
             });
 
+            function deleteCoupon(id) {
 
+                $.ajax({
+                    url: apiUrl + "coupons/delete/" + id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(result) {
+                        $('.coupon-datatable-ajax').DataTable().ajax.reload();
+                    },
+                    error: function(xhr, status, error) {
+                        var errorMessage = "An error occurred.";
+                        if (xhr.responseJSON && xhr.responseJSON.error) {
+                            // If the error response contains a specific error message
+                            errorMessage = xhr.responseJSON.error;
+                        } else if (xhr.responseText) {
+                            // If the error response is a string
+                            errorMessage = xhr.responseText;
+                        } else {
+                            // Fallback error message
+                            errorMessage = error;
+                        }
+                        console.log(errorMessage);
+                    },
+                });
+            }
         });
     </script>
 

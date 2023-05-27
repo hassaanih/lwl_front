@@ -116,8 +116,19 @@ function submitBookingDetails() {
       getVehicles();
       console.log(bookingDetailsId);
     },
-    error: function (error) {
-      console.log("Error: " + error);
+    error: function (xhr, status, error) {
+      var errorMessage = "An error occurred.";
+      if (xhr.responseJSON && xhr.responseJSON.error) {
+        // If the error response contains a specific error message
+        errorMessage = xhr.responseJSON.error;
+      } else if (xhr.responseText) {
+        // If the error response is a string
+        errorMessage = xhr.responseText;
+      } else {
+        // Fallback error message
+        errorMessage = error;
+      }
+      console.log(errorMessage);
     },
   });
 }
@@ -214,8 +225,19 @@ function selectVehicleType(vehicleType, vehicleId) {
       setCheckoutPageSummaryView(bookingDetails);
       console.log(bookingDetailsId);
     },
-    error: function (error) {
-      console.log("Error: " + JSON.stringify(error));
+    error: function (xhr, status, error) {
+      var errorMessage = "An error occurred.";
+      if (xhr.responseJSON && xhr.responseJSON.error) {
+        // If the error response contains a specific error message
+        errorMessage = xhr.responseJSON.error;
+      } else if (xhr.responseText) {
+        // If the error response is a string
+        errorMessage = xhr.responseText;
+      } else {
+        // Fallback error message
+        errorMessage = error;
+      }
+      console.log(errorMessage);
     },
   });
 }
@@ -244,8 +266,19 @@ function getVehicles() {
         }
       }, 1000);
     },
-    error: function (error) {
-      console.log("Error: " + JSON.stringify(error));
+    error: function (xhr, status, error) {
+      var errorMessage = "An error occurred.";
+      if (xhr.responseJSON && xhr.responseJSON.error) {
+        // If the error response contains a specific error message
+        errorMessage = xhr.responseJSON.error;
+      } else if (xhr.responseText) {
+        // If the error response is a string
+        errorMessage = xhr.responseText;
+      } else {
+        // Fallback error message
+        errorMessage = error;
+      }
+      console.log(errorMessage);
     },
   });
 }
@@ -288,8 +321,19 @@ function proceedToCheckout() {
       console.log(bookingDetailsId);
       window.location.href = appUrl + "thankyou_for_booking.php";
     },
-    error: function (error) {
-      console.log("Error: " + error);
+    error: function (xhr, status, error) {
+      var errorMessage = "An error occurred.";
+      if (xhr.responseJSON && xhr.responseJSON.error) {
+        // If the error response contains a specific error message
+        errorMessage = xhr.responseJSON.error;
+      } else if (xhr.responseText) {
+        // If the error response is a string
+        errorMessage = xhr.responseText;
+      } else {
+        // Fallback error message
+        errorMessage = error;
+      }
+      console.log(errorMessage);
     },
   });
 }
@@ -354,20 +398,30 @@ function assignDriver() {
       $("#drv_name").val("");
       $("#drv_payment").val("");
       $("#exampleModal").modal("hide");
-      $('.page-datatable-ajax').DataTable().ajax.reload(null, false);
+      $(".page-datatable-ajax").DataTable().ajax.reload(null, false);
       console.log(result);
     },
-    error: function (error) {
-      console.log("Error: " + error);
+    error: function (xhr, status, error) {
+      var errorMessage = "An error occurred.";
+      if (xhr.responseJSON && xhr.responseJSON.error) {
+        // If the error response contains a specific error message
+        errorMessage = xhr.responseJSON.error;
+      } else if (xhr.responseText) {
+        // If the error response is a string
+        errorMessage = xhr.responseText;
+      } else {
+        // Fallback error message
+        errorMessage = error;
+      }
+      console.log(errorMessage);
       Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Something went wrong! Please check all the details are correct?',
-      })
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong! Please check all the details are correct?",
+      });
     },
   });
 }
-
 
 function cancelRide(id) {
   let data = {
@@ -383,16 +437,27 @@ function cancelRide(id) {
       // result contains the response from the server-side PHP script
       // you can use this result to update the UI or perform other operations
       // sendToNextView();
-      $('.user-datatable-ajax').DataTable().ajax.reload(null, false);
+      $(".user-datatable-ajax").DataTable().ajax.reload(null, false);
       console.log(result);
     },
-    error: function (error) {
-      console.log("Error: " + error);
+    error: function (xhr, status, error) {
+      var errorMessage = "An error occurred.";
+      if (xhr.responseJSON && xhr.responseJSON.error) {
+        // If the error response contains a specific error message
+        errorMessage = xhr.responseJSON.error;
+      } else if (xhr.responseText) {
+        // If the error response is a string
+        errorMessage = xhr.responseText;
+      } else {
+        // Fallback error message
+        errorMessage = error;
+      }
+      console.log(errorMessage);
       Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Something went wrong! Please check all the details are correct?',
-      })
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong! Please check all the details are correct?",
+      });
     },
   });
 }
@@ -415,22 +480,188 @@ function assignSelf() {
       // sendToNextView();
       $("#drv_name_self").val("");
       $("#drv_payment_self").val("");
-      $("#self-assign-modal").modal('hide');
-      $('.page-datatable-ajax').DataTable().ajax.reload(null, false);
+      $("#self-assign-modal").modal("hide");
+      $(".page-datatable-ajax").DataTable().ajax.reload(null, false);
       console.log(result);
     },
-    error: function (error) {
-      console.log("Error: " + error);
+    error: function (xhr, status, error) {
+      var errorMessage = "An error occurred.";
+      if (xhr.responseJSON && xhr.responseJSON.error) {
+        // If the error response contains a specific error message
+        errorMessage = xhr.responseJSON.error;
+      } else if (xhr.responseText) {
+        // If the error response is a string
+        errorMessage = xhr.responseText;
+      } else {
+        // Fallback error message
+        errorMessage = error;
+      }
+      console.log(errorMessage);
       Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Something went wrong! Please check all the details are correct?',
-      })
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong! Please check all the details are correct?",
+      });
     },
   });
 }
 
-function showCurrentUserRides(){
-  console.log('hello');
-  $('.user-datatable-ajax').DataTable().ajax.reload();
+function showCurrentUserRides() {
+  console.log("hello");
+  $(".user-datatable-ajax").DataTable().ajax.reload();
+}
+
+function addTipForDriver(event) {
+  let tip = event.target.value;
+  console.log(tip);
+}
+
+function applyCoupon() {
+  let data = {
+    id: bookingDetailsId,
+    code: $("#coupon-code").val(),
+  };
+
+  $.ajax({
+    url: apiUrl + "coupon/apply",
+    type: "POST",
+    data: data,
+    dataType: "json",
+    success: function (result) {
+      // result contains the response from the server-side PHP script
+      // you can use this result to update the UI or perform other operations
+      // sendToNextView();
+      setCheckoutPageSummaryView(result.booking_details);
+      console.log(bookingDetailsId);
+    },
+    error: function (xhr, status, error) {
+      var errorMessage = "An error occurred.";
+      if (xhr.responseJSON && xhr.responseJSON.error) {
+        // If the error response contains a specific error message
+        errorMessage = xhr.responseJSON.error;
+      } else if (xhr.responseText) {
+        // If the error response is a string
+        errorMessage = xhr.responseText;
+      } else {
+        // Fallback error message
+        errorMessage = error;
+      }
+      console.log(errorMessage);
+    },
+  });
+}
+
+function signin() {
+  let data = {
+    email: $("#signinEmail").val(),
+    password: $("#signinPassword").val(),
+  };
+
+  $.ajax({
+    url: apiUrl + "user/signin",
+    type: "POST",
+    data: data,
+    dataType: "json",
+    success: function (result) {
+      // result contains the response from the server-side PHP script
+      // you can use this result to update the UI or perform other operations
+      // sendToNextView();
+      localStorage.setItem("userEmail", result.user.email);
+      window.location.href = appUrl + "dash_user.php";
+      console.log(result);
+    },
+    error: function (xhr, status, error) {
+      var errorMessage = "An error occurred.";
+      if (xhr.responseJSON && xhr.responseJSON.error) {
+        // If the error response contains a specific error message
+        errorMessage = xhr.responseJSON.error;
+      } else if (xhr.responseText) {
+        // If the error response is a string
+        errorMessage = xhr.responseText;
+      } else {
+        // Fallback error message
+        errorMessage = error;
+      }
+      console.log(errorMessage);
+    },
+  });
+}
+
+function signup() {
+  let data = {
+    email: $("#signupEmail").val(),
+    password: $("#signupPassword").val(),
+    c_password: $("#signupConfirmPassword").val(),
+    full_name: $("#signupName").val(),
+  };
+
+  $.ajax({
+    url: apiUrl + "user/create",
+    type: "POST",
+    data: data,
+    dataType: "json",
+    success: function (result) {
+      // result contains the response from the server-side PHP script
+      // you can use this result to update the UI or perform other operations
+      // sendToNextView();
+      localStorage.setItem("userEmail", result.user.email);
+      window.location.href = appUrl + "dash_user.php";
+      console.log(result);
+    },
+    error: function (xhr, status, error) {
+      var errorMessage = "An error occurred.";
+      if (xhr.responseJSON && xhr.responseJSON.error) {
+        // If the error response contains a specific error message
+        errorMessage = xhr.responseJSON.error;
+      } else if (xhr.responseText) {
+        // If the error response is a string
+        errorMessage = xhr.responseText;
+      } else {
+        // Fallback error message
+        errorMessage = error;
+      }
+      console.log(errorMessage);
+    },
+  });
+}
+
+function openAddCouponModal() {
+  $("#couponModal").modal("show");
+}
+
+function addCoupon() {
+  let data = {
+    code: $("#codeTxt").val(),
+    total_discount: $("#discountTxt").val(),
+    usage_count: $("#usageCountTxt").val(),
+  };
+
+  $.ajax({
+    url: apiUrl + "coupons/add",
+    type: "POST",
+    data: data,
+    dataType: "json",
+    success: function (result) {
+      $("#couponModal").modal("hide");
+      $(".coupon-datatable-ajax").DataTable().ajax.reload();
+    },
+    error: function (xhr, status, error) {
+      var errorMessage = "An error occurred.";
+      if (xhr.responseJSON && xhr.responseJSON.error) {
+        // If the error response contains a specific error message
+        errorMessage = xhr.responseJSON.error;
+      } else if (xhr.responseText) {
+        // If the error response is a string
+        errorMessage = xhr.responseText;
+      } else {
+        // Fallback error message
+        errorMessage = error;
+      }
+      console.log(errorMessage);
+    },
+  });
+}
+
+function redirectToCoupon(){
+  window.location.href = appUrl + 'coupon.php';
 }

@@ -259,6 +259,11 @@ section.logo:before {
     <div class="tb">
         <div class="container-fluid">
             <div class="row">
+                <div class="col-md-12 d-flex justify-content-end">
+                    <button type="button" onclick="redirectToCoupon()">Generate Coupon</button>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-12">
                     <table id="myTable" class="row-border display page-datatable-ajax p-2">
                         <thead>
