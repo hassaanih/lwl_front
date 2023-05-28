@@ -93,7 +93,7 @@
         .odd .drv {
             border: unset;
             width: 100%;
-            height: 31px;
+            height: auto;
             padding: 0;
         }
 
