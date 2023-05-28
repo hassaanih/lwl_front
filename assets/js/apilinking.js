@@ -16,6 +16,28 @@ var steps = $("fieldset").length;
 
 */
 
+function displayErrorMessages(errors) {
+  const errorValues = Object.values(errors);
+  let errorMessage = '<ul>';
+
+  for (const fieldErrors of errorValues) {
+    for (const error of fieldErrors) {
+      errorMessage += `<li class="mb-2 text-danger"> &bull; ${error}</li>`;
+    }
+  }
+
+  errorMessage += '</ul>';
+
+  Swal.fire({
+    title: 'Error',
+    html: errorMessage,
+    icon: 'error',
+    customClass: {
+      content: 'text-left', // Add custom CSS class for content alignment
+    },
+  });
+}
+
 function addStop() {
   var moreEmail = document.querySelector("#more-email");
   var div = document.createElement("div");
@@ -71,14 +93,19 @@ function setProgressBar(curStep) {
   $(".progress-bar").css("width", percent + "%");
 }
 
-function toggleTextField() {
-  var checkbox = document.getElementById("checkbox");
+function toggleTextField(checkbox) {
+  var checkboxes = document.getElementsByName("option");
   var textField = document.getElementById("text-field");
 
   if (checkbox.checked) {
-    textField.style.display = "block";
+    for (var i = 0; i < checkboxes.length; i++) {
+      if (checkboxes[i] !== checkbox) {
+        checkboxes[i].checked = false;
+      }
+    }
+    textField.style.display = checkbox.value === 'yes' ? 'block' : 'none';
   } else {
-    textField.style.display = "none";
+    textField.style.display = 'none';
   }
 }
 
@@ -129,9 +156,12 @@ function submitBookingDetails() {
         errorMessage = error;
       }
       console.log(errorMessage);
+      displayErrorMessages(errorMessage);
     },
   });
 }
+
+
 
 function setSummaryView(bookingDetails) {
   document.getElementById("pickup-date-summary").innerHTML = new Date(
@@ -238,6 +268,8 @@ function selectVehicleType(vehicleType, vehicleId) {
         errorMessage = error;
       }
       console.log(errorMessage);
+      displayErrorMessages(errorMessage);
+      
     },
   });
 }
@@ -279,6 +311,7 @@ function getVehicles() {
         errorMessage = error;
       }
       console.log(errorMessage);
+      
     },
   });
 }
@@ -334,6 +367,7 @@ function proceedToCheckout() {
         errorMessage = error;
       }
       console.log(errorMessage);
+      displayErrorMessages(errorMessage);
     },
   });
 }
@@ -414,11 +448,7 @@ function assignDriver() {
         errorMessage = error;
       }
       console.log(errorMessage);
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Something went wrong! Please check all the details are correct?",
-      });
+      displayErrorMessages(errorMessage);
     },
   });
 }
@@ -453,11 +483,7 @@ function cancelRide(id) {
         errorMessage = error;
       }
       console.log(errorMessage);
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Something went wrong! Please check all the details are correct?",
-      });
+      displayErrorMessages(errorMessage);
     },
   });
 }
@@ -497,11 +523,7 @@ function assignSelf() {
         errorMessage = error;
       }
       console.log(errorMessage);
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Something went wrong! Please check all the details are correct?",
-      });
+      displayErrorMessages(errorMessage);
     },
   });
 }
@@ -547,6 +569,7 @@ function applyCoupon() {
         errorMessage = error;
       }
       console.log(errorMessage);
+      displayErrorMessages(errorMessage);
     },
   });
 }
@@ -583,6 +606,7 @@ function signin() {
         errorMessage = error;
       }
       console.log(errorMessage);
+      displayErrorMessages(errorMessage);
     },
   });
 }
@@ -621,6 +645,7 @@ function signup() {
         errorMessage = error;
       }
       console.log(errorMessage);
+      displayErrorMessages(errorMessage);
     },
   });
 }
@@ -658,10 +683,15 @@ function addCoupon() {
         errorMessage = error;
       }
       console.log(errorMessage);
+      displayErrorMessages(errorMessage);
     },
   });
 }
 
 function redirectToCoupon(){
   window.location.href = appUrl + 'coupon.php';
+}
+
+function backToAdminPanel(){
+  window.location.href = appUrl + 'dash.php';
 }

@@ -16,6 +16,8 @@
 	<script data-require="jquery@3.1.1" data-semver="3.1.1" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNCYnCArZoOrroMJTcZZQddwSqiAvtWm4&libraries=places" async></script>
 	<script src="env.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 
 	<?php
@@ -87,18 +89,20 @@
 										<div class="row" id="hourlyEnable" style="display: none;">
 											<div class="col-md-6">
 												<input type="number" id="hour" placeholder="Hours" min="0" max="24">
+												<span class="error-span">Validation Here</span>
 											</div>
 											<div class="col-md-6">
 												<input type="number" id="minutes" placeholder="Minutes" min="0" max="24">
+												<span class="error-span">Validation Here</span>
 											</div>
 										</div>
 										<div class="row in1">
 											<div class="col-md-6">
-												<label for="pickupdate">* Pick Up Date:</label><input type="date" id="pick" name="pick" placeholder="Pick Up Date">
+												<label for="pickupdate">* Pick Up Date:</label><input type="date" id="pick" name="pick" placeholder="Pick Up Date"><span class="error-span">Validation Here</span>
 											</div>
 											<div class="col-md-6">
 												<label for="appt">* Pickup time:</label><br>
-												<input type="time" id="time" name="time">
+												<input type="time" id="time" name="time"><span class="error-span">Validation Here</span>
 											</div>
 										</div>
 										<div class="row in2">
@@ -106,21 +110,78 @@
 												<div class="for">
 													<label for="exampleInputEmail1">Pickup Location</label>
 													<input type="text" class="form-control" id="ploc" pattern="^\d+\s[a-zA-Z]+\s[a-zA-Z]+\,\s[a-zA-Z]+\,\sIllinois\s\d{5}\,\s[a-zA-Z]+\s*$">
+													<span class="error-span">Validation Here</span>
 													<div class="row">
 														<div class="col-md-12">
 															<p id="text" style="display:none"><input type="text" class="form-control" id="flghno" placeholder="Flight No*">
-																<label for="appt">* Flight time:</label><br><input type="time" id="flghtm" name="time"><input type="text" class="form-control" id="airlineName" placeholder="Name Of Airline">
+																<span class="error-span">Validation Here</span>
+																<label for="appt">* Flight time:</label><br><input type="time" id="flghtm" name="time">
+																<span class="error-span">Validation Here</span>
+
+																<select class="form-control" id="airlineName">
+    																<option value="Choose Your Airline">Choose Your Airline</option>
+  <option value="Aer Lingus">Aer Lingus</option>
+  <option value="AeroMexico">AeroMexico</option>
+  <option value="Air Canada">Air Canada</option>
+  <option value="Air France">Air France</option>
+  <option value="Air India">Air India</option>
+  <option value="Alaska Airlines">Alaska Airlines</option>
+  <option value="All Nippon">All Nippon</option>
+  <option value="American Airlines">American Airlines</option>
+  <option value="Austrian Airlines">Austrian Airlines</option>
+  <option value="British Airways">British Airways</option>
+  <option value="Cape Air">Cape Air</option>
+  <option value="Cathay Pacific Airways">Cathay Pacific Airways</option>
+  <option value="Copa Airlines">Copa Airlines</option>
+  <option value="Delta and Delta Shuttle">Delta and Delta Shuttle</option>
+  <option value="Denver Air Connection (Key Lime Air)">Denver Air Connection (Key Lime Air)</option>
+  <option value="EVA Air">EVA Air</option>
+  <option value="Emirates">Emirates</option>
+  <option value="Ethiopian Airlines">Ethiopian Airlines</option>
+  <option value="Etihad Airways">Etihad Airways</option>
+  <option value="Finnair">Finnair</option>
+  <option value="Frontier Airlines">Frontier Airlines</option>
+  <option value="Iberia Airlines">Iberia Airlines</option>
+  <option value="Icelandair">Icelandair</option>
+  <option value="Japan Airlines (JAL)">Japan Airlines (JAL)</option>
+  <option value="JetBlue">JetBlue</option>
+  <option value="KLM Royal Dutch">KLM Royal Dutch</option>
+  <option value="Korean Air">Korean Air</option>
+  <option value="LOT Polish Airlines">LOT Polish Airlines</option>
+  <option value="Lufthansa">Lufthansa</option>
+  <option value="Qatar Airways">Qatar Airways</option>
+  <option value="Royal Jordanian">Royal Jordanian</option>
+  <option value="SWISS">SWISS</option>
+  <option value="Scandinavian Airlines (SAS)">Scandinavian Airlines (SAS)</option>
+  <option value="Southwest Airlines">Southwest Airlines</option>
+  <option value="Spirit Airlines">Spirit Airlines</option>
+  <option value="Sun Country">Sun Country</option>
+  <option value="TAP Air Portugal">TAP Air Portugal</option>
+  <option value="Turkish Airlines">Turkish Airlines</option>
+  <option value="United Airlines">United Airlines</option>
+  <option value="VivaAerobus">VivaAerobus</option>
+  <option value="Volaris Airlines">Volaris Airlines</option>
+  <option value="WestJet">WestJet</option>
+  																</select>
+  																<span class="error-span">Validation Here</span>
+
+																<!-- <input type="text" class="form-control" id="airlineName" placeholder="Name Of Airline"> -->
 
 																</head>
 
 																<body>
 																	<label for="checkbox">Inside Meetup:<span style="color: red; font-size: 14px;"> &nbsp; (If you want us to welcome you inside the airport with a Card.)</span></label> <br>
-																	<input type="checkbox" id="checkbox" value="yes" onclick="toggleTextField()"><label for="vehicle1" class="in_yesno"> Yes</label>
-																	<input type="checkbox" id="checkbox" value="no" checked="checked"><label for="vehicle1" class="in_yesno"> No</label>
+																	<input type="checkbox" name="option" id="checkbox" value="yes" onclick="toggleTextField(this)">
+																	<!-- <span class="error-span">Validation Here</span> -->
+																	<label for="vehicle1" class="in_yesno"> Yes</label>
+																	<input type="checkbox" name="option" id="checkbox" value="no" onclick="toggleTextField(this)">
+																	<!-- <span class="error-span">Validation Here</span> -->
+																	<label for="vehicle1" class="in_yesno"> No</label>
 
 																	<div class="text-field" id="text-field">
 																		<label for="text-input">Additional Message:</label>
 																		<textarea id="txtarea_inside" placeholder="" id="card"></textarea>
+
 																	</div>
 
 																	<!-- <script>
@@ -170,13 +231,16 @@
 											<div class="col-md-12">
 												<label for="address">* Dropoff Location:</label>
 												<br><input type="text" id="daddress" name="daddress" pattern="^\d+\s[a-zA-Z]+\s[a-zA-Z]+\,\s[a-zA-Z]+\,\sIllinois\s\d{5}\,\s[a-zA-Z]+\s*$">
+												<span class="error-span">Validation Here</span>
 											</div>
 										</div>
 										<div class="row in4">
 											<div class="col-md-3">
 												<label for="address">*Travellers:</label>
 												<div class="quantity buttons_added">
-													<input type="button" value="-" class="minus"><input id="travellerNumber" type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
+													<input type="button" value="-" class="minus">
+													<input id="travellerNumber" type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
+													
 												</div>
 											</div>
 
@@ -184,12 +248,14 @@
 												<label for="address">*Bags:</label>
 												<div class="quantity buttons_added">
 													<input type="button" value="-" class="minus"><input id="kidsNumber" type="number" step="1" min="0" max="" name="quantity" value="0" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
+													
 												</div>
 											</div>
 											<div class="col-md-3">
 												<label for="address">Child Seat:</label>
 												<div class="quantity buttons_added">
 													<input type="button" value="-" class="minus"><input id="bagsNumber" type="number" step="1" min="0" max="" name="quantity" value="0" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
+													
 												</div>
 											</div>
 											<div class="col-md-12 ds">
@@ -411,7 +477,7 @@
 
 														</div>
 
-														<div class="car_img">
+														<div class="car_img suv">
 															<img src="assets/images/suv1.jpg">
 														</div>
 														<div class="car-info">
@@ -562,25 +628,31 @@
 												<div class="row">
 													<div class="col-md-6">
 														<input type="text" name="pfname" id="pfname" placeholder="*First Name">
+														<span class="error-span">Validation Here</span>
 													</div>
 													<div class="col-md-6">
 														<input type="text" name="plname" id="plname" placeholder="*Last Name">
+														<span class="error-span">Validation Here</span>
 													</div>
 												</div>
 												<div class="row">
 													<div class="col-md-6">
 														<input type="tel" name="ptel" id="ptel" placeholder="*Mobile Phone">
+														<span class="error-span">Validation Here</span>
 													</div>
 													<div class="col-md-6">
 														<input type="email" name="pemail" id="pemail" placeholder="*Email Address">
+														<span class="error-span">Validation Here</span>
 													</div>
 												</div>
 												<div class="row">
 													<div class="col-md-6">
 														<input type="text" name="cname" id="cname" placeholder="*Contact Name">
+														<span class="error-span">Validation Here</span>
 													</div>
 													<div class="col-md-6">
 														<input type="tel" name="ctel" id="ctel" placeholder="*Contact Phone">
+														<span class="error-span">Validation Here</span>
 													</div>
 												</div>
 												<div class="row">
@@ -589,10 +661,12 @@
 													</div> -->
 													<div class="col-md-6">
 														<input type="text" name="tip" id="tip" placeholder="*Enter Tip For the Driver" onchange="addTipForDriver(event)">
+														<span class="error-span">Validation Here</span>
 													</div>
 
 													<div class="col-md-6 d-flex">
 														<input type="text" id="coupon-code" placeholder="Coupon Code" width="60%">
+														<span class="error-span">Validation Here</span>
 														<button type="button" onclick="applyCoupon()">Apply</button>
 													</div>
 												</div>
@@ -608,18 +682,21 @@
 
 
 														<input type="text" id="owner" placeholder="Card Holder Name">
+														<span class="error-span">Validation Here</span>
 
 													</div>
 													<div class="col-md-6">
 
 
 														<input type="text" id="cvv" placeholder="CVV">
+														<span class="error-span">Validation Here</span>
 
 													</div>
 												</div>
 
 
 												<input type="text" id="cardNumber" placeholder="Credit Card Number">
+												<span class="error-span">Validation Here</span>
 
 												<div class="form-group" id="expiration-date">
 													<label class="ex">Select Expiry Date</label> <br>
@@ -637,6 +714,7 @@
 														<option value="11">November</option>
 														<option value="12">December</option>
 													</select>
+													<span class="error-span">Validation Here</span>
 													<select class="yrs" id="year">
 
 														<?php
@@ -818,7 +896,9 @@
 
 					</div>
 				</div>
-				<p style="padding:20px 0;font-family:'poppins'; color:black; font-weight:600; text-align:center;">ALL RIGHTS RESERVED BY LIGHT WATER LIMO. DEVELOPED BY 1SOL.</p>
+				<p style="padding:20px 0;font-family:'poppins'; color:black; font-weight:600; text-align:center;">ALL RIGHTS RESERVED BY <a  href="https://lightwaterlimo.com/"><strong>LIGHT WATER LIMO</strong></a>. <br>
+DEVELOPED BY <strong><a style="color: #000" href="https://1solpk.com/">1 SOL DIGITAL SERVICES (SMC-Private) LIMITED</a>.</strong>
+</p>
 
 			</div>
 		</div>

@@ -276,7 +276,10 @@
     <div class="tb">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-md-12 d-flex justify-content-end">
+                <div class="col-md-6 d-flex justify-content-start">
+                    <button type="button" class="btn" onclick="backToAdminPanel()">Back to Admin Panel</button>
+                </div>
+                <div class="col-md-6 d-flex justify-content-end">
                     <button type="button" class="btn" onclick="openAddCouponModal()">Add</button>
                 </div>
             </div>
