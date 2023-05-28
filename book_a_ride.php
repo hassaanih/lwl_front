@@ -180,7 +180,7 @@
 
 																	<div class="text-field" id="text-field">
 																		<label for="text-input">Additional Message:</label>
-																		<textarea id="txtarea_inside" placeholder="" id="card"></textarea>
+																		<textarea  placeholder="" id="card"></textarea>
 
 																	</div>
 
@@ -947,6 +947,11 @@ DEVELOPED BY <strong><a style="color: #000" href="https://1solpk.com/">1 SOL DIG
 
 		// STEP FORM 
 		$(document).ready(function() {
+			$('#coupon-code').on('keyup', function() {
+                var inputValue = $(this).val();
+                var uppercaseValue = inputValue.toUpperCase();
+                $(this).val(uppercaseValue);
+            });
 
 			var current_fs, next_fs, previous_fs; //fieldsets
 			var opacity;
