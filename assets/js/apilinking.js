@@ -352,7 +352,10 @@ function proceedToCheckout() {
       // sendToNextView();
 
       console.log(bookingDetailsId);
-      window.location.href = appUrl + "thankyou_for_booking.php";
+      Swal.fire('Booking Payment Successful');
+      setTimeout(item => {
+        window.location.href = appUrl + "thankyou_for_booking.php";
+      }, 2000);
     },
     error: function (xhr, status, error) {
       var errorMessage = "An error occurred.";
@@ -432,6 +435,7 @@ function assignDriver() {
       $("#drv_name").val("");
       $("#drv_payment").val("");
       $("#exampleModal").modal("hide");
+      Swal.fire('Ride has been assigned to driver');
       $(".page-datatable-ajax").DataTable().ajax.reload(null, false);
       console.log(result);
     },
@@ -508,6 +512,7 @@ function assignSelf() {
       $("#drv_name_self").val("");
       $("#drv_payment_self").val("");
       $("#self-assign-modal").modal("hide");
+      Swal.fire('Ride Has been assigned to self.');
       $(".page-datatable-ajax").DataTable().ajax.reload(null, false);
       console.log(result);
     },
@@ -555,6 +560,7 @@ function applyCoupon() {
       // you can use this result to update the UI or perform other operations
       // sendToNextView();
       setCheckoutPageSummaryView(result.booking_details);
+      Swal.fire('Coupon has been applied');
       console.log(bookingDetailsId);
     },
     error: function (xhr, status, error) {
@@ -669,6 +675,7 @@ function addCoupon() {
     dataType: "json",
     success: function (result) {
       $("#couponModal").modal("hide");
+      Swal.fire('Coupon has been added.');
       $(".coupon-datatable-ajax").DataTable().ajax.reload();
     },
     error: function (xhr, status, error) {
