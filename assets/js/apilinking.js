@@ -15,6 +15,27 @@ var steps = $("fieldset").length;
       Step 1 Api's and function
 
 */
+function displayErrorMessages(errors) {
+  const errorValues = Object.values(errors);
+  let errorMessage = '<ul>';
+
+  for (const fieldErrors of errorValues) {
+    for (const error of fieldErrors) {
+      errorMessage += `<li class="mb-2 text-danger"> &bull; ${error}</li>`;
+    }
+  }
+
+  errorMessage += '</ul>';
+
+  Swal.fire({
+    title: 'Error',
+    html: errorMessage,
+    icon: 'error',
+    customClass: {
+      content: 'text-left', // Add custom CSS class for content alignment
+    },
+  });
+}
 
 function addStop() {
   var moreEmail = document.querySelector("#more-email");
@@ -71,13 +92,23 @@ function setProgressBar(curStep) {
   $(".progress-bar").css("width", percent + "%");
 }
 
-function toggleTextField() {
-  var checkbox = document.getElementById("checkbox");
+function toggleTextField(checkboxVal) {
+  var checkbox = document.getElementsByName("options");
   var textField = document.getElementById("text-field");
-
-  if (checkbox.checked) {
+  
+  if (checkboxVal.checked && checkboxVal.value == 'yes') {
+    checkbox.forEach(element => {
+      if(element !== checkboxVal){
+        element.checked = false;
+      }
+    });
     textField.style.display = "block";
   } else {
+    checkbox.forEach(element => {
+      if(element !== checkboxVal){
+        element.checked = false;
+      }
+    });
     textField.style.display = "none";
   }
 }
@@ -129,6 +160,7 @@ function submitBookingDetails() {
         errorMessage = error;
       }
       console.log(errorMessage);
+      displayErrorMessages(errorMessage);
     },
   });
 }
@@ -238,6 +270,7 @@ function selectVehicleType(vehicleType, vehicleId) {
         errorMessage = error;
       }
       console.log(errorMessage);
+      displayErrorMessages(errorMessage)
     },
   });
 }
@@ -337,6 +370,7 @@ function proceedToCheckout() {
         errorMessage = error;
       }
       console.log(errorMessage);
+      displayErrorMessages(errorMessage)
     },
   });
 }
@@ -417,11 +451,7 @@ function assignDriver() {
         errorMessage = error;
       }
       console.log(errorMessage);
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Something went wrong! Please check all the details are correct?",
-      });
+      displayErrorMessages(errorMessage);
     },
   });
 }
@@ -456,11 +486,7 @@ function cancelRide(id) {
         errorMessage = error;
       }
       console.log(errorMessage);
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Something went wrong! Please check all the details are correct?",
-      });
+      displayErrorMessages(errorMessage)
     },
   });
 }
@@ -468,8 +494,8 @@ function cancelRide(id) {
 function assignSelf() {
   let data = {
     id: $("#booking_id").val(),
-    driver_name: $("#drv_name").val(),
-    driver_payment: $("#drv_payment").val(),
+    driver_name: $("#drv_name_self").val(),
+    driver_payment: $("#drv_payment_self").val(),
   };
 
   $.ajax({
@@ -500,11 +526,7 @@ function assignSelf() {
         errorMessage = error;
       }
       console.log(errorMessage);
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Something went wrong! Please check all the details are correct?",
-      });
+      displayErrorMessages(errorMessage);
     },
   });
 }
@@ -536,6 +558,7 @@ function applyCoupon() {
       // sendToNextView();
       setCheckoutPageSummaryView(result.booking_details);
       console.log(bookingDetailsId);
+      Swal.fire('warning', 'Coupon Applied');
     },
     error: function (xhr, status, error) {
       var errorMessage = "An error occurred.";
@@ -550,6 +573,7 @@ function applyCoupon() {
         errorMessage = error;
       }
       console.log(errorMessage);
+      displayErrorMessages(errorMessage)
     },
   });
 }
@@ -586,6 +610,7 @@ function signin() {
         errorMessage = error;
       }
       console.log(errorMessage);
+      displayErrorMessages(errorMessage)
     },
   });
 }
@@ -624,6 +649,7 @@ function signup() {
         errorMessage = error;
       }
       console.log(errorMessage);
+      displayErrorMessages(errorMessage)
     },
   });
 }
@@ -661,6 +687,7 @@ function addCoupon() {
         errorMessage = error;
       }
       console.log(errorMessage);
+      displayErrorMessages(errorMessage)
     },
   });
 }
@@ -701,6 +728,7 @@ function sendPasswordResetEmail(){
         errorMessage = error;
       }
       console.log(errorMessage);
+      displayErrorMessages(errorMessage)
     },
   });
 }
@@ -734,6 +762,7 @@ function resetPassword(){
         errorMessage = error;
       }
       console.log(errorMessage);
+      displayErrorMessages(errorMessage)
     },
   });
 }

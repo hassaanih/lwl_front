@@ -378,6 +378,23 @@ a {
   transform: scale(1.05);
 }
 
+/* Styles for screens smaller than or equal to 600px */
+@media (max-width: 800px) {
+  /* CSS rules here */
+  #bookingSummaryPg2 {
+    display: none;
+  }
+}
+
+/* Styles for screens larger than 600px */
+@media (min-width: 801px) {
+  /* CSS rules here */
+  #bookingSummaryPg2 {
+    display: block;
+  }
+}
+
+
 /* header 
 ------------------------------------*/
 .row.mai {

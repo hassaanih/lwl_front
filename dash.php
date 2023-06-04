@@ -265,7 +265,7 @@ section.logo:before {
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <table id="myTable" class="row-border display page-datatable-ajax p-2">
+                    <table id="adminDashboard" class="row-border display page-datatable-ajax p-2">
                         <thead>
                             <tr>
                                 <th>Id</th>
@@ -379,7 +379,8 @@ section.logo:before {
                 ajax: apiUrl + 'bookings/findAll',
                 lengthMenu: [10, 25, 50, 100, 500],
                 responsive: true,
-                columns: [{
+                columns: [
+                    {
                         data: 'id',
                         name: 'id',
                         className: 'align-top',
@@ -408,13 +409,16 @@ section.logo:before {
                         searchable: true
                     },
                     {
-                        data: 'driver_name',
-                        name: 'driver_name',
+                        data: 'diver_name',
+                        name: 'diver_name',
                         className: 'align-top',
                         render: function(data, type, row) {
                             // Modify the data for the first column
                             if(data == null){
                                 return 'Not Assigned';
+                            }
+                            else{
+                                return data;
                             }
                         },
                         orderable: true,
@@ -426,11 +430,15 @@ section.logo:before {
                         className: 'align-top',
                         render: function(data, type, row) {
                             // Modify the data for the first column
+                            
+                            console.log(data);
                             if(data == null){
                                 return 'N/A';
+                            }else{
+                                return data;
                             }
                         },
-                        orderable: true,
+                        orderable: false,
                         searchable: true
                     },
                     {

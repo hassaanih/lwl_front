@@ -109,14 +109,59 @@
 													<div class="row">
 														<div class="col-md-12">
 															<p id="text" style="display:none"><input type="text" class="form-control" id="flghno" placeholder="Flight No*">
-																<label for="appt">* Flight time:</label><br><input type="time" id="flghtm" name="time"><input type="text" class="form-control" id="airlineName" placeholder="Name Of Airline">
+																<label for="appt">* Flight time:</label><br><input type="time" id="flghtm" name="time">
+																<select class="form-control" id="airlineName">
+																	<option value="Choose Your Airline">Choose Your Airline</option>
+																	<option value="Aer Lingus">Aer Lingus</option>
+																	<option value="AeroMexico">AeroMexico</option>
+																	<option value="Air Canada">Air Canada</option>
+																	<option value="Air France">Air France</option>
+																	<option value="Air India">Air India</option>
+																	<option value="Alaska Airlines">Alaska Airlines</option>
+																	<option value="All Nippon">All Nippon</option>
+																	<option value="American Airlines">American Airlines</option>
+																	<option value="Austrian Airlines">Austrian Airlines</option>
+																	<option value="British Airways">British Airways</option>
+																	<option value="Cape Air">Cape Air</option>
+																	<option value="Cathay Pacific Airways">Cathay Pacific Airways</option>
+																	<option value="Copa Airlines">Copa Airlines</option>
+																	<option value="Delta and Delta Shuttle">Delta and Delta Shuttle</option>
+																	<option value="Denver Air Connection (Key Lime Air)">Denver Air Connection (Key Lime Air)</option>
+																	<option value="EVA Air">EVA Air</option>
+																	<option value="Emirates">Emirates</option>
+																	<option value="Ethiopian Airlines">Ethiopian Airlines</option>
+																	<option value="Etihad Airways">Etihad Airways</option>
+																	<option value="Finnair">Finnair</option>
+																	<option value="Frontier Airlines">Frontier Airlines</option>
+																	<option value="Iberia Airlines">Iberia Airlines</option>
+																	<option value="Icelandair">Icelandair</option>
+																	<option value="Japan Airlines (JAL)">Japan Airlines (JAL)</option>
+																	<option value="JetBlue">JetBlue</option>
+																	<option value="KLM Royal Dutch">KLM Royal Dutch</option>
+																	<option value="Korean Air">Korean Air</option>
+																	<option value="LOT Polish Airlines">LOT Polish Airlines</option>
+																	<option value="Lufthansa">Lufthansa</option>
+																	<option value="Qatar Airways">Qatar Airways</option>
+																	<option value="Royal Jordanian">Royal Jordanian</option>
+																	<option value="SWISS">SWISS</option>
+																	<option value="Scandinavian Airlines (SAS)">Scandinavian Airlines (SAS)</option>
+																	<option value="Southwest Airlines">Southwest Airlines</option>
+																	<option value="Spirit Airlines">Spirit Airlines</option>
+																	<option value="Sun Country">Sun Country</option>
+																	<option value="TAP Air Portugal">TAP Air Portugal</option>
+																	<option value="Turkish Airlines">Turkish Airlines</option>
+																	<option value="United Airlines">United Airlines</option>
+																	<option value="VivaAerobus">VivaAerobus</option>
+																	<option value="Volaris Airlines">Volaris Airlines</option>
+																	<option value="WestJet">WestJet</option>
+																</select>
 
-																</head>
+																
 
 																<body>
 																	<label for="checkbox">Inside Meetup:<span style="color: red; font-size: 14px;"> &nbsp; (If you want us to welcome you inside the airport with a Card.)</span></label> <br>
-																	<input type="checkbox" id="checkbox" value="yes" onclick="toggleTextField()"><label for="vehicle1" class="in_yesno"> Yes</label>
-																	<input type="checkbox" id="checkbox" value="no" checked="checked"><label for="vehicle1" class="in_yesno"> No</label>
+																	<input type="checkbox" id="checkbox" name="options" value="yes" onclick="toggleTextField(this)"><label for="vehicle1" class="in_yesno"> Yes</label>
+																	<input type="checkbox" id="checkbox" name="options" value="no" onclick="toggleTextField(this)"><label for="vehicle1" class="in_yesno"> No</label>
 
 																	<div class="text-field" id="text-field">
 																		<label for="text-input">Additional Message:</label>
@@ -434,7 +479,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="col-md-5">
+										<div class="col-md-5" id="bookingSummaryPg2">
 											<h3>BOOKING SUMMARY</h3>
 											<div class="book">
 												<div class="pdate">

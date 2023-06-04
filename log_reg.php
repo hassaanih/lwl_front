@@ -245,15 +245,12 @@
    -->
   <script src="env.js"></script>
 </head>
-<?php
-  $code = $_GET['code'];
-  echo $code;
-  ?>
 
-  
+
+
 <body class="hompg">
 
-  
+
 
 
   <div class="form-modal">
@@ -265,7 +262,7 @@
 
     <div id="login-form">
       <form>
-        <input type="hidden" id="resetcode" value="<?php echo $_GET['code']; ?>">
+        <input type="hidden" id="resetcode">
         <input type="text" id="signinEmail" placeholder="Enter email or username" />
         <input type="password" id="signinPassword" placeholder="Enter password" />
         <button type="button" class="btn login" onclick="signin()">login</button>
@@ -378,12 +375,12 @@
 
   <script>
     $(document).ready(function() {
-      setTimeout(function(){
+      var url = new URLSearchParams(window.location.search)
+      if (url.has('code')) {
+        $('#resetcode').val(url.get('code'));
         console.log($('#resetcode').val())
-        if ($('#resetcode').val()) {
-          $('#passwordResetModal').modal('show');
-        }
-      }, 3000);
+        $('#passwordResetModal').modal('show');
+      }
 
     })
 
