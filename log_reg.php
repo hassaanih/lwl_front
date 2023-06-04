@@ -1,460 +1,413 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-<title>Home Page</title>
-<meta name="keywords" content="">
-<meta name="description" content="">
+  <title>Home Page</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" integrity="sha512-17EgCFERpgZKcm0j0fEq1YCJuyAWdz9KUtv1EjVuaOz8pDnh/0nZxmU6BBXwaaxqoi9PQXnRWqlcDB027hgv9A==" crossorigin="anonymous" />
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script data-require="jquery@3.1.1" data-semver="3.1.1" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <?php
+  $srcurl = "includes/";
+  $basesurl = "assets/";
+  ?>
 
 
 
-<?php
-$srcurl = "includes/";
-$basesurl = "assets/";
-?>
+
+  <?php
+  $style = $_SERVER['HTTP_HOST'];
+  $style = $srcurl . "style.php";
+  include($style);
+
+  $urhere = "homepage";
+  ?>
+
+  <style type="text/css">
+    @import url('https://fonts.googleapis.com/css?family=Montserrat|Quicksand');
+
+    * {
+      font-family: 'quicksand', Arial, Helvetica, sans-serif;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #114A6C;
+    }
+
+    .form-modal {
+      position: relative;
+      width: 450px;
+      height: auto;
+      margin-top: 4em;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff;
+      border-top-right-radius: 20px;
+      border-top-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1)
+    }
+
+    .form-modal button {
+      cursor: pointer;
+      position: relative;
+      text-transform: capitalize;
+      font-size: 1em;
+      z-index: 2;
+      outline: none;
+      background: #fff;
+      transition: 0.2s;
+    }
+
+    .form-modal .btn {
+      border-radius: 20px;
+      border: none;
+      font-weight: bold;
+      font-size: 1.2em;
+      padding: 0.8em 1em 0.8em 1em !important;
+      transition: 0.5s;
+      border: 1px solid #ebebeb;
+      margin-bottom: 0.5em;
+      margin-top: 0.5em;
+    }
+
+    .form-modal .login,
+    .form-modal .signup {
+      background: #3e7d8e;
+      color: #fff;
+    }
+
+    .form-modal .login:hover,
+    .form-modal .signup:hover {
+      background: #222;
+    }
+
+    .form-toggle {
+      position: relative;
+      width: 100%;
+      height: auto;
+    }
+
+    .form-toggle button {
+      width: 50%;
+      float: left;
+      padding: 1.5em;
+      margin-bottom: 1.5em;
+      border: none;
+      transition: 0.2s;
+      font-size: 1.1em;
+      font-weight: bold;
+      border-top-right-radius: 20px;
+      border-top-left-radius: 20px;
+    }
+
+    .form-toggle button:nth-child(1) {
+      border-bottom-right-radius: 20px;
+    }
+
+    .form-toggle button:nth-child(2) {
+      border-bottom-left-radius: 20px;
+    }
+
+    #login-toggle {
+      background: #3e7d8e;
+      color: #ffff;
+    }
+
+    .form-modal form {
+      position: relative;
+      width: 90%;
+      height: auto;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    #login-form,
+    #signup-form {
+      position: relative;
+      width: 100%;
+      height: auto;
+      padding-bottom: 1em;
+    }
+
+    #signup-form {
+      display: none;
+    }
 
 
+    #login-form button,
+    #signup-form button {
+      width: 100%;
+      margin-top: 0.5em;
+      padding: 0.6em;
+    }
+
+    .form-modal input {
+      position: relative;
+      width: 100%;
+      font-size: 1em;
+      padding: 1.2em 1.7em 1.2em 1.7em;
+      margin-top: 0.6em;
+      margin-bottom: 0.6em;
+      border-radius: 20px;
+      border: none;
+      background: #ebebeb;
+      outline: none;
+      font-weight: bold;
+      transition: 0.4s;
+    }
+
+    .form-modal input:focus,
+    .form-modal input:active {
+      transform: scaleX(1.02);
+    }
+
+    .form-modal input::-webkit-input-placeholder {
+      color: #222;
+    }
+
+    .btn {
+      background-color: #3e7d8e;
+    }
 
 
-<?php
-$style = $_SERVER['HTTP_HOST']; 
-$style = $srcurl."style.php"; 
-include($style); 
+    .form-modal p {
+      font-size: 16px;
+      font-weight: bold;
+    }
 
-$urhere = "homepage";
-?>
+    .form-modal p a {
+      color: #57b846;
+      text-decoration: none;
+      transition: 0.2s;
+    }
 
-<style type="text/css">
- *, *:before, *:after{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Nunito', sans-serif;
-}
-
-body {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Nunito', sans-serif;
-    background-color: #111c30;
-}
-span.m-in {
-    z-index: 999999 !IMPORTANT;
-    top: 0px !important;
-    position: absolute !important;
-}
-
-input, button{
-  border:none;
-  outline: none;
-  background: none;
-}
-
-.cont{
-  overflow: hidden;
-  position: relative;
-  width: 900px;
-  height: 550px;
-  background: #fff;
-  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
-}
-
-.form{
-  position: relative;
-  width: 640px;
-  height: 100%;
-  padding: 50px 30px;
-  -webkit-transition:-webkit-transform 1.2s ease-in-out;
-  transition: -webkit-transform 1.2s ease-in-out;
-  transition: transform 1.2s ease-in-out;
-  transition: transform 1.2s ease-in-out, -webkit-transform 1.2s ease-in-out;
-}
-
-h2{
-  width: 100%;
-  font-size: 30px;
-  text-align: center;
-}
-
-label{
-  display: block;
-  width: 260px;
-  margin: 25px auto 0;
-  text-align: center;
-}
-
-label span{
-  font-size: 14px;
-  font-weight: 600;
-  color: #505f75;
-  text-transform: uppercase;
-}
-
-input{
-  display: block;
-  width: 100%;
-  margin-top: 5px;
-  font-size: 16px;
-  padding-bottom: 5px;
-  border-bottom: 1px solid rgba(109, 93, 93, 0.4);
-  text-align: center;
-  font-family: 'Nunito', sans-serif; 
-}
-
-button{
-  display: block;
-  margin: 0 auto;
-  width: 260px;
-  height: 52px;
-  border-radius: 30px;
-  color: #fff;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-.submit{
-  margin-top: 40px;
-  margin-bottom: 30px;
-  text-transform: uppercase;
-  font-weight: 600;
-  font-family: 'Nunito', sans-serif;
-  background-color: #111c30;
-}
-
-.submit:hover{
-  background: -webkit-linear-gradient(left, #b224ef, #7579ff);
-}
-
-.forgot-pass{
-  margin-top: 15px;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 600;
-  color: #0c0101;
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-.forgot-pass:hover{
-  color: red;
-}
-
-.social-media{
-  width: 100%;
-  text-align: center;
-  margin-top: 20px;
-}
-
-.social-media ul{
-  list-style: none;
-}
-
-.social-media ul li{
-  display: inline-block;
-  cursor: pointer;
-  margin: 25px 15px;
-}
-
-.social-media img{
-  width: 40px;
-  height: 40px;
-}
-
-.sub-cont{
-  overflow: hidden;
-  position: absolute;
-  left: 640px;
-  top: 0;
-  width: 900px;
-  height: 100%;
-  padding-left: 260px;
-  background: #fff;
-  -webkit-transition: -webkit-transform 1.2s ease-in-out;
-  transition: -webkit-transform 1.2s ease-in-out;
-  transition: transform 1.2s ease-in-out;
-}
-
-.cont.s-signup .sub-cont{
-  -webkit-transform:translate3d(-640px, 0, 0);
-          transform:translate3d(-640px, 0, 0);
-}
-
-.img{
-  overflow: hidden;
-  z-index: 2;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 260px;
-  height: 100%;
-  padding-top: 360px;
-}
-
-.img:before{
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 900px;
-  height: 100%;
-  background-image: url(assets/images/22.jpg);
-  background-size: cover;
-  transition: -webkit-transform 1.2s ease-in-out;
-  transition: transform 1.2s ease-in-out, -webkit-transform 1.2s ease-in-out;
-  background-position: center;
-  filter: blur(1px);
-}
-
-.img:after{
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.3);
-}
-
-.cont.s-signup .img:before{
-  -webkit-transform:translate3d(640px, 0, 0);
-          transform:translate3d(640px, 0, 0);
-}
-
-.img-text{
-  z-index: 2;
-  position: absolute;
-  left: 0;
-  top: 50px;
-  width: 100%;
-  padding: 0 20px;
-  text-align: center;
-  color: #fff;
-  -webkit-transition:-webkit-transform 1.2s ease-in-out;
-  transition: -webkit-transform 1.2s ease-in-out;
-  transition: transform 1.2s ease-in-out, -webkit-transform 1.2s ease-in-out;
-}
-
-.img-text h2{
-  margin-bottom: 10px;
-  font-weight: normal;
-}
-
-.img-text p{
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.cont.s-signup .img-text.m-up{
-  -webkit-transform:translateX(520px);
-          transform:translateX(520px);
-}
-
-.img-text.m-in{
-  -webkit-transform:translateX(-520px);
-          transform:translateX(-520px);
-}
-
-.cont.s-signup .img-text.m-in{
-  -webkit-transform:translateX(0);
-          transform:translateX(0);
-}
+    .form-modal p a:hover {
+      color: #222;
+    }
 
 
-.sign-in{
-  padding-top: 65px;
-  -webkit-transition-timing-function:ease-out;
-          transition-timing-function:ease-out;
-}
+    .form-modal i {
+      position: absolute;
+      left: 10%;
+      top: 50%;
+      transform: translateX(-10%) translateY(-50%);
+    }
 
-.cont.s-signup .sign-in{
-  -webkit-transition-timing-function:ease-in-out;
-          transition-timing-function:ease-in-out;
-  -webkit-transition-duration:1.2s;
-          transition-duration:1.2s; 
-  -webkit-transform:translate3d(640px, 0, 0);
-          transform:translate3d(640px, 0, 0);
-}
+    .fa-google {
+      color: #dd4b39;
+    }
 
-.img-btn{
-  overflow: hidden;
-  z-index: 2;
-  position: relative;
-  width: 100px;
-  height: 36px;
-  margin: 0 auto;
-  background: transparent;
-  color: #fff;
-  text-transform: uppercase;
-  font-size: 15px;
-  cursor: pointer;
-}
+    .fa-linkedin {
+      color: #3b5998;
+    }
 
-.img-btn:after{
-  content: '';
-  z-index: 2;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 30px;
-  background-color: #111c30;
-  z-index: -1;
-  display: none;
-}
+    .fa-windows {
+      color: #0072c6;
+    }
 
-.img-btn span{
-  position: unset;
-  left: 0;
-  top: 0;
-  display: -webkit-box;
-  display: block;
-  -webkit-box-pack: unset;
-  justify-content: center;
-  align-items: center;
-  width: auto;
-  height: auto;
-  -webkit-transition:-webkit-transform 1.2s;
-  transition: -webkit-transform 1.2s;
-  transition: transform 1.2s;
-  transition: transform 1.2s, -webkit-transform 1.2s;
-  font-size: 23px;
-  font-family: 'Poppins';
-  text-align: center;
-  padding: 0px 0px;
-  text-decoration: underline;
-}
+    .-box-sd-effect:hover {
+      box-shadow: 0 4px 8px hsla(210, 2%, 84%, .2);
+    }
 
-.img-btn span.m-in{
-  -webkit-transform:translateY(-72px);
-          transform:translateY(-72px);
-}
+    @media only screen and (max-width:500px) {
+      .form-modal {
+        width: 100%;
+      }
+    }
 
-.cont.s-signup .img-btn span.m-in{
-  -webkit-transform:translateY(0);
-          transform:translateY(0);
-}
-
-.cont.s-signup .img-btn span.m-up{
-  -webkit-transform:translateY(72px);
-          transform:translateY(72px);
-}
-
-.sign-up{
-  -webkit-transform:translate3d(-900px, 0, 0);
-          transform:translate3d(-900px, 0, 0);
-}
-
-.cont.s-signup .sign-up{
-  -webkit-transform:translate3d(0, 0, 0);
-          transform:translate3d(0, 0, 0);
-}
-.img-text.m-up {}
-
-.img-text.m-up img {
-    width: 100%;
-    filter: brightness(0) invert(1);
-}
-
-.img-text p {color: white;font-size: 29px;line-height: 39px;font-family: 'Poppins';text-transform: uppercase;font-weight: 800;}
-
-</style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="env.js"></script>
+    @media only screen and (max-width:400px) {
+      i {
+        display: none !important;
+      }
+    }
+  </style>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   -->
+  <script src="env.js"></script>
 </head>
+<?php
+  $code = $_GET['code'];
+  echo $code;
+  ?>
+
+  
 <body class="hompg">
 
-<!-- <?php
-$header = $_SERVER['HTTP_HOST']; 
-$header = $srcurl."header.php"; 
-include($header); 
-?> -->
-
-
-
-<div class="cont">
-    <div class="form sign-in">
-      <h2>LOG IN</h2>
-      <label>
-        <h4>Email Address</h4>
-        <input type="email" name="email" id="signinEmail">
-      </label>
-      <label>
-        <h4>Password</h4>
-        <input type="password" name="password" id="signinPassword">
-      </label>
-      <button class="submit" type="button" onclick="signin()">Sign In</button>
-      <!-- <p class="forgot-pass">Forgot Password ?</p> -->
-      <br>
-      <p style="font-family:'poppins'; color:black; font-weight:600; text-align:center;">ALL RIGHTS RESERVED BY LIGHT WATER LIMO. DEVELOPED BY 1SOL.</p>
-    </div>
-
-    <div class="sub-cont">
-      <div class="img">
-        <div class="img-text m-up">
-          <img src="assets/images/LIGHT-WATER-LOGO.png">
-          
-        </div>
-        <div class="img-text m-in">
-          <h2>One of us?</h2>
-          <p>If you already has an account, just sign in. We've missed you!</p>
-        </div>
-        <div class="img-btn">
-          <span class="m-up">Sign Up</span>
-          <span class="m-in">Sign In</span>
-        </div>
-      </div>
-      <div class="form sign-up">
-        <h2>Sign Up</h2>
-        <label>
-          <span>Name</span>
-          <input type="text" id="signupName">
-        </label>
-        <label>
-          <span>Email</span>
-          <input type="email" id="signupEmail">
-        </label>
-        <label>
-          <span>Password</span>
-          <input type="password" id="signupPassword">
-        </label>
-        <label>
-          <span>Confirm Password</span>
-          <input type="password" id="signupConfirmPassword">
-        </label>
-        <button type="button" class="submit" onclick="signup()">Sign Up Now</button>
-        
-      </div>
-      
-    </div>
-    
-  </div>
   
 
 
+  <div class="form-modal">
 
-<!-- <?php
-$footer = $_SERVER['HTTP_HOST']; 
-$footer = $srcurl."footer.php"; 
-include($footer); 
-?> -->
+    <div class="form-toggle">
+      <button id="login-toggle" onclick="toggleLogin()">log in</button>
+      <button id="signup-toggle" onclick="toggleSignup()">sign up</button>
+    </div>
 
-<script>
-document.querySelector('.img-btn').addEventListener('click', function()
-  {
-    document.querySelector('.cont').classList.toggle('s-signup')
-  }
-);
+    <div id="login-form">
+      <form>
+        <input type="hidden" id="resetcode" value="<?php echo $_GET['code']; ?>">
+        <input type="text" id="signinEmail" placeholder="Enter email or username" />
+        <input type="password" id="signinPassword" placeholder="Enter password" />
+        <button type="button" class="btn login" onclick="signin()">login</button>
+        <p><a href="javascript:void(0)" onclick="showSendEmailModal()">Forgotten account</a></p>
+        <hr />
 
-</script>
-<script src="assets/js/apilinking.js"></script>
+      </form>
+    </div>
+
+    <div id="signup-form">
+      <form>
+        <input type="email" id="signupEmail" placeholder="Enter your email" />
+        <input type="text" id="signupName" placeholder="Choose username" />
+        <input type="password" id="signupPassword" placeholder="Create password" />
+        <input type="password" id="signupConfirmPassword" placeholder="Confirm Password" />
+        <button type="button" class="btn signup" onclick="signup()">create account</button>
+        <p>Clicking <strong>create account</strong> means that you are agree to our <a href="javascript:void(0)">terms of services</a>.</p>
+        <hr />
+
+      </form>
+    </div>
+
+  </div>
+  <div class="modal fade" id="sendEmailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Send Password Email</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="email-div">
+            <h4>Please Enter your email</h4>
+            <div class="row">
+              <div class="col-3">
+                <label class="form-control">Email:</label>
+              </div>
+              <div class="col-9">
+                <input type="text" id="sendEmailForPasswordReset" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <div id="message-div" style="display: none;">
+            <h4>Please check your email.</h4>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="sendPasswordResetEmail()">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="passwordResetModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="password-div">
+            <h4>Please enter your new password</h4>
+            <div class="row">
+              <div class="col-3">
+                <label class="form-control">New Password:</label>
+              </div>
+              <div class="col-9">
+                <input type="password" id="newPassword" class="form-control">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-3">
+                <label class="form-control">Confirm Password:</label>
+              </div>
+              <div class="col-9">
+                <input type="password" id="confirmNewPassword" class="form-control">
+              </div>
+            </div>
+
+          </div>
+
+          <div id="password-message-div" style="display: none;">
+            <h4 class="text-danger bg-black">Password has been changed.</h4>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="resetPassword()">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- <?php
+        $footer = $_SERVER['HTTP_HOST'];
+        $footer = $srcurl . "footer.php";
+        include($footer);
+        ?> -->
+
+  <script>
+    $(document).ready(function() {
+      setTimeout(function(){
+        console.log($('#resetcode').val())
+        if ($('#resetcode').val()) {
+          $('#passwordResetModal').modal('show');
+        }
+      }, 3000);
+
+    })
+
+    function toggleSignup() {
+      document.getElementById("login-toggle").style.backgroundColor = "#fff";
+      document.getElementById("login-toggle").style.color = "#222";
+      document.getElementById("signup-toggle").style.backgroundColor = "#3e7d8e";
+      document.getElementById("signup-toggle").style.color = "#fff";
+      document.getElementById("login-form").style.display = "none";
+      document.getElementById("signup-form").style.display = "block";
+    }
+
+    function toggleLogin() {
+      document.getElementById("login-toggle").style.backgroundColor = "#3e7d8e";
+      document.getElementById("login-toggle").style.color = "#fff";
+      document.getElementById("signup-toggle").style.backgroundColor = "#fff";
+      document.getElementById("signup-toggle").style.color = "#222";
+      document.getElementById("signup-form").style.display = "none";
+      document.getElementById("login-form").style.display = "block";
+    }
+  </script>
+  <script src="assets/js/apilinking.js"></script>
 
 
 </body>
+
 </html>

@@ -16,28 +16,6 @@ var steps = $("fieldset").length;
 
 */
 
-function displayErrorMessages(errors) {
-  const errorValues = Object.values(errors);
-  let errorMessage = '<ul>';
-
-  for (const fieldErrors of errorValues) {
-    for (const error of fieldErrors) {
-      errorMessage += `<li class="mb-2 text-danger"> &bull; ${error}</li>`;
-    }
-  }
-
-  errorMessage += '</ul>';
-
-  Swal.fire({
-    title: 'Error',
-    html: errorMessage,
-    icon: 'error',
-    customClass: {
-      content: 'text-left', // Add custom CSS class for content alignment
-    },
-  });
-}
-
 function addStop() {
   var moreEmail = document.querySelector("#more-email");
   var div = document.createElement("div");
@@ -93,19 +71,14 @@ function setProgressBar(curStep) {
   $(".progress-bar").css("width", percent + "%");
 }
 
-function toggleTextField(checkbox) {
-  var checkboxes = document.getElementsByName("option");
+function toggleTextField() {
+  var checkbox = document.getElementById("checkbox");
   var textField = document.getElementById("text-field");
 
   if (checkbox.checked) {
-    for (var i = 0; i < checkboxes.length; i++) {
-      if (checkboxes[i] !== checkbox) {
-        checkboxes[i].checked = false;
-      }
-    }
-    textField.style.display = checkbox.value === 'yes' ? 'block' : 'none';
+    textField.style.display = "block";
   } else {
-    textField.style.display = 'none';
+    textField.style.display = "none";
   }
 }
 
@@ -156,12 +129,9 @@ function submitBookingDetails() {
         errorMessage = error;
       }
       console.log(errorMessage);
-      displayErrorMessages(errorMessage);
     },
   });
 }
-
-
 
 function setSummaryView(bookingDetails) {
   document.getElementById("pickup-date-summary").innerHTML = new Date(
@@ -268,8 +238,6 @@ function selectVehicleType(vehicleType, vehicleId) {
         errorMessage = error;
       }
       console.log(errorMessage);
-      displayErrorMessages(errorMessage);
-      
     },
   });
 }
@@ -311,7 +279,6 @@ function getVehicles() {
         errorMessage = error;
       }
       console.log(errorMessage);
-      
     },
   });
 }
@@ -352,10 +319,7 @@ function proceedToCheckout() {
       // sendToNextView();
 
       console.log(bookingDetailsId);
-      Swal.fire('Booking Payment Successful');
-      setTimeout(item => {
-        window.location.href = appUrl + "thankyou_for_booking.php";
-      }, 2000);
+      window.location.href = appUrl + "thankyou_for_booking.php";
     },
     error: function (xhr, status, error) {
       var errorMessage = "An error occurred.";
@@ -370,7 +334,6 @@ function proceedToCheckout() {
         errorMessage = error;
       }
       console.log(errorMessage);
-      displayErrorMessages(errorMessage);
     },
   });
 }
@@ -435,7 +398,6 @@ function assignDriver() {
       $("#drv_name").val("");
       $("#drv_payment").val("");
       $("#exampleModal").modal("hide");
-      Swal.fire('Ride has been assigned to driver');
       $(".page-datatable-ajax").DataTable().ajax.reload(null, false);
       console.log(result);
     },
@@ -452,7 +414,11 @@ function assignDriver() {
         errorMessage = error;
       }
       console.log(errorMessage);
-      displayErrorMessages(errorMessage);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong! Please check all the details are correct?",
+      });
     },
   });
 }
@@ -473,7 +439,6 @@ function cancelRide(id) {
       // sendToNextView();
       $(".user-datatable-ajax").DataTable().ajax.reload(null, false);
       console.log(result);
-      Swal.fire('Your Ride has been cancelled')
     },
     error: function (xhr, status, error) {
       var errorMessage = "An error occurred.";
@@ -488,7 +453,11 @@ function cancelRide(id) {
         errorMessage = error;
       }
       console.log(errorMessage);
-      displayErrorMessages(errorMessage);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong! Please check all the details are correct?",
+      });
     },
   });
 }
@@ -512,7 +481,6 @@ function assignSelf() {
       $("#drv_name_self").val("");
       $("#drv_payment_self").val("");
       $("#self-assign-modal").modal("hide");
-      Swal.fire('Ride Has been assigned to self.');
       $(".page-datatable-ajax").DataTable().ajax.reload(null, false);
       console.log(result);
     },
@@ -529,7 +497,11 @@ function assignSelf() {
         errorMessage = error;
       }
       console.log(errorMessage);
-      displayErrorMessages(errorMessage);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong! Please check all the details are correct?",
+      });
     },
   });
 }
@@ -560,7 +532,6 @@ function applyCoupon() {
       // you can use this result to update the UI or perform other operations
       // sendToNextView();
       setCheckoutPageSummaryView(result.booking_details);
-      Swal.fire('Coupon has been applied');
       console.log(bookingDetailsId);
     },
     error: function (xhr, status, error) {
@@ -576,7 +547,6 @@ function applyCoupon() {
         errorMessage = error;
       }
       console.log(errorMessage);
-      displayErrorMessages(errorMessage);
     },
   });
 }
@@ -613,7 +583,6 @@ function signin() {
         errorMessage = error;
       }
       console.log(errorMessage);
-      displayErrorMessages(errorMessage);
     },
   });
 }
@@ -652,7 +621,6 @@ function signup() {
         errorMessage = error;
       }
       console.log(errorMessage);
-      displayErrorMessages(errorMessage);
     },
   });
 }
@@ -675,7 +643,6 @@ function addCoupon() {
     dataType: "json",
     success: function (result) {
       $("#couponModal").modal("hide");
-      Swal.fire('Coupon has been added.');
       $(".coupon-datatable-ajax").DataTable().ajax.reload();
     },
     error: function (xhr, status, error) {
@@ -691,7 +658,6 @@ function addCoupon() {
         errorMessage = error;
       }
       console.log(errorMessage);
-      displayErrorMessages(errorMessage);
     },
   });
 }
@@ -700,6 +666,71 @@ function redirectToCoupon(){
   window.location.href = appUrl + 'coupon.php';
 }
 
-function backToAdminPanel(){
-  window.location.href = appUrl + 'dash.php';
+function showSendEmailModal(){
+  console.log($('#sendEmailModal'));
+  $('#sendEmailModal').modal("show");
+}
+
+function sendPasswordResetEmail(){
+  let data = {
+    email: $('#sendEmailForPasswordReset').val()
+  }
+
+  $.ajax({
+    url: apiUrl + "user/resetpassword/send/email",
+    type: "POST",
+    data: data,
+    dataType: "json",
+    success: function (result) {
+      document.getElementById('email-div').style.display = 'none';
+      document.getElementById('message-div').style.display = 'block';
+    },
+    error: function (xhr, status, error) {
+      var errorMessage = "An error occurred.";
+      if (xhr.responseJSON && xhr.responseJSON.error) {
+        // If the error response contains a specific error message
+        errorMessage = xhr.responseJSON.error;
+      } else if (xhr.responseText) {
+        // If the error response is a string
+        errorMessage = xhr.responseText;
+      } else {
+        // Fallback error message
+        errorMessage = error;
+      }
+      console.log(errorMessage);
+    },
+  });
+}
+
+function resetPassword(){
+  let data = {
+    code: $('#resetcode').val(),
+    password: $('#newPassword').val(),
+    confirm_password: $('#confirmNewPassword').val()
+  }
+
+  $.ajax({
+    url: apiUrl + "user/reset/password",
+    type: "POST",
+    data: data,
+    dataType: "json",
+    success: function (result) {
+      document.getElementById('password-div').style.display = 'none';
+      document.getElementById('password-message-div').style.display = 'block';
+    },
+    error: function (xhr, status, error) {
+      var errorMessage = "An error occurred.";
+      if (xhr.responseJSON && xhr.responseJSON.error) {
+        // If the error response contains a specific error message
+        errorMessage = xhr.responseJSON.error;
+      } else if (xhr.responseText) {
+        // If the error response is a string
+        errorMessage = xhr.responseText;
+      } else {
+        // Fallback error message
+        errorMessage = error;
+      }
+      console.log(errorMessage);
+    },
+  });
 }

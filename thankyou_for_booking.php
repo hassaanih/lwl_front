@@ -607,12 +607,12 @@ include($header);
 		<div class="row">
 			<div class="col-md-12">
 				<div class="wrp1">
-					<h1 class="mb-4">
+					<h1>
 						THANKYOU FOR BOOKING YOUR RIDE WITH US
 					</h1>
-					<p class="d-flex justify-content-center mb-2">Your invoice has been shared via email. If you want to check ride details, please login/signup. </p>
 					<div class="wrp1_btn">
 						<a class="btn" href="<?php echo $path;?>log_reg">Log In/Register</a>
+						<a class="btn" href="<?php echo $path;?>">Search Your Ride</a>
 					
 					</div>
 				
