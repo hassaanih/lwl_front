@@ -56,6 +56,8 @@ section.foot p {
     padding: 0;
     font-size: 15px;
     font-weight: 700;
+    text-align: center;
+
 
 }
        .tb .container-fluid {
@@ -273,15 +275,15 @@ section.logo:before {
                                 <th>Last Name</th>
                                 <th>Contact Number</th>
                                 <th>Driver Name</th>
-                                <th>Driver Price</th>
-                                <th>Tip for driver</th>
-                                <th>Total Charges</th>
+                                <th>Driver Price ($)</th>
+                                <th>Tip for driver ($)</th>
+                                <th>Total Charges ($)</th>
                                 <th>Pickup Location</th>
                                 <th>Drop Location</th>
                                 <th>Pickup Date</th>
                                 <th>Pickup Time</th>
                                 <th>Traveller</th>
-                                <th>Total Kms</th>
+                                <th>Total Miles</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>

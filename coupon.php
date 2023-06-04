@@ -50,6 +50,20 @@
 
             padding: 20px 0;
         }
+        
+        .odd button.btn.btn-danger.open-add-coupon-modal-button.drv {
+    padding: 0 0 !IMPORTANT;
+    height: 50px !important;
+    width: 200px !important;
+    float: right !IMPORTANT;
+}
+.even button.btn.btn-danger.open-add-coupon-modal-button.drv {
+    padding: 0 0 !IMPORTANT;
+    height: 50px !important;
+    width: 200px !important;
+    float: right !IMPORTANT;
+    border:unset !important;
+}
 
         section.foot p {
             color: black;

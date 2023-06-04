@@ -540,7 +540,7 @@
 												<div class="kid">
 													<div class="row">
 														<div class="col-md-6">
-															<h4>No. Of Childern</h4>
+															<h4>No. Of Child Seat</h4>
 														</div>
 														<div class="col-md-6">
 															<p id="children-number-summary">N/A</p>
@@ -761,7 +761,7 @@
 												<div class="kid">
 													<div class="row">
 														<div class="col-md-6">
-															<h4>No. Of Childern</h4>
+															<h4>No. Of Child Seat</h4>
 														</div>
 														<div class="col-md-6">
 															<p id="children-number-summary-checkout">N/A</p>

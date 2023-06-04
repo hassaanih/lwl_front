@@ -472,6 +472,7 @@ function cancelRide(id) {
       // sendToNextView();
       $(".user-datatable-ajax").DataTable().ajax.reload(null, false);
       console.log(result);
+      Swal.fire('warning', 'Ride has been cancelled');
     },
     error: function (xhr, status, error) {
       var errorMessage = "An error occurred.";

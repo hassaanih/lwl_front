@@ -611,7 +611,7 @@ include($header);
 						THANKYOU FOR BOOKING YOUR RIDE WITH US
 					</h1>
 					<div class="wrp1_btn">
-						<a class="btn" href="<?php echo $path;?>log_reg">Log In/Register</a>
+						<a class="btn" href="<?php echo $path;?>bookingmodule/lwl_front/log_reg">Log In/Register</a>
 					
 					</div>
 				

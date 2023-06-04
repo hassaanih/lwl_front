@@ -50,12 +50,21 @@
 
             padding: 20px 0;
         }
+        
+        table#myTable button.btn.btn-danger.open-modal-button.drv {
+    padding: 0 0 !IMPORTANT;
+    width: 100% !important;
+    height: 40px !important;
+    border: unset !important;
+}
 
         section.foot p {
-            color: black;
-            padding: 0;
-            font-size: 15px;
-            font-weight: 700;
+             color: black;
+    padding: 0;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+
 
         }
 
@@ -285,14 +294,14 @@
                                 <th>Last Name</th>
                                 <th>Contact Number</th>
                                 <!-- <th>Phone Number</th> -->
-                                <th>Tip for driver</th>
-                                <th>Total Charges</th>
+                                <th>Tip for driver ($)</th>
+                                <th>Total Charges ($)</th>
                                 <th>Pickup Location</th>
                                 <th>Drop Location</th>
                                 <th>Pickup Date</th>
                                 <th>Pickup Time</th>
                                 <th>Traveller</th>
-                                <th>Total Kms</th>
+                                <th>Total Miles</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
