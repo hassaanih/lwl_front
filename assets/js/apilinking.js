@@ -319,7 +319,10 @@ function proceedToCheckout() {
       // sendToNextView();
 
       console.log(bookingDetailsId);
-      window.location.href = appUrl + "thankyou_for_booking.php";
+      Swal.fire('Payment Successful');
+      setTimeout(function(){
+        window.location.href = appUrl + "thankyou_for_booking.php";
+      },1500);
     },
     error: function (xhr, status, error) {
       var errorMessage = "An error occurred.";

@@ -120,7 +120,7 @@
 
 																	<div class="text-field" id="text-field">
 																		<label for="text-input">Additional Message:</label>
-																		<textarea id="txtarea_inside" placeholder="" id="card"></textarea>
+																		<textarea placeholder="" id="card"></textarea>
 																	</div>
 
 																	<!-- <script>
@@ -183,13 +183,13 @@
 											<div class="col-md-3">
 												<label for="address">*Bags:</label>
 												<div class="quantity buttons_added">
-													<input type="button" value="-" class="minus"><input id="kidsNumber" type="number" step="1" min="0" max="" name="quantity" value="0" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
+													<input type="button" value="-" class="minus"><input id="bagsNumber" type="number" step="1" min="0" max="" name="quantity" value="0" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
 												</div>
 											</div>
 											<div class="col-md-3">
 												<label for="address">Child Seat:</label>
 												<div class="quantity buttons_added">
-													<input type="button" value="-" class="minus"><input id="bagsNumber" type="number" step="1" min="0" max="" name="quantity" value="0" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
+													<input type="button" value="-" class="minus"><input id="kidsNumber" type="number" step="1" min="0" max="" name="quantity" value="0" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
 												</div>
 											</div>
 											<div class="col-md-12 ds">
