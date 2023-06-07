@@ -283,6 +283,9 @@ section.logo:before {
                                 <th>Pickup Date</th>
                                 <th>Pickup Time</th>
                                 <th>Traveller</th>
+                                <th>Child Seat</th>
+                                <th>Inside Meetup</th>
+                                <th>Additional Remarks</th>
                                 <th>Total Miles</th>
                                 <th>Actions</th>
                             </tr>
@@ -494,6 +497,47 @@ section.logo:before {
                         data: 'details.travellers',
                         name: 'details.travellers',
                         className: 'align-top',
+                        orderable: true,
+                        searchable: true
+                    },
+                    {
+                        data: 'details.kids',
+                        name: 'details.kids',
+                        className: 'align-top',
+                        orderable: true,
+                        searchable: true
+                    },
+                    {
+                        data: 'details.onsight_meetup',
+                        name: 'details.onsight_meetup',
+                        className: 'align-top',
+                        render: function(data, type, row) {
+                            // Modify the data for the first column
+                            
+                            console.log(data);
+                            if(data == null){
+                                return 'N/A';
+                            }else{
+                                return data;
+                            }
+                        },
+                        orderable: true,
+                        searchable: true
+                    },
+                    {
+                        data: 'specail_intruction',
+                        name: 'specail_intruction',
+                        className: 'align-top',
+                        render: function(data, type, row) {
+                            // Modify the data for the first column
+                            
+                            console.log(data);
+                            if(data == null){
+                                return 'N/A';
+                            }else{
+                                return data;
+                            }
+                        },
                         orderable: true,
                         searchable: true
                     },

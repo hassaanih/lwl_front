@@ -338,7 +338,7 @@ function proceedToCheckout() {
       expiry_month: $("#month").val(),
       expiry_year: $("#year").val(),
     },
-    specail_instruction: $("#instr").val(),
+    specail_intruction: $("#instr").val(),
   };
 
   $.ajax({
