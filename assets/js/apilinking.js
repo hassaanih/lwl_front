@@ -4,17 +4,55 @@ var bookingDetailsRequestBody = {};
 var bookingRequestBody = {};
 bookingDetailsRequestBody.stops = [];
 var bookingDetails = {};
+var stopInputs = [];
 
 var currentFs, nextFs, previousFs; //fieldsets
 var opacity;
 var current = 1;
 var steps = $("fieldset").length;
+var stopsGeometry = [];
+var stopMarkers = [];
 
 /* 
 
       Step 1 Api's and function
 
 */
+function preSubmitValidation(pickupLocationValue, dropLocationValue, stopInputs){
+  let regex = /^(?=.*\b(Illinois|IL)\b).+$/i;
+  stopInputs.forEach(item=>{
+    if(regex.test(item.value)){
+      bookingDetailsRequestBody.stops.push({location: item.value});
+      return true;
+    }else{
+      Swal.fire({
+        title: 'Error',
+        text: 'Cannot find the requested location.',
+        icon: 'error',
+      });
+      return false;
+    }
+  })
+  
+
+  if(regex.test(dropLocationValue) && regex.test(pickupLocationValue)){
+    
+    return true;
+  }else{
+    console.log('Pickup Location value: '+ dropLocationValue)
+    console.log('Drop Location value: '+ pickupLocationValue)
+    console.log('Pickup Location validation: '+ regex.test(dropLocationValue))
+    console.log('Drop Location validation: '+ regex.test(pickupLocationValue))
+    Swal.fire({
+      title: 'Error',
+      text: 'Cannot find the requested location.',
+      icon: 'error',
+    });
+    return false;
+  }
+
+}
+
 function displayErrorMessages(errors) {
   const errorValues = Object.values(errors);
   let errorMessage = '<ul>';
@@ -38,20 +76,60 @@ function displayErrorMessages(errors) {
 }
 
 function addStop() {
-  var moreEmail = document.querySelector("#more-email");
-  var div = document.createElement("div");
+  let moreEmail = document.querySelector("#more-email");
+  let div = document.createElement("div");
   div.className = "for";
-  var input = document.createElement("input");
+  let input = document.createElement("input");
   input.type = "text";
-  input.className = "form-control";
+  input.addEventListener('input', validateInput);
+  input.className = "form-control stop";
   input.placeholder = "Add Additional Pickup Location";
+  let stopsAutoComplete = new google.maps.places.Autocomplete(input);
+  let stopMarker = new google.maps.Marker({ map: map });
+  
+  stopsAutoComplete.addListener('place_changed', function(){
+    var place = stopsAutoComplete.getPlace();
+    if (!place.geometry) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Cannot find the requested location.',
+        icon: 'error',
+      });
+      return;
+    }
+
+    stopMarker.setPosition(place.geometry.location);
+    stopsGeometry.push(place.geometry.location);
+    stopMarkers.push(stopMarker);
+    stopInputs.push(input);
+    window.calculateAndDisplayRoute(directionsService, directionsRenderer, stopsGeometry);
+  })
+
   div.appendChild(input);
   moreEmail.appendChild(div);
+}
+
+function validateInput(event) {
+  let inputValue = event.target.value;
+  let regex = /^(?=.*\b(Illinois|IL)\b).+$/i; // Example regex pattern: only alphabetic characters
+  let isValid = regex.test(inputValue);
+
+  if (isValid) {
+    // Input is valid
+    event.target.style.borderColor = "green";
+  } else {
+    // Input is invalid
+    event.target.style.borderColor = "red";
+  }
 }
 
 function removeStop() {
   const moreEmail = document.getElementById("more-email");
   const lastChild = moreEmail.lastElementChild;
+  stopsGeometry.pop();
+  let lastMarker = stopMarkers.pop();
+  lastMarker.setMap(null);
+  window.calculateAndDisplayRoute(directionsService, directionsRenderer, stopsGeometry);
   if (lastChild) {
     moreEmail.removeChild(lastChild);
   }
@@ -114,6 +192,8 @@ function toggleTextField(checkboxVal) {
 }
 
 function submitBookingDetails() {
+  
+
   bookingDetailsRequestBody = {
     pickup_date: $("#pick").val(),
     pickup_time: $("#time").val(),
@@ -130,7 +210,14 @@ function submitBookingDetails() {
     arrival_time: $("#flghtm").val(),
     total_duration_hours: $("#hour").val(),
     total_duration_minutes: $("#minutes").val(),
+    stops: []
   };
+
+  let preRequestLocationsValidator = preSubmitValidation(document.getElementById("ploc").value,document.getElementById("daddress").value,stopInputs);
+  
+  if(preRequestLocationsValidator == false){
+    return;
+  }
 
   $.ajax({
     url: apiUrl + "booking/details/create",

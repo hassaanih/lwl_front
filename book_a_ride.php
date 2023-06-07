@@ -105,7 +105,7 @@
 											<div class="col-md-12">
 												<div class="for">
 													<label for="exampleInputEmail1">Pickup Location</label>
-													<input type="text" class="form-control" id="ploc" pattern="^\d+\s[a-zA-Z]+\s[a-zA-Z]+\,\s[a-zA-Z]+\,\sIllinois\s\d{5}\,\s[a-zA-Z]+\s*$">
+													<input type="text" class="form-control" id="ploc" pattern="^(?=.*\bIllinois\b).+$/i">
 													<div class="row">
 														<div class="col-md-12">
 															<p id="text" style="display:none"><input type="text" class="form-control" id="flghno" placeholder="Flight No*">
@@ -156,7 +156,7 @@
 																	<option value="WestJet">WestJet</option>
 																</select>
 
-																
+
 
 																<body>
 																	<label for="checkbox">Inside Meetup:<span style="color: red; font-size: 14px;"> &nbsp; (If you want us to welcome you inside the airport with a Card.)</span></label> <br>
@@ -207,16 +207,17 @@
 													<label id="removeEmail" class="link" onclick="removeStop()">Remove Additional Pickup Location</label>
 
 												</div>
-												<div id="more-email"></div>
+
 											</div>
 										</div>
 
 										<div class="row in3">
 											<div class="col-md-12">
 												<label for="address">* Dropoff Location:</label>
-												<br><input type="text" id="daddress" name="daddress" pattern="^\d+\s[a-zA-Z]+\s[a-zA-Z]+\,\s[a-zA-Z]+\,\sIllinois\s\d{5}\,\s[a-zA-Z]+\s*$">
+												<br><input type="text" id="daddress" name="daddress" pattern="/^(?=.*\b(Illinois|IL)\b).+$/i">
 											</div>
 										</div>
+										<div id="more-email"></div>
 										<div class="row in4">
 											<div class="col-md-3">
 												<label for="address">*Travellers:</label>
