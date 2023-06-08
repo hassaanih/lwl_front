@@ -963,8 +963,8 @@
 
 		});
 	</script>
-	<script src="assets/js/googlemap.js"></script>
-	<script src="assets/js/apilinking.js"></script>
+	<script src="assets/js/googlemap.js?v=1.1.0"></script>
+	<script src="assets/js/apilinking.js?v=1.1.3"></script>
 </body>
 
 </html>

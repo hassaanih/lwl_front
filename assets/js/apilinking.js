@@ -20,6 +20,7 @@ var stopMarkers = [];
 */
 function preSubmitValidation(pickupLocationValue, dropLocationValue, stopInputs){
   let regex = /^(?=.*\b(Illinois|IL)\b).+$/i;
+  bookingDetailsRequestBody.stops = [];
   stopInputs.forEach(item=>{
     if(regex.test(item.value)){
       bookingDetailsRequestBody.stops.push({location: item.value});
@@ -130,6 +131,8 @@ function removeStop() {
   let lastMarker = stopMarkers.pop();
   lastMarker.setMap(null);
   window.calculateAndDisplayRoute(directionsService, directionsRenderer, stopsGeometry);
+  bookingDetailsRequestBody.stops.pop();
+  stopInputs.pop();
   if (lastChild) {
     moreEmail.removeChild(lastChild);
   }
