@@ -105,7 +105,7 @@
 											<div class="col-md-12">
 												<div class="for">
 													<label for="exampleInputEmail1">Pickup Location</label>
-													<input type="text" class="form-control" id="ploc" pattern="^(?=.*\bIllinois\b).+$/i">
+													<input type="text" class="form-control" id="ploc" pattern="^(?=.*\b(Chicago)\b).+$/i">
 													<div class="row">
 														<div class="col-md-12">
 															<p id="text" style="display:none"><input type="text" class="form-control" id="flghno" placeholder="Flight No*">
@@ -214,7 +214,7 @@
 										<div class="row in3">
 											<div class="col-md-12">
 												<label for="address">* Dropoff Location:</label>
-												<br><input type="text" id="daddress" name="daddress" pattern="/^(?=.*\b(Illinois|IL)\b).+$/i">
+												<br><input type="text" id="daddress" name="daddress" pattern="^(?=.*\b(Chicago)\b).+$/i">
 											</div>
 										</div>
 										<div id="more-email"></div>
@@ -634,7 +634,7 @@
 														<input type="email" name="cemail" id="cemail" placeholder="*Contact Email">
 													</div> -->
 													<div class="col-md-6">
-														<input type="text" name="tip" id="tip" placeholder="*Enter Tip For the Driver" onchange="addTipForDriver(event)">
+														<input type="text" name="tip" id="tip" placeholder="*Enter Tip" onchange="addTipForDriver(event)">
 													</div>
 
 													<div class="col-md-6 d-flex">
@@ -864,7 +864,9 @@
 
 					</div>
 				</div>
-				<p style="padding:20px 0;font-family:'poppins'; color:black; font-weight:600; text-align:center;">ALL RIGHTS RESERVED BY LIGHT WATER LIMO. DEVELOPED BY 1SOL.</p>
+				<section class="footer">
+    <p style="font-weight: 400; text-align: center; font-size: 15px; margin-top: 40px"><a style="color:#000; font-weight:600;" href="https://lightwaterlimo.com/">All Rights Reserved 2023 By Light Water Limo </a><br><a style="color:#000; font-weight:600;" href="https://1solpk.com/">Developed By 1 Sol Digital Services (SMC-Private) Ltd.</a> </p>
+</section>
 
 			</div>
 		</div>
@@ -963,8 +965,8 @@
 
 		});
 	</script>
-	<script src="assets/js/googlemap.js"></script>
-	<script src="assets/js/apilinking.js"></script>
+	<script src="assets/js/googlemap.js?v=1.1.0"></script>
+	<script src="assets/js/apilinking.js?v=1.1.5"></script>
 </body>
 
 </html>

@@ -19,7 +19,8 @@ var stopMarkers = [];
 
 */
 function preSubmitValidation(pickupLocationValue, dropLocationValue, stopInputs){
-  let regex = /^(?=.*\b(Illinois|IL)\b).+$/i;
+  let regex = /^(?=.*\b(Chicago)\b).+$/i;
+  bookingDetailsRequestBody.stops = [];
   stopInputs.forEach(item=>{
     if(regex.test(item.value)){
       bookingDetailsRequestBody.stops.push({location: item.value});
@@ -27,7 +28,7 @@ function preSubmitValidation(pickupLocationValue, dropLocationValue, stopInputs)
     }else{
       Swal.fire({
         title: 'Error',
-        text: 'Cannot find the requested location.',
+        text: 'Currently we are not offering rdies outside Chicago. Please get in touch with us for this ride.',
         icon: 'error',
       });
       return false;
@@ -45,7 +46,7 @@ function preSubmitValidation(pickupLocationValue, dropLocationValue, stopInputs)
     console.log('Drop Location validation: '+ regex.test(pickupLocationValue))
     Swal.fire({
       title: 'Error',
-      text: 'Cannot find the requested location.',
+      text: 'Currently we are not offering rdies outside Chicago. Please get in touch with us for this ride.',
       icon: 'error',
     });
     return false;
@@ -111,7 +112,7 @@ function addStop() {
 
 function validateInput(event) {
   let inputValue = event.target.value;
-  let regex = /^(?=.*\b(Illinois|IL)\b).+$/i; // Example regex pattern: only alphabetic characters
+  let regex = /^(?=.*\b(Chicago)\b).+$/i; // Example regex pattern: only alphabetic characters
   let isValid = regex.test(inputValue);
 
   if (isValid) {
@@ -130,6 +131,8 @@ function removeStop() {
   let lastMarker = stopMarkers.pop();
   lastMarker.setMap(null);
   window.calculateAndDisplayRoute(directionsService, directionsRenderer, stopsGeometry);
+  bookingDetailsRequestBody.stops.pop();
+  stopInputs.pop();
   if (lastChild) {
     moreEmail.removeChild(lastChild);
   }
