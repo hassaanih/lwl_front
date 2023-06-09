@@ -232,6 +232,7 @@ function submitBookingDetails() {
       // you can use this result to update the UI or perform other operations
       // sendToNextView();
       bookingDetailsId = result.booking_details.id;
+      $('#bookingDetailsId').val(bookingDetailsId);
       handleClickNext();
       setSummaryView(result.booking_details);
       getVehicles();

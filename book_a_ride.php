@@ -201,6 +201,7 @@
 													</div>
 
 													<input type="hidden" id="totalkms">
+													<input type="hidden" id="bookingDetailsId">
 												</div>
 												<div class="for">
 													<label id="addEmail" class="link" onclick="addStop()">Add Additional Pickup Location</label>
@@ -865,8 +866,8 @@
 					</div>
 				</div>
 				<section class="footer">
-    <p style="font-weight: 400; text-align: center; font-size: 15px; margin-top: 40px"><a style="color:#000; font-weight:600;" href="https://lightwaterlimo.com/">All Rights Reserved 2023 By Light Water Limo </a><br><a style="color:#000; font-weight:600;" href="https://1solpk.com/">Developed By 1 Sol Digital Services (SMC-Private) Ltd.</a> </p>
-</section>
+					<p style="font-weight: 400; text-align: center; font-size: 15px; margin-top: 40px"><a style="color:#000; font-weight:600;" href="https://lightwaterlimo.com/">All Rights Reserved 2023 By Light Water Limo </a><br><a style="color:#000; font-weight:600;" href="https://1solpk.com/">Developed By 1 Sol Digital Services (SMC-Private) Ltd.</a> </p>
+				</section>
 
 			</div>
 		</div>
@@ -932,7 +933,22 @@
 
 				//Remove class active
 				$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
-
+					// bookings/previous
+					$.ajax({
+						url: apiUrl + "bookings/previous",
+						type: "POST",
+						data: {id: $('#bookingDetailsId').val()},
+						dataType: "json",
+						success: function(result) {
+							// result contains the response from the server-side PHP script
+							// you can use this result to update the UI or perform other operations
+							// sendToNextView();
+						},
+						error: function(xhr, status, error) {
+							
+							console.log(error);
+						},
+					});
 				//show the previous fieldset
 				previous_fs.show();
 
@@ -966,11 +982,5 @@
 		});
 	</script>
 	<script src="assets/js/googlemap.js?v=1.1.0"></script>
-<<<<<<< HEAD
-	<script src="assets/js/apilinking.js?v=1.1.3"></script>
-=======
 	<script src="assets/js/apilinking.js?v=1.1.5"></script>
->>>>>>> aa4b116cc2a225d9af0ede2fc48e4343b8e91ffb
 </body>
-
-</html>
