@@ -23,24 +23,10 @@ function preSubmitValidation(
   dropLocationValue,
   stopInputs
 ) {
-  let regex = /^(?=.*\b(Chicago)\b).+$/i;
-  bookingDetailsRequestBody.stops = [];
-  stopInputs.forEach((item) => {
-    if (regex.test(item.value)) {
-      bookingDetailsRequestBody.stops.push({ location: item.value });
-      return true;
-    } else {
-      Swal.fire({
-        title: "Error",
-        text:
-          "Currently we are not offering rdies outside Chicago. Please get in touch with us for this ride.",
-        icon: "error",
-      });
-      return false;
-    }
-  });
+  let regex = /^(?=.*\b(Illinois|IL)\b).+$/i;
+  
 
-  if (regex.test(dropLocationValue) && regex.test(pickupLocationValue)) {
+  if (regex.test(pickupLocationValue)) {
     return true;
   } else {
     console.log("Pickup Location value: " + dropLocationValue);
@@ -50,7 +36,7 @@ function preSubmitValidation(
     Swal.fire({
       title: "Error",
       text:
-        "Currently we are not offering rdies outside Chicago. Please get in touch with us for this ride.",
+        "Currently we are not offering pickups outside Illinois. Please get in touch with us for this ride.",
       icon: "error",
     });
     return false;
@@ -118,20 +104,11 @@ function addStop() {
 }
 
 function validateInput(event) {
-  let inputValue = event.target.value;
-  let regex = /^(?=.*\b(Chicago)\b).+$/i; // Example regex pattern: only alphabetic characters
-  let isValid = regex.test(inputValue);
-
-  if (isValid) {
-    // Input is valid
-    event.target.style.borderColor = "green";
-  } else {
-    // Input is invalid
-    event.target.style.borderColor = "red";
-    if (event.target.value == "") {
-      removeStop();
-    }
+  
+  if (event.target.value == "") {
+    removeStop();
   }
+  
 }
 
 function removeStop() {

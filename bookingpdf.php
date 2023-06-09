@@ -326,34 +326,5 @@ section.footer i.fa {
         </section>
     </div>
 </section>
-
-
-
-<script type="text/javascript">
-  $(document).ready(function() {
-            $('.page-datatable-ajax').on('click', '.open-modal-button', function() {
-                // Get the data from the DataTable row
-                const table = $('.page-datatable-ajax').DataTable();
-                const rowData = table.row($(this).closest('tr')).data();
-                $('#booking_id').val(rowData.id);
-                console.log(rowData.id);
-                // Extract the necessary data from the row
-
-                // Open the modal and populate the data
-                openModal();
-            });
-
-            function openModal() {
-                // Logic to open the modal and populate the data
-                // You can use your preferred method to open the modal, such as Bootstrap modal or a custom solution
-                // Example:
-                $('#exampleModal').modal('show');
-
-            }
-        });
-    </script>
-</script>
-
-
 </body>
 </html>

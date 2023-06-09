@@ -105,7 +105,7 @@
 											<div class="col-md-12">
 												<div class="for">
 													<label for="exampleInputEmail1">Pickup Location</label>
-													<input type="text" class="form-control" id="ploc" pattern="^(?=.*\b(Chicago)\b).+$/i">
+													<input type="text" class="form-control" id="ploc" pattern="/^(?=.*\b(Illinois|IL)\b).+$/i">
 													<div class="row">
 														<div class="col-md-12">
 															<p id="text" style="display:none"><input type="text" class="form-control" id="flghno" placeholder="Flight No*">
@@ -215,7 +215,7 @@
 										<div class="row in3">
 											<div class="col-md-12">
 												<label for="address">* Dropoff Location:</label>
-												<br><input type="text" id="daddress" name="daddress" pattern="^(?=.*\b(Chicago)\b).+$/i">
+												<br><input type="text" id="daddress" name="daddress">
 											</div>
 										</div>
 										<div id="more-email"></div>
@@ -474,7 +474,7 @@
 												<div class="col-md-12">
 													<div class="select-dropdown">
 														<select id="vehicles" onchange="handleOnchange(this)">
-															<option value="Option 1" class="op1">Choose Your Own Car</option>
+															<option value="" class="op1">Choose Your Own Car</option>
 
 														</select>
 													</div>
@@ -943,6 +943,7 @@
 							// result contains the response from the server-side PHP script
 							// you can use this result to update the UI or perform other operations
 							// sendToNextView();
+							$("#vehicles").val("");
 						},
 						error: function(xhr, status, error) {
 							
