@@ -982,5 +982,5 @@
 		});
 	</script>
 	<script src="assets/js/googlemap.js?v=1.1.0"></script>
-	<script src="assets/js/apilinking.js?v=1.1.5"></script>
+	<script src="assets/js/apilinking.js?v=1.1.7"></script>
 </body>
