@@ -18,45 +18,48 @@ var stopMarkers = [];
       Step 1 Api's and function
 
 */
-function preSubmitValidation(pickupLocationValue, dropLocationValue, stopInputs){
+function preSubmitValidation(
+  pickupLocationValue,
+  dropLocationValue,
+  stopInputs
+) {
   let regex = /^(?=.*\b(Chicago)\b).+$/i;
   bookingDetailsRequestBody.stops = [];
-  stopInputs.forEach(item=>{
-    if(regex.test(item.value)){
-      bookingDetailsRequestBody.stops.push({location: item.value});
+  stopInputs.forEach((item) => {
+    if (regex.test(item.value)) {
+      bookingDetailsRequestBody.stops.push({ location: item.value });
       return true;
-    }else{
+    } else {
       Swal.fire({
-        title: 'Error',
-        text: 'Currently we are not offering rdies outside Chicago. Please get in touch with us for this ride.',
-        icon: 'error',
+        title: "Error",
+        text:
+          "Currently we are not offering rdies outside Chicago. Please get in touch with us for this ride.",
+        icon: "error",
       });
       return false;
     }
-  })
-  
+  });
 
-  if(regex.test(dropLocationValue) && regex.test(pickupLocationValue)){
-    
+  if (regex.test(dropLocationValue) && regex.test(pickupLocationValue)) {
     return true;
-  }else{
-    console.log('Pickup Location value: '+ dropLocationValue)
-    console.log('Drop Location value: '+ pickupLocationValue)
-    console.log('Pickup Location validation: '+ regex.test(dropLocationValue))
-    console.log('Drop Location validation: '+ regex.test(pickupLocationValue))
+  } else {
+    console.log("Pickup Location value: " + dropLocationValue);
+    console.log("Drop Location value: " + pickupLocationValue);
+    console.log("Pickup Location validation: " + regex.test(dropLocationValue));
+    console.log("Drop Location validation: " + regex.test(pickupLocationValue));
     Swal.fire({
-      title: 'Error',
-      text: 'Currently we are not offering rdies outside Chicago. Please get in touch with us for this ride.',
-      icon: 'error',
+      title: "Error",
+      text:
+        "Currently we are not offering rdies outside Chicago. Please get in touch with us for this ride.",
+      icon: "error",
     });
     return false;
   }
-
 }
 
 function displayErrorMessages(errors) {
   const errorValues = Object.values(errors);
-  let errorMessage = '<ul>';
+  let errorMessage = "<ul>";
 
   for (const fieldErrors of errorValues) {
     for (const error of fieldErrors) {
@@ -64,14 +67,14 @@ function displayErrorMessages(errors) {
     }
   }
 
-  errorMessage += '</ul>';
+  errorMessage += "</ul>";
 
   Swal.fire({
-    title: 'Error',
+    title: "Error",
     html: errorMessage,
-    icon: 'error',
+    icon: "error",
     customClass: {
-      content: 'text-left', // Add custom CSS class for content alignment
+      content: "text-left", // Add custom CSS class for content alignment
     },
   });
 }
@@ -82,19 +85,19 @@ function addStop() {
   div.className = "for";
   let input = document.createElement("input");
   input.type = "text";
-  input.addEventListener('input', validateInput);
+  input.addEventListener("input", validateInput);
   input.className = "form-control stop";
   input.placeholder = "Add Additional Pickup Location";
   let stopsAutoComplete = new google.maps.places.Autocomplete(input);
   let stopMarker = new google.maps.Marker({ map: map });
-  
-  stopsAutoComplete.addListener('place_changed', function(){
+
+  stopsAutoComplete.addListener("place_changed", function () {
     var place = stopsAutoComplete.getPlace();
     if (!place.geometry) {
       Swal.fire({
-        title: 'Error',
-        text: 'Cannot find the requested location.',
-        icon: 'error',
+        title: "Error",
+        text: "Cannot find the requested location.",
+        icon: "error",
       });
       return;
     }
@@ -103,8 +106,12 @@ function addStop() {
     stopsGeometry.push(place.geometry.location);
     stopMarkers.push(stopMarker);
     stopInputs.push(input);
-    window.calculateAndDisplayRoute(directionsService, directionsRenderer, stopsGeometry);
-  })
+    window.calculateAndDisplayRoute(
+      directionsService,
+      directionsRenderer,
+      stopsGeometry
+    );
+  });
 
   div.appendChild(input);
   moreEmail.appendChild(div);
@@ -121,6 +128,9 @@ function validateInput(event) {
   } else {
     // Input is invalid
     event.target.style.borderColor = "red";
+    if (event.target.value == "") {
+      removeStop();
+    }
   }
 }
 
@@ -130,7 +140,11 @@ function removeStop() {
   stopsGeometry.pop();
   let lastMarker = stopMarkers.pop();
   lastMarker.setMap(null);
-  window.calculateAndDisplayRoute(directionsService, directionsRenderer, stopsGeometry);
+  window.calculateAndDisplayRoute(
+    directionsService,
+    directionsRenderer,
+    stopsGeometry
+  );
   bookingDetailsRequestBody.stops.pop();
   stopInputs.pop();
   if (lastChild) {
@@ -176,17 +190,17 @@ function setProgressBar(curStep) {
 function toggleTextField(checkboxVal) {
   var checkbox = document.getElementsByName("options");
   var textField = document.getElementById("text-field");
-  
-  if (checkboxVal.checked && checkboxVal.value == 'yes') {
-    checkbox.forEach(element => {
-      if(element !== checkboxVal){
+
+  if (checkboxVal.checked && checkboxVal.value == "yes") {
+    checkbox.forEach((element) => {
+      if (element !== checkboxVal) {
         element.checked = false;
       }
     });
     textField.style.display = "block";
   } else {
-    checkbox.forEach(element => {
-      if(element !== checkboxVal){
+    checkbox.forEach((element) => {
+      if (element !== checkboxVal) {
         element.checked = false;
       }
     });
@@ -195,8 +209,6 @@ function toggleTextField(checkboxVal) {
 }
 
 function submitBookingDetails() {
-  
-
   bookingDetailsRequestBody = {
     pickup_date: $("#pick").val(),
     pickup_time: $("#time").val(),
@@ -213,12 +225,16 @@ function submitBookingDetails() {
     arrival_time: $("#flghtm").val(),
     total_duration_hours: $("#hour").val(),
     total_duration_minutes: $("#minutes").val(),
-    stops: []
+    stops: [],
   };
 
-  let preRequestLocationsValidator = preSubmitValidation(document.getElementById("ploc").value,document.getElementById("daddress").value,stopInputs);
-  
-  if(preRequestLocationsValidator == false){
+  let preRequestLocationsValidator = preSubmitValidation(
+    document.getElementById("ploc").value,
+    document.getElementById("daddress").value,
+    stopInputs
+  );
+
+  if (preRequestLocationsValidator == false) {
     return;
   }
 
@@ -232,7 +248,7 @@ function submitBookingDetails() {
       // you can use this result to update the UI or perform other operations
       // sendToNextView();
       bookingDetailsId = result.booking_details.id;
-      $('#bookingDetailsId').val(bookingDetailsId);
+      $("#bookingDetailsId").val(bookingDetailsId);
       handleClickNext();
       setSummaryView(result.booking_details);
       getVehicles();
@@ -361,7 +377,7 @@ function selectVehicleType(vehicleType, vehicleId) {
         errorMessage = error;
       }
       console.log(errorMessage);
-      displayErrorMessages(errorMessage)
+      displayErrorMessages(errorMessage);
     },
   });
 }
@@ -443,10 +459,10 @@ function proceedToCheckout() {
       // sendToNextView();
 
       console.log(bookingDetailsId);
-      Swal.fire('Payment Successful');
-      setTimeout(function(){
+      Swal.fire("Payment Successful");
+      setTimeout(function () {
         window.location.href = appUrl + "thankyou_for_booking.php";
-      },1500);
+      }, 1500);
     },
     error: function (xhr, status, error) {
       var errorMessage = "An error occurred.";
@@ -461,7 +477,7 @@ function proceedToCheckout() {
         errorMessage = error;
       }
       console.log(errorMessage);
-      displayErrorMessages(errorMessage)
+      displayErrorMessages(errorMessage);
     },
   });
 }
@@ -563,7 +579,7 @@ function cancelRide(id) {
       // sendToNextView();
       $(".user-datatable-ajax").DataTable().ajax.reload(null, false);
       console.log(result);
-      Swal.fire('warning', 'Ride has been cancelled');
+      Swal.fire("warning", "Ride has been cancelled");
     },
     error: function (xhr, status, error) {
       var errorMessage = "An error occurred.";
@@ -578,7 +594,7 @@ function cancelRide(id) {
         errorMessage = error;
       }
       console.log(errorMessage);
-      displayErrorMessages(errorMessage)
+      displayErrorMessages(errorMessage);
     },
   });
 }
@@ -650,7 +666,7 @@ function applyCoupon() {
       // sendToNextView();
       setCheckoutPageSummaryView(result.booking_details);
       console.log(bookingDetailsId);
-      Swal.fire('warning', 'Coupon Applied');
+      Swal.fire("warning", "Coupon Applied");
     },
     error: function (xhr, status, error) {
       var errorMessage = "An error occurred.";
@@ -665,7 +681,7 @@ function applyCoupon() {
         errorMessage = error;
       }
       console.log(errorMessage);
-      displayErrorMessages(errorMessage)
+      displayErrorMessages(errorMessage);
     },
   });
 }
@@ -702,7 +718,7 @@ function signin() {
         errorMessage = error;
       }
       console.log(errorMessage);
-      displayErrorMessages(errorMessage)
+      displayErrorMessages(errorMessage);
     },
   });
 }
@@ -741,7 +757,7 @@ function signup() {
         errorMessage = error;
       }
       console.log(errorMessage);
-      displayErrorMessages(errorMessage)
+      displayErrorMessages(errorMessage);
     },
   });
 }
@@ -779,24 +795,24 @@ function addCoupon() {
         errorMessage = error;
       }
       console.log(errorMessage);
-      displayErrorMessages(errorMessage)
+      displayErrorMessages(errorMessage);
     },
   });
 }
 
-function redirectToCoupon(){
-  window.location.href = appUrl + 'coupon.php';
+function redirectToCoupon() {
+  window.location.href = appUrl + "coupon.php";
 }
 
-function showSendEmailModal(){
-  console.log($('#sendEmailModal'));
-  $('#sendEmailModal').modal("show");
+function showSendEmailModal() {
+  console.log($("#sendEmailModal"));
+  $("#sendEmailModal").modal("show");
 }
 
-function sendPasswordResetEmail(){
+function sendPasswordResetEmail() {
   let data = {
-    email: $('#sendEmailForPasswordReset').val()
-  }
+    email: $("#sendEmailForPasswordReset").val(),
+  };
 
   $.ajax({
     url: apiUrl + "user/resetpassword/send/email",
@@ -804,8 +820,8 @@ function sendPasswordResetEmail(){
     data: data,
     dataType: "json",
     success: function (result) {
-      document.getElementById('email-div').style.display = 'none';
-      document.getElementById('message-div').style.display = 'block';
+      document.getElementById("email-div").style.display = "none";
+      document.getElementById("message-div").style.display = "block";
     },
     error: function (xhr, status, error) {
       var errorMessage = "An error occurred.";
@@ -820,17 +836,17 @@ function sendPasswordResetEmail(){
         errorMessage = error;
       }
       console.log(errorMessage);
-      displayErrorMessages(errorMessage)
+      displayErrorMessages(errorMessage);
     },
   });
 }
 
-function resetPassword(){
+function resetPassword() {
   let data = {
-    code: $('#resetcode').val(),
-    password: $('#newPassword').val(),
-    confirm_password: $('#confirmNewPassword').val()
-  }
+    code: $("#resetcode").val(),
+    password: $("#newPassword").val(),
+    confirm_password: $("#confirmNewPassword").val(),
+  };
 
   $.ajax({
     url: apiUrl + "user/reset/password",
@@ -838,8 +854,8 @@ function resetPassword(){
     data: data,
     dataType: "json",
     success: function (result) {
-      document.getElementById('password-div').style.display = 'none';
-      document.getElementById('password-message-div').style.display = 'block';
+      document.getElementById("password-div").style.display = "none";
+      document.getElementById("password-message-div").style.display = "block";
     },
     error: function (xhr, status, error) {
       var errorMessage = "An error occurred.";
@@ -854,7 +870,7 @@ function resetPassword(){
         errorMessage = error;
       }
       console.log(errorMessage);
-      displayErrorMessages(errorMessage)
+      displayErrorMessages(errorMessage);
     },
   });
 }
