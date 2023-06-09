@@ -276,7 +276,7 @@ section.logo:before {
                                 <th>Contact Number</th>
                                 <th>Driver Name</th>
                                 <th>Driver Price ($)</th>
-                                <th>Tip for driver ($)</th>
+                                <th>Tip ($)</th>
                                 <th>Total Charges ($)</th>
                                 <th>Pickup Location</th>
                                 <th>Drop Location</th>
@@ -366,15 +366,9 @@ section.logo:before {
             </div>
         </div>
     </div>
-    <section class="foot">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                <p>ALL RIGHTS RESERVED BY LIGHT WATER LIMO. DEVELOPED BY 1SOL.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <section class="footer">
+    <p style="font-weight: 400; text-align: center; font-size: 15px; margin-top: 40px"><a style="color:#000; font-weight:600;" href="https://lightwaterlimo.com/">All Rights Reserved 2023 By Light Water Limo </a><br><a style="color:#000; font-weight:600;" href="https://1solpk.com/">Developed By 1 Sol Digital Services (SMC-Private) Ltd.</a> </p>
+</section>
 
 
     <script type="text/javascript">
