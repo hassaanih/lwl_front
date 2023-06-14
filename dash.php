@@ -747,7 +747,7 @@
                 $('#driver-payment-details').text(bookingDetails.driver_payment);
                 $('#additional-remarks-details').text(bookingDetalis.specail_intruction);
                 $('#vehicle-type-detail').text(bookingDetalis.details.vehicle_type.name);
-                $('#vehicle-detail').text(bookingDetalis.details.vehicle == null ? 'Any Vehicle' : bookingDetalis.details.vehicle.name);
+                $('#vehicle-detail').text(bookingDetalis.details.vehicle == null ? 'Any Vehicle' : bookingDetalis.details.vehicle.company + ' ' + bookingDetalis.details.vehicle.model);
 
                 // For the stopsList
                 bookingDetalis.details.stops.forEach(function(item, key) {

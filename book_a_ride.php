@@ -445,7 +445,7 @@
 															<span class="icon"><i class="fa fa-users" aria-hidden="true"></i>4</span>
 															<span class="icon"><i class="fa fa-suitcase" aria-hidden="true"></i>2</span>
 														</div>
-														<div class="car-price _vehiclePrice" id="sedanPrice"><ins>USD</ins>$95</div>
+														<div class="car-price _vehiclePrice"><ins>USD </ins><span id="sedanPrice"></span></div>
 													</button>
 												</div>
 												<div class="col-md-12">
@@ -468,7 +468,7 @@
 															<span class="icon"><i class="fa fa-users" aria-hidden="true"></i>5</span>
 															<span class="icon"><i class="fa fa-suitcase" aria-hidden="true"></i>3</span>
 														</div>
-														<div class="car-price _vehiclePrice"><ins>USD</ins>$115</div>
+														<div class="car-price _vehiclePrice"><ins>USD </ins><span id="suvPrice"></span></div>
 													</button>
 												</div>
 												<div class="col-md-12">

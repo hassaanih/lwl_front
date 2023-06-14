@@ -231,7 +231,9 @@ function submitBookingDetails() {
       handleClickNext();
       setSummaryView(result.booking_details);
       getVehicles();
-      console.log(bookingDetailsId);
+      $('#sedanPrice').text(result.booking_details.sedan_charges);
+      $('#suvPrice').text(result.booking_details.suv_charges);
+      console.log(result.booking_details.sedan_charges);
     },
     error: function (xhr, status, error) {
       var errorMessage = "An error occurred.";
