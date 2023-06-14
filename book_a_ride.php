@@ -445,7 +445,7 @@
 															<span class="icon"><i class="fa fa-users" aria-hidden="true"></i>4</span>
 															<span class="icon"><i class="fa fa-suitcase" aria-hidden="true"></i>2</span>
 														</div>
-														<div class="car-price _vehiclePrice"><ins>USD</ins>$95</div>
+														<div class="car-price _vehiclePrice" id="sedanPrice"><ins>USD</ins>$95</div>
 													</button>
 												</div>
 												<div class="col-md-12">
