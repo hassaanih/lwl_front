@@ -24,8 +24,10 @@ function preSubmitValidation(
   stopInputs
 ) {
   let regex = /^(?=.*\b(Illinois|IL)\b).+$/i;
-  
-
+  console.log(stopInputs)
+  stopInputs.forEach(item => {
+    bookingDetailsRequestBody.stops.push(item.value);
+  })
   if (regex.test(pickupLocationValue)) {
     return true;
   } else {

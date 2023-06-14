@@ -21,55 +21,56 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="env.js"></script>
 
-    
 
 
 
-    
-
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="icon" href="/favicon.ico" type="image/x-icon" />
-<link href="assets/css/m-style.css" rel="stylesheet" type="text/css" />
-<link href="assets/css/style.css" rel="stylesheet" type="text/css" />
-<link href="assets/css/newcss.css" rel="stylesheet" type="text/css" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 
 
-<!--[if IE]>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link href="assets/css/m-style.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/newcss.css" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
+
+    <!--[if IE]>
   <script src="assets/js/html5.js"></script>
 <![endif]-->
 
     <style type="text/css">
         section.foot {
-    
-    padding:20px 0 ;
-}
 
-section.foot p {
-    color: black;
-    padding: 0;
-    font-size: 15px;
-    font-weight: 700;
-    text-align: center;
+            padding: 20px 0;
+        }
+
+        section.foot p {
+            color: black;
+            padding: 0;
+            font-size: 15px;
+            font-weight: 700;
+            text-align: center;
 
 
-}
-       .tb .container-fluid {
-    display: block;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-    margin-top: 0;
-    padding: 50px 20px !IMPORTANT;
-    box-shadow: unset;
-    margin: 0 0 0 -10px;
-}
+        }
+
+        .tb .container-fluid {
+            display: block;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            margin-top: 0;
+            padding: 50px 20px !IMPORTANT;
+            box-shadow: unset;
+            margin: 0 0 0 -10px;
+        }
 
         table#myTable {
             margin: 0 auto;
@@ -90,33 +91,38 @@ section.foot p {
         table#myTable tbody tr td {
             padding: 10px 20px;
         }
+
         .odd .drv {
-    border: unset;
-    width: 100%;
-    height: 31px;
-    padding: 0;
-}
+            border: unset;
+            width: 100%;
+            height: 31px;
+            padding: 0;
+        }
 
         button.self {
-    padding: 0;
-    background-color: #9a4d55;
-    color: white;
-    text-transform: uppercase;
-    border: unset;
-    font-size: 15px;
-    width: 100%;
-    height: 31px;
-    margin-top: 3px;
-}
-.log_img img {width: 21%;filter: brightness(0) invert(1);}
+            padding: 0;
+            background-color: #9a4d55;
+            color: white;
+            text-transform: uppercase;
+            border: unset;
+            font-size: 15px;
+            width: 100%;
+            height: 31px;
+            margin-top: 3px;
+        }
 
-.logo {
-    padding: 30px 0;
-    background-color: #111c30;
-}
+        .log_img img {
+            width: 21%;
+            filter: brightness(0) invert(1);
+        }
+
+        .logo {
+            padding: 30px 0;
+            background-color: #111c30;
+        }
 
 
-/* @media (max-width: 1600px) {
+        /* @media (max-width: 1600px) {
     /* section.logo:before {
     content: '';
     background-color: #111c30;
@@ -136,120 +142,131 @@ section.foot p {
     top: 0;
 } 
 }*/
-@media (max-width: 1280px) {
-    section.logo:before {
-    content: '';
-    background-color: #111c30;
-    width: 20px;
-    position: absolute;
-    height: 137px;
-    top: 0;
-    right: -10px;
-}
-}
-@media (max-width: 1024px) {
-    section.logo:before {
-    content: '';
-    background-color: #111c30;
-    width: 470px;
-    position: absolute;
-    height: 125px;
-    top: 0;
-    right: -270px;
-}
+        @media (max-width: 1280px) {
+            section.logo:before {
+                content: '';
+                background-color: #111c30;
+                width: 20px;
+                position: absolute;
+                height: 137px;
+                top: 0;
+                right: -10px;
+            }
+        }
 
-}
-@media (max-width: 800px) {
-    .log_img img {
-    width: 28%;
-    filter: brightness(0) invert(1);
-}
-section.logo:before {
-    content: '';
-    background-color: #111c30;
-    width: 540px;
-    position: absolute;
-    height: 125px;
-    top: 0;
-    right: -510px;
-}
-.odd .drv {
-    border: unset;
-    width: 100%;
-    height: 31px;
-    padding: 0 10px;
-}
-}
+        @media (max-width: 1024px) {
+            section.logo:before {
+                content: '';
+                background-color: #111c30;
+                width: 470px;
+                position: absolute;
+                height: 125px;
+                top: 0;
+                right: -270px;
+            }
 
-@media (max-width: 768px) {}
-@media (max-width: 480px) {
-    .log_img img {
-    width: 43%;
-    filter: brightness(0) invert(1);
-}
-section.logo:before {
-    content: '';
-    background-color: #111c30;
-    width: 940px;
-    position: absolute;
-    height: 125px;
-    top: 0;
-    right: -830px;
-}
-   
-}
+        }
 
-@media (max-width: 430px) {
-    .log_img img {
-    width: 100%;
-    filter: brightness(0) invert(1);
-}
-section.foot p {
-    color: white;
-    padding: 0;
-    font-size: 14px;
-    font-weight: 700;
+        @media (max-width: 800px) {
+            .log_img img {
+                width: 28%;
+                filter: brightness(0) invert(1);
+            }
 
-}
-section.logo:before {
-    content: '';
-    background-color: #111c30;
-    width: 970px;
-    position: absolute;
-    height: 175px;
-    top: 0;
-    right: -950px;
-}
-}
+            section.logo:before {
+                content: '';
+                background-color: #111c30;
+                width: 540px;
+                position: absolute;
+                height: 125px;
+                top: 0;
+                right: -510px;
+            }
 
-@media (max-width: 375px) {
-    section.logo:before {
-    content: '';
-    background-color: #111c30;
-    width: 970px;
-    position: absolute;
-    height: 175px;
-    top: 0;
-    right: -950px;
-}
-}
-@media (max-width: 360px) {
-    section.logo:before {
-    content: '';
-    background-color: #111c30;
-    width: 970px;
-    position: absolute;
-    height: 175px;
-    top: 0;
-    right: -950px;
-}
-} */
+            .odd .drv {
+                border: unset;
+                width: 100%;
+                height: 31px;
+                padding: 0 10px;
+            }
+        }
+
+        @media (max-width: 768px) {}
+
+        @media (max-width: 480px) {
+            .log_img img {
+                width: 43%;
+                filter: brightness(0) invert(1);
+            }
+
+            section.logo:before {
+                content: '';
+                background-color: #111c30;
+                width: 940px;
+                position: absolute;
+                height: 125px;
+                top: 0;
+                right: -830px;
+            }
+
+        }
+
+        @media (max-width: 430px) {
+            .log_img img {
+                width: 100%;
+                filter: brightness(0) invert(1);
+            }
+
+            section.foot p {
+                color: white;
+                padding: 0;
+                font-size: 14px;
+                font-weight: 700;
+
+            }
+
+            section.logo:before {
+                content: '';
+                background-color: #111c30;
+                width: 970px;
+                position: absolute;
+                height: 175px;
+                top: 0;
+                right: -950px;
+            }
+        }
+
+        @media (max-width: 375px) {
+            section.logo:before {
+                content: '';
+                background-color: #111c30;
+                width: 970px;
+                position: absolute;
+                height: 175px;
+                top: 0;
+                right: -950px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            section.logo:before {
+                content: '';
+                background-color: #111c30;
+                width: 970px;
+                position: absolute;
+                height: 175px;
+                top: 0;
+                right: -950px;
+            }
+        }
+
+        */
     </style>
 
 </head>
 
 <body class="hompg">
-<section class="logo">
+    <section class="logo">
         <div class="container">
             <div class="row">
                 <div class="log_img">
@@ -257,7 +274,7 @@ section.logo:before {
                 </div>
             </div>
         </div>
-</section>
+    </section>
     <div class="tb">
         <div class="container-fluid">
             <div class="row">
@@ -366,9 +383,99 @@ section.logo:before {
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="details-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="booking_id">
+                    <div class="row">
+                        <div class="mb-5 col-3 d-flex align-items-center">
+                            <label class="form-label font-weight-bold">First Name:</label>
+                        </div>
+                        <div class="mb-5 col-9">
+                            <label id="first-name-details"></label>
+                        </div>
+                        <div class="mb-5 col-3 d-flex align-items-center">
+                            <label class="form-label font-weight-bold">Last Name:</label>
+                        </div>
+                        <div class="mb-5 col-9">
+                            <label id="last-name-details">N/A</label>
+                        </div>
+                        <div class="mb-5 col-3 d-flex align-items-center">
+                            <label class="form-label font-weight-bold">Pickup Location:</label>
+                        </div>
+                        <div class="mb-5 col-9">
+                            <label id="pickup-location-details">N/A</label>
+                        </div>
+                        <div class="mb-5 col-3 d-flex align-items-center">
+                            <label class="form-label font-weight-bold">Drop Location:</label>
+                        </div>
+                        <div class="mb-5 col-9">
+                            <label id="drop-location-details">N/A</label>
+                        </div>
+                        <div class="mb-5 col-3 d-flex align-items-center">
+                            <label class="form-label font-weight-bold">Driver Tip:</label>
+                        </div>
+                        <div class="mb-5 col-9">
+                            <label id="driver-tip-details">N/A</label>
+                        </div>
+                        <div class="mb-5 col-3 d-flex align-items-center">
+                            <label class="form-label font-weight-bold">Driver Name:</label>
+                        </div>
+                        <div class="mb-5 col-9">
+                            <label id="driver-name-details">N/A</label>
+                        </div>
+                        <div class="mb-5 col-3 d-flex align-items-center">
+                            <label class="form-label font-weight-bold">Driver Payment:</label>
+                        </div>
+                        <div class="mb-5 col-9">
+                            <label id="driver-payment-details">N/A</label>
+                        </div>
+                        <div class="mb-5 col-3 d-flex align-items-center">
+                            <label class="form-label font-weight-bold">Additional Remarks:</label>
+                        </div>
+                        <div class="mb-5 col-9">
+                            <label id="additional-remarks-details">N/A</label>
+                        </div>
+                        <div class="mb-5 col-3 d-flex align-items-center">
+                            <label class="form-label font-weight-bold">Vehicle Type:</label>
+                        </div>
+                        <div class="mb-5 col-9">
+                            <label id="vehicle-type-detail"></label>
+                        </div>
+                        <div class="mb-5 col-3 d-flex align-items-center">
+                            <label class="form-label font-weight-bold">Vehicle:</label>
+                        </div>
+                        <div class="mb-5 col-9">
+                            <label id="vehicle-detail"> Any </label>
+                        </div>
+                        <div class="mb-5 col-3 d-flex align-items-center">
+                            <label class="form-label font-weight-bold">Stops:</label>
+                        </div>
+                        <div class="mb-5 col-9">
+                            <ol id="stopsList" style="list-style-type: square;">
+                                
+                            </ol>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <section class="footer">
-    <p style="font-weight: 400; text-align: center; font-size: 15px; margin-top: 40px"><a style="color:#000; font-weight:600;" href="https://lightwaterlimo.com/">All Rights Reserved 2023 By Light Water Limo </a><br><a style="color:#000; font-weight:600;" href="https://1solpk.com/">Developed By 1 Sol Digital Services (SMC-Private) Ltd.</a> </p>
-</section>
+        <p style="font-weight: 400; text-align: center; font-size: 15px; margin-top: 40px"><a style="color:#000; font-weight:600;" href="https://lightwaterlimo.com/">All Rights Reserved 2023 By Light Water Limo </a><br><a style="color:#000; font-weight:600;" href="https://1solpk.com/">Developed By 1 Sol Digital Services (SMC-Private) Ltd.</a> </p>
+    </section>
 
 
     <script type="text/javascript">
@@ -378,8 +485,7 @@ section.logo:before {
                 ajax: apiUrl + 'bookings/findAll',
                 lengthMenu: [10, 25, 50, 100, 500],
                 responsive: true,
-                columns: [
-                    {
+                columns: [{
                         data: 'id',
                         name: 'id',
                         className: 'align-top',
@@ -413,10 +519,9 @@ section.logo:before {
                         className: 'align-top',
                         render: function(data, type, row) {
                             // Modify the data for the first column
-                            if(data == null){
+                            if (data == null) {
                                 return 'Not Assigned';
-                            }
-                            else{
+                            } else {
                                 return data;
                             }
                         },
@@ -429,11 +534,11 @@ section.logo:before {
                         className: 'align-top',
                         render: function(data, type, row) {
                             // Modify the data for the first column
-                            
+
                             console.log(data);
-                            if(data == null){
+                            if (data == null) {
                                 return 'N/A';
-                            }else{
+                            } else {
                                 return data;
                             }
                         },
@@ -507,11 +612,11 @@ section.logo:before {
                         className: 'align-top',
                         render: function(data, type, row) {
                             // Modify the data for the first column
-                            
+
                             console.log(data);
-                            if(data == null){
+                            if (data == null) {
                                 return 'N/A';
-                            }else{
+                            } else {
                                 return data;
                             }
                         },
@@ -524,11 +629,11 @@ section.logo:before {
                         className: 'align-top',
                         render: function(data, type, row) {
                             // Modify the data for the first column
-                            
+
                             console.log(data);
-                            if(data == null){
+                            if (data == null) {
                                 return 'N/A';
-                            }else{
+                            } else {
                                 return data;
                             }
                         },
@@ -546,6 +651,7 @@ section.logo:before {
                         render: function(data, type, row) {
                             // Modify the data for the first column
                             return `<button type="button" class="btn btn-dark open-modal-button drv">Assign To Driver</button>
+                            <button type="button" class="btn btn-dark open-detail-modal-button mt-2 drv" style="width: 100%;">View Details</button>
                             <button type="button" class="self">Self</button>`
                         },
                     }
@@ -578,12 +684,76 @@ section.logo:before {
                 openAssignToSelfModal();
             });
 
+            $('.page-datatable-ajax').on('click', '.open-detail-modal-button', function() {
+                // Get the data from the DataTable row
+                const table = $('.page-datatable-ajax').DataTable();
+                const rowData = table.row($(this).closest('tr')).data();
+                $('#booking_id').val(rowData.id);
+                console.log(rowData.id);
+                // Extract the necessary data from the row
+
+                // Open the modal and populate the data
+                openDetailsModal();
+            });
+
             function openModal() {
                 $('#exampleModal').modal('show');
             }
 
-            function openAssignToSelfModal(){
+            function openAssignToSelfModal() {
                 $("#self-assign-modal").modal('show');
+            }
+
+            function openDetailsModal() {
+                $.ajax({
+                    url: apiUrl + "bookings/find/id/" + $('#booking_id').val(),
+                    type: "GET",
+                    dataType: "json",
+                    success: function(result) {
+                        // result contains the response from the server-side PHP script
+                        // you can use this result to update the UI or perform other operations
+                        // sendToNextView();
+                        let bookingDetails = result.booking;
+                        setValueToDetailsModal(bookingDetails)
+                        console.log(result);
+                    },
+                    error: function(xhr, status, error) {
+                        var errorMessage = "An error occurred.";
+                        if (xhr.responseJSON && xhr.responseJSON.error) {
+                            // If the error response contains a specific error message
+                            errorMessage = xhr.responseJSON.error;
+                        } else if (xhr.responseText) {
+                            // If the error response is a string
+                            errorMessage = xhr.responseText;
+                        } else {
+                            // Fallback error message
+                            errorMessage = error;
+                        }
+                        console.log(errorMessage);
+                        displayErrorMessages(errorMessage);
+                    },
+                });
+                $("#details-modal").modal('show');
+            }
+
+            function setValueToDetailsModal(bookingDetalis) {
+                console.log(bookingDetalis)
+                $('#first-name-details').text(bookingDetalis.first_name);
+                $('#last-name-details').text(bookingDetalis.last_name);
+                $('#pickup-location-details').text(bookingDetalis.details.pickup_location);
+                $('#drop-location-details').text(bookingDetalis.details.drop_location);
+                $('#driver-tip-details').text(bookingDetalis.tip);
+                $('#driver-name-details').text(bookingDetails.diver_name);
+                $('#driver-payment-details').text(bookingDetails.driver_payment);
+                $('#additional-remarks-details').text(bookingDetalis.specail_intruction);
+                $('#vehicle-type-detail').text(bookingDetalis.details.vehicle_type.name);
+                $('#vehicle-detail').text(bookingDetalis.details.vehicle == null ? 'Any Vehicle' : bookingDetalis.details.vehicle.name);
+
+                // For the stopsList
+                bookingDetalis.details.stops.forEach(function(item, key) {
+                    var li = $('<li>').text( (key+1) + ') ' + item.location);
+                    $('#stopsList').append(li);
+                })
             }
         });
     </script>
@@ -591,7 +761,7 @@ section.logo:before {
 
 
 
-<script src="assets/js/apilinking.js?v=1.1.0"></script>
+    <script src="assets/js/apilinking.js?v=1.1.0"></script>
 
 </body>
 
