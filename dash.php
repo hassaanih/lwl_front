@@ -466,6 +466,36 @@
                                 
                             </ol>
                         </div>
+                        <div class="mb-5 col-3 d-flex align-items-center">
+                            <label class="form-label font-weight-bold">Traveller:</label>
+                        </div>
+                        <div class="mb-5 col-9">
+                            <label id="traveller-detail"></label>
+                        </div>
+                        <div class="mb-5 col-3 d-flex align-items-center">
+                            <label class="form-label font-weight-bold">Child Seat:</label>
+                        </div>
+                        <div class="mb-5 col-9">
+                            <label id="child-seat-detail"></label>
+                        </div>
+                        <div class="mb-5 col-3 d-flex align-items-center">
+                            <label class="form-label font-weight-bold">Bags:</label>
+                        </div>
+                        <div class="mb-5 col-9">
+                            <label id="bags-detail"></label>
+                        </div>
+                        <div class="mb-5 col-3 d-flex align-items-center">
+                            <label class="form-label font-weight-bold">Inside Meetup:</label>
+                        </div>
+                        <div class="mb-5 col-9">
+                            <label id="inside-meetup-detail"></label>
+                        </div>
+                        <div class="mb-5 col-3 d-flex align-items-center">
+                            <label class="form-label font-weight-bold">Total Miles:</label>
+                        </div>
+                        <div class="mb-5 col-9">
+                            <label id="total-miles-detail"></label>
+                        </div>
                     </div>
 
                 </div>
@@ -599,14 +629,16 @@
                         name: 'details.travellers',
                         className: 'align-top',
                         orderable: true,
-                        searchable: true
+                        searchable: true,
+                        visible: false
                     },
                     {
                         data: 'details.kids',
                         name: 'details.kids',
                         className: 'align-top',
                         orderable: true,
-                        searchable: true
+                        searchable: true,
+                        visible: false
                     },
                     {
                         data: 'details.onsight_meetup',
@@ -623,7 +655,8 @@
                             }
                         },
                         orderable: true,
-                        searchable: true
+                        searchable: true,
+                        visible: false
                     },
                     {
                         data: 'specail_intruction',
@@ -640,21 +673,24 @@
                             }
                         },
                         orderable: true,
-                        searchable: true
+                        searchable: true,
+                        visible: false
                     },
                     {
                         data: 'details.total_km',
                         name: 'details.total_km',
                         className: 'align-top',
                         orderable: true,
-                        searchable: true
+                        searchable: true,
+                        visible: false
                     },
                     {
                         render: function(data, type, row) {
                             // Modify the data for the first column
                             return `<button type="button" class="btn btn-dark open-modal-button drv">Assign To Driver</button>
                             <button type="button" class="btn btn-dark open-detail-modal-button mt-2 drv" style="width: 100%;">View Details</button>
-                            <button type="button" class="self">Self</button>`
+                            <button type="button" class="self">Self</button>
+                            `
                         },
                     }
                 ]
@@ -685,6 +721,18 @@
                 // Open the modal and populate the data
                 openAssignToSelfModal();
             });
+
+            /* $('.page-datatable-ajax').on('click', '.self', function() {
+                // Get the data from the DataTable row
+                const table = $('.page-datatable-ajax').DataTable();
+                const rowData = table.row($(this).closest('tr')).data();
+                $('#booking_id').val(rowData.id);
+                console.log(rowData.id);
+                // Extract the necessary data from the row
+
+                // Open the modal and populate the data
+                openAssignToSelfModal();
+            }); */
 
             $('.page-datatable-ajax').on('click', '.open-detail-modal-button', function() {
                 // Get the data from the DataTable row
@@ -750,6 +798,13 @@
                 $('#additional-remarks-details').text(booking.specail_intruction);
                 $('#vehicle-type-detail').text(booking.details.vehicle_type.name);
                 $('#vehicle-detail').text(booking.details.vehicle == null ? 'Any Vehicle' : booking.details.vehicle.company + ' ' + booking.details.vehicle.model);
+                $('#traveller-detail').text(booking.details.travellers);
+                $('#child-seat-detail').text(booking.details.kids);
+                $('#bags-detail').text(booking.details.bags);
+                $('#inside-meetup-detail').text(booking.details.onsight_meetup == null ? 'No' : 'Yes');
+                $('#total-miles-detail').text(booking.details.total_km);
+
+                
 
                 // For the stopsList
                 booking.details.stops.forEach(function(item, key) {
