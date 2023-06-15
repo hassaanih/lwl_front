@@ -284,6 +284,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
+                    <div class="table-responsive">
                     <table id="adminDashboard" class="row-border display page-datatable-ajax p-2">
                         <thead>
                             <tr>
@@ -308,6 +309,7 @@
                             </tr>
                         </thead>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -713,8 +715,8 @@
                         // result contains the response from the server-side PHP script
                         // you can use this result to update the UI or perform other operations
                         // sendToNextView();
-                        let bookingDetails = result.booking;
-                        setValueToDetailsModal(bookingDetails)
+                        let booking = result.booking;
+                        setValueToDetailsModal(booking)
                         console.log(result);
                     },
                     error: function(xhr, status, error) {
@@ -736,21 +738,21 @@
                 $("#details-modal").modal('show');
             }
 
-            function setValueToDetailsModal(bookingDetalis) {
-                console.log(bookingDetalis)
-                $('#first-name-details').text(bookingDetalis.first_name);
-                $('#last-name-details').text(bookingDetalis.last_name);
-                $('#pickup-location-details').text(bookingDetalis.details.pickup_location);
-                $('#drop-location-details').text(bookingDetalis.details.drop_location);
-                $('#driver-tip-details').text(bookingDetalis.tip);
-                $('#driver-name-details').text(bookingDetails.diver_name);
-                $('#driver-payment-details').text(bookingDetails.driver_payment);
-                $('#additional-remarks-details').text(bookingDetalis.specail_intruction);
-                $('#vehicle-type-detail').text(bookingDetalis.details.vehicle_type.name);
-                $('#vehicle-detail').text(bookingDetalis.details.vehicle == null ? 'Any Vehicle' : bookingDetalis.details.vehicle.company + ' ' + bookingDetalis.details.vehicle.model);
+            function setValueToDetailsModal(booking) {
+                console.log(booking)
+                $('#first-name-details').text(booking.first_name);
+                $('#last-name-details').text(booking.last_name);
+                $('#pickup-location-details').text(booking.details.pickup_location);
+                $('#drop-location-details').text(booking.details.drop_location);
+                $('#driver-tip-details').text(booking.tip_for_driver);
+                $('#driver-name-details').text(booking.diver_name);
+                $('#driver-payment-details').text(booking.driver_payment);
+                $('#additional-remarks-details').text(booking.specail_intruction);
+                $('#vehicle-type-detail').text(booking.details.vehicle_type.name);
+                $('#vehicle-detail').text(booking.details.vehicle == null ? 'Any Vehicle' : booking.details.vehicle.company + ' ' + booking.details.vehicle.model);
 
                 // For the stopsList
-                bookingDetalis.details.stops.forEach(function(item, key) {
+                booking.details.stops.forEach(function(item, key) {
                     var li = $('<li>').text( (key+1) + ') ' + item.location);
                     $('#stopsList').append(li);
                 })

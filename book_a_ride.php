@@ -334,7 +334,7 @@
 												<div class="row">
 													<div class="col-md-6">
 														<div class="info_pop">
-															<span class="icon"><i class="fa fa-users" aria-hidden="true"></i>5</span>
+															<span class="icon"><i class="fa fa-users" aria-hidden="true"></i>6</span>
 															<span class="icon"><i class="fa fa-suitcase" aria-hidden="true"></i>3</span>
 														</div>
 													</div>
@@ -574,12 +574,20 @@
 
 												<div class="lne"></div>
 												<div class="amount">
-													<div class="row">
+													<div class="row d-none">
 														<div class="col-md-6">
 															<h4>Total</h4>
 														</div>
 														<div class="col-md-6">
 															<h4 id="total-charges">N/A</h4>
+														</div>
+													</div>
+													<div class="row">
+														<div class="col-md-12">
+															<span class="font-weight-bold text-danger">Note: </span>
+														</div>
+														<div class="col-md-12">
+															<p class="text-danger text-left">Add-ons will be added as per lightwaterlimo policies <a href="https://lightwaterlimo.com/terms-conditions/">Click Here</a> to view our policies and terms and conditions</p>
 														</div>
 													</div>
 												</div>
