@@ -121,6 +121,16 @@
             background-color: #111c30;
         }
 
+        .green-row {
+            background-color: green !important;
+            color: white !important;
+        }
+
+        .red-row {
+            background-color: red !important;
+            color: white !important;
+        }
+
 
         /* @media (max-width: 1600px) {
     /* section.logo:before {
@@ -285,30 +295,31 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive">
-                    <table id="adminDashboard" class="row-border display page-datatable-ajax p-2">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Contact Number</th>
-                                <th>Driver Name</th>
-                                <th>Driver Price ($)</th>
-                                <th>Tip ($)</th>
-                                <th>Total Charges ($)</th>
-                                <th>Pickup Location</th>
-                                <th>Drop Location</th>
-                                <th>Pickup Date</th>
-                                <th>Pickup Time</th>
-                                <th>Traveller</th>
-                                <th>Child Seat</th>
-                                <th>Inside Meetup</th>
-                                <th>Additional Remarks</th>
-                                <th>Total Miles</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                    </table>
+                        <table id="adminDashboard" class="row-border display page-datatable-ajax p-2">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Contact Number</th>
+                                    <th>Driver Name</th>
+                                    <th>Driver Price ($)</th>
+                                    <th>Tip ($)</th>
+                                    <th>Total Charges ($)</th>
+                                    <th>Pickup Location</th>
+                                    <th>Drop Location</th>
+                                    <th>Pickup Date</th>
+                                    <th>Pickup Time</th>
+                                    <th>Traveller</th>
+                                    <th>Child Seat</th>
+                                    <th>Inside Meetup</th>
+                                    <th>Additional Remarks</th>
+                                    <th>Total Miles</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -463,7 +474,7 @@
                         </div>
                         <div class="mb-5 col-9">
                             <ol id="stopsList" style="list-style-type: square;">
-                                
+
                             </ol>
                         </div>
                         <div class="mb-5 col-3 d-flex align-items-center">
@@ -517,6 +528,7 @@
                 ajax: apiUrl + 'bookings/findAll',
                 lengthMenu: [10, 25, 50, 100, 500],
                 responsive: true,
+
                 columns: [{
                         data: 'id',
                         name: 'id',
@@ -567,7 +579,6 @@
                         render: function(data, type, row) {
                             // Modify the data for the first column
 
-                            console.log(data);
                             if (data == null) {
                                 return 'N/A';
                             } else {
@@ -647,7 +658,6 @@
                         render: function(data, type, row) {
                             // Modify the data for the first column
 
-                            console.log(data);
                             if (data == null) {
                                 return 'N/A';
                             } else {
@@ -665,7 +675,6 @@
                         render: function(data, type, row) {
                             // Modify the data for the first column
 
-                            console.log(data);
                             if (data == null) {
                                 return 'N/A';
                             } else {
@@ -685,15 +694,36 @@
                         visible: false
                     },
                     {
+                        data: 'booking_status',
+                        name: 'booking_status',
+                        className: 'align-top',
+                        orderable: true,
+                        searchable: true,
+                        visible: true
+                    },
+                    {
                         render: function(data, type, row) {
                             // Modify the data for the first column
-                            return `<button type="button" class="btn btn-dark open-modal-button drv">Assign To Driver</button>
-                            <button type="button" class="btn btn-dark open-detail-modal-button mt-2 drv" style="width: 100%;">View Details</button>
-                            <button type="button" class="self">Self</button>
+                            return `
+                            <button type="button" class="btn btn-dark open-modal-button drv mr-2">Assign To Driver</button>
+                            <button type="button" class="btn btn-dark open-detail-modal-button mt-2 mr-2 drv" style="width: 100%;">View Details</button>
+                            <button type="button" class="self mr-2">Self</button>
+                            <button type="button" class="complete-ride mr-2 btn btn-dark mt-2" style="width: 100%;">Completed</button>
+                            
                             `
                         },
                     }
-                ]
+                ],
+                rowCallback: function(row, data, index) {
+                    var status = data.booking_status; // Assuming the status is in the "status" property of the data object
+                    console.log(status)
+                    if (status === 'completed') {
+                        $(row).addClass('green-row'); // Add a CSS class to the row
+                    }
+                    if (status === 'cancel') {
+                        $(row).addClass('red-row'); // Add a CSS class to the row
+                    }
+                }
             });
 
         });
@@ -722,20 +752,45 @@
                 openAssignToSelfModal();
             });
 
-            /* $('.page-datatable-ajax').on('click', '.self', function() {
+            $('.page-datatable-ajax tbody').on('click', '.complete-ride', function() {
                 // Get the data from the DataTable row
                 const table = $('.page-datatable-ajax').DataTable();
                 const rowData = table.row($(this).closest('tr')).data();
                 $('#booking_id').val(rowData.id);
-                console.log(rowData.id);
-                // Extract the necessary data from the row
 
-                // Open the modal and populate the data
-                openAssignToSelfModal();
-            }); */
+                $.ajax({
+                    url: apiUrl + "bookings/complete",
+                    type: "POST",
+                    data: {id: $('#booking_id').val()},
+                    dataType: "json",
+                    success: function(result) {
+                        // result contains the response from the server-side PHP script
+                        // you can use this result to update the UI or perform other operations
+                        // sendToNextView();
+                        const table = $('.page-datatable-ajax').DataTable();
+                        table.ajax.reload(null, false);
+                    },
+                    error: function(xhr, status, error) {
+                        var errorMessage = "An error occurred.";
+                        if (xhr.responseJSON && xhr.responseJSON.error) {
+                            // If the error response contains a specific error message
+                            errorMessage = xhr.responseJSON.error;
+                        } else if (xhr.responseText) {
+                            // If the error response is a string
+                            errorMessage = xhr.responseText;
+                        } else {
+                            // Fallback error message
+                            errorMessage = error;
+                        }
+                        console.log(errorMessage);
+                        displayErrorMessages(errorMessage);
+                    },
+                });
+            });
 
             $('.page-datatable-ajax').on('click', '.open-detail-modal-button', function() {
                 // Get the data from the DataTable row
+
                 const table = $('.page-datatable-ajax').DataTable();
                 const rowData = table.row($(this).closest('tr')).data();
                 $('#booking_id').val(rowData.id);
@@ -804,11 +859,11 @@
                 $('#inside-meetup-detail').text(booking.details.onsight_meetup == null ? 'No' : 'Yes');
                 $('#total-miles-detail').text(booking.details.total_km);
 
-                
+
 
                 // For the stopsList
                 booking.details.stops.forEach(function(item, key) {
-                    var li = $('<li>').text( (key+1) + ') ' + item.location);
+                    var li = $('<li>').text((key + 1) + ') ' + item.location);
                     $('#stopsList').append(li);
                 })
             }
