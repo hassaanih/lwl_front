@@ -124,12 +124,30 @@
         .green-row {
             background-color: green !important;
             color: white !important;
+            padding: 10px !important;
+
         }
 
         .red-row {
             background-color: red !important;
             color: white !important;
+            padding: 10px !important;
+
         }
+
+        .yellow-row {
+            background-color: yellow !important;
+            color: red !important;
+            padding: 10px !important;
+        }
+
+        .blue-row {
+            background-color: lightskyblue !important;
+            color: red !important;
+            padding: 10px !important;
+        }
+
+
 
 
         /* @media (max-width: 1600px) {
@@ -709,8 +727,18 @@
                             <button type="button" class="btn btn-dark open-detail-modal-button mt-2 mr-2 drv" style="width: 100%;">View Details</button>
                             <button type="button" class="self mr-2">Self</button>
                             <button type="button" class="complete-ride mr-2 btn btn-dark mt-2" style="width: 100%;">Completed</button>
-                            
-                            `
+
+                            `;
+                            // return '<div class="dropdown">'+
+                            //             '<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton'+row.id+'" data-bs-toggle="dropdown" aria-expanded="false">'+
+                            //             'Actions'+
+                            //             '</button>'+
+                            //             '<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton'+row.id+'">'+
+                            //             '<li><a class="dropdown-item" href="#">Edit</a></li>'+
+                            //             '<li><a class="dropdown-item" href="#">Delete</a></li>'+
+                            //             '<!-- Add more actions as needed -->'+
+                            //             '</ul>'+
+                            //         "</div>";
                         },
                     }
                 ],
@@ -719,19 +747,22 @@
                     console.log(status)
                     if (status === 'completed') {
                         $(row).addClass('green-row'); // Add a CSS class to the row
-                    }
-                    if (status === 'cancel') {
+                    }else if (status === 'cancel') {
                         $(row).addClass('red-row'); // Add a CSS class to the row
+                    }else if (data.assigned_to === 'driver'){
+                        $(row).addClass('yellow-row');
+                    }else if (data.assigned_to === 'self'){
+                        $(row).addClass('blue-row');
                     }
                 }
             });
 
         });
         $(document).ready(function() {
-            setInterval(function() {
-                const table = $('.page-datatable-ajax').DataTable();
-                table.ajax.reload(null, false);
-            }, 10000);
+            // setInterval(function() {
+            //     const table = $('.page-datatable-ajax').DataTable();
+            //     table.ajax.reload(null, false);
+            // }, 10000);
 
             $('.page-datatable-ajax').on('click', '.open-modal-button', function() {
                 // Get the data from the DataTable row

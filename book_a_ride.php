@@ -465,7 +465,7 @@
 															<p>SUV</p>
 														</div>
 														<div class="car-volume">
-															<span class="icon"><i class="fa fa-users" aria-hidden="true"></i>5</span>
+															<span class="icon"><i class="fa fa-users" aria-hidden="true"></i>6</span>
 															<span class="icon"><i class="fa fa-suitcase" aria-hidden="true"></i>3</span>
 														</div>
 														<div class="car-price _vehiclePrice"><ins>USD </ins><span id="suvPrice"></span></div>
