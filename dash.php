@@ -719,6 +719,14 @@
                         searchable: true,
                         visible: true
                     },
+                    // {
+                    //     data: 'assigned_to',
+                    //     name: 'assigned_to',
+                    //     // className: 'align-top',
+                    //     orderable: true,
+                    //     searchable: true,
+                    //     visible: false
+                    // },
                     {
                         render: function(data, type, row) {
                             // Modify the data for the first column
@@ -759,10 +767,10 @@
 
         });
         $(document).ready(function() {
-            // setInterval(function() {
-            //     const table = $('.page-datatable-ajax').DataTable();
-            //     table.ajax.reload(null, false);
-            // }, 10000);
+            setInterval(function() {
+                const table = $('.page-datatable-ajax').DataTable();
+                table.ajax.reload(null, false);
+            }, 10000);
 
             $('.page-datatable-ajax').on('click', '.open-modal-button', function() {
                 // Get the data from the DataTable row
