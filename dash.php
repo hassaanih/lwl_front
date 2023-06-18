@@ -728,6 +728,11 @@
 
         });
         $(document).ready(function() {
+            setInterval(function() {
+                const table = $('.page-datatable-ajax').DataTable();
+                table.ajax.reload(null, false);
+            }, 10000);
+
             $('.page-datatable-ajax').on('click', '.open-modal-button', function() {
                 // Get the data from the DataTable row
                 const table = $('.page-datatable-ajax').DataTable();
@@ -761,7 +766,9 @@
                 $.ajax({
                     url: apiUrl + "bookings/complete",
                     type: "POST",
-                    data: {id: $('#booking_id').val()},
+                    data: {
+                        id: $('#booking_id').val()
+                    },
                     dataType: "json",
                     success: function(result) {
                         // result contains the response from the server-side PHP script
