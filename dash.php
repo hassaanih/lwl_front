@@ -735,7 +735,7 @@
                             <button type="button" class="btn btn-dark open-detail-modal-button mt-2 mr-2 drv" style="width: 100%;">View Details</button>
                             <button type="button" class="self mr-2">Self</button>
                             <button type="button" class="complete-ride mr-2 btn btn-dark mt-2" style="width: 100%;">Completed</button>
-
+                            <button type="button" class="btn btn-danger cancel-ride-button drv">Cancel Ride</button>
                             `;
                             // return '<div class="dropdown">'+
                             //             '<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton'+row.id+'" data-bs-toggle="dropdown" aria-expanded="false">'+
@@ -755,11 +755,11 @@
                     console.log(status)
                     if (status === 'completed') {
                         $(row).addClass('green-row'); // Add a CSS class to the row
-                    }else if (status === 'cancel') {
+                    } else if (status === 'cancel') {
                         $(row).addClass('red-row'); // Add a CSS class to the row
-                    }else if (data.assigned_to === 'driver'){
+                    } else if (data.assigned_to === 'driver') {
                         $(row).addClass('yellow-row');
-                    }else if (data.assigned_to === 'self'){
+                    } else if (data.assigned_to === 'self') {
                         $(row).addClass('blue-row');
                     }
                 }
@@ -767,6 +767,21 @@
 
         });
         $(document).ready(function() {
+
+
+            $('.page-datatable-ajax').on('click', '.cancel-ride-button', function() {
+                // Get the data from the DataTable row
+                const table = $('.page-datatable-ajax').DataTable();
+                const rowData = table.row($(this).closest('tr')).data();
+                $('#booking_id').val(rowData.id);
+                console.log(rowData.id);
+                // Extract the necessary data from the row
+
+                // Open the modal and populate the data
+                cancelRide(rowData.id);
+            });
+
+
             setInterval(function() {
                 const table = $('.page-datatable-ajax').DataTable();
                 table.ajax.reload(null, false);
