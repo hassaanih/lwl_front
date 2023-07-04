@@ -611,8 +611,7 @@ include($header);
 						THANKYOU FOR BOOKING YOUR RIDE WITH US
 					</h1>
 					<div class="wrp1_btn">
-						<a class="btn" href="<?php echo $path;?>log_reg">Log In/Register</a>
-						<a class="btn" href="<?php echo $path;?>">Search Your Ride</a>
+						<a class="btn" href="<?php echo $path;?>bookingmodule/lwl_front/log_reg">Log In/Register</a>
 					
 					</div>
 				
@@ -620,6 +619,9 @@ include($header);
 			</div>
 		</div>
 	</div>
+</section>
+<section class="footer">
+    <p style="font-weight: 400; text-align: center; font-size: 15px; margin-top: 40px"><a style="color:#000; font-weight:600;" href="https://lightwaterlimo.com/">All Rights Reserved 2023 By Light Water Limo </a><br><a style="color:#000; font-weight:600;" href="https://1solpk.com/">Developed By 1 Sol Digital Services (SMC-Private) Ltd.</a> </p>
 </section>
 
 

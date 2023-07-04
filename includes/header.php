@@ -3,7 +3,7 @@
 
 
   if ($_SERVER['HTTP_HOST'] == "localhost") {
-      $folder_name = ""; $path = 'https://localhost/junaid /'.$folder_name;
+      $folder_name = ""; $path = 'https://localhost/lwl_front /'.$folder_name;
   } else {
     $folder_name = ""; $path = 'https://'.$_SERVER['HTTP_HOST'].''.$folder_name.'/';
   }

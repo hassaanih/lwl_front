@@ -4,33 +4,128 @@ var bookingDetailsRequestBody = {};
 var bookingRequestBody = {};
 bookingDetailsRequestBody.stops = [];
 var bookingDetails = {};
+var stopInputs = [];
 
 var currentFs, nextFs, previousFs; //fieldsets
 var opacity;
 var current = 1;
 var steps = $("fieldset").length;
+var stopsGeometry = [];
+var stopMarkers = [];
 
 /* 
 
       Step 1 Api's and function
 
 */
+function preSubmitValidation(
+  pickupLocationValue,
+  dropLocationValue,
+  stopInputs
+) {
+  let regex = /^(?=.*\b(Illinois|IL)\b).+$/i;
+  console.log(stopInputs)
+  stopInputs.forEach(item => {
+    bookingDetailsRequestBody.stops.push(item.value);
+  })
+  if (regex.test(pickupLocationValue)) {
+    return true;
+  } else {
+    console.log("Pickup Location value: " + dropLocationValue);
+    console.log("Drop Location value: " + pickupLocationValue);
+    console.log("Pickup Location validation: " + regex.test(dropLocationValue));
+    console.log("Drop Location validation: " + regex.test(pickupLocationValue));
+    Swal.fire({
+      title: "Error",
+      text:
+        "Currently we are not offering pickups outside Illinois. Please get in touch with us for this ride.",
+      icon: "error",
+    });
+    return false;
+  }
+}
+
+function displayErrorMessages(errors) {
+  const errorValues = Object.values(errors);
+  let errorMessage = "<ul>";
+
+  for (const fieldErrors of errorValues) {
+    for (const error of fieldErrors) {
+      errorMessage += `<li class="mb-2 text-danger"> &bull; ${error}</li>`;
+    }
+  }
+
+  errorMessage += "</ul>";
+
+  Swal.fire({
+    title: "Error",
+    html: errorMessage,
+    icon: "error",
+    customClass: {
+      content: "text-left", // Add custom CSS class for content alignment
+    },
+  });
+}
 
 function addStop() {
-  var moreEmail = document.querySelector("#more-email");
-  var div = document.createElement("div");
+  let moreEmail = document.querySelector("#more-email");
+  let div = document.createElement("div");
   div.className = "for";
-  var input = document.createElement("input");
+  let input = document.createElement("input");
   input.type = "text";
-  input.className = "form-control";
+  input.addEventListener("input", validateInput);
+  input.className = "form-control stop";
   input.placeholder = "Add Additional Pickup Location";
+  let stopsAutoComplete = new google.maps.places.Autocomplete(input);
+  let stopMarker = new google.maps.Marker({ map: map });
+
+  stopsAutoComplete.addListener("place_changed", function () {
+    var place = stopsAutoComplete.getPlace();
+    if (!place.geometry) {
+      Swal.fire({
+        title: "Error",
+        text: "Cannot find the requested location.",
+        icon: "error",
+      });
+      return;
+    }
+
+    stopMarker.setPosition(place.geometry.location);
+    stopsGeometry.push(place.geometry.location);
+    stopMarkers.push(stopMarker);
+    stopInputs.push(input);
+    window.calculateAndDisplayRoute(
+      directionsService,
+      directionsRenderer,
+      stopsGeometry
+    );
+  });
+
   div.appendChild(input);
   moreEmail.appendChild(div);
+}
+
+function validateInput(event) {
+  
+  if (event.target.value == "") {
+    removeStop();
+  }
+  
 }
 
 function removeStop() {
   const moreEmail = document.getElementById("more-email");
   const lastChild = moreEmail.lastElementChild;
+  stopsGeometry.pop();
+  let lastMarker = stopMarkers.pop();
+  lastMarker.setMap(null);
+  window.calculateAndDisplayRoute(
+    directionsService,
+    directionsRenderer,
+    stopsGeometry
+  );
+  bookingDetailsRequestBody.stops.pop();
+  stopInputs.pop();
   if (lastChild) {
     moreEmail.removeChild(lastChild);
   }
@@ -62,7 +157,6 @@ function handleClickNext() {
       nextFs.style.display = "block";
       setProgressBar(current + 1);
     }
-    
   }, 50);
 }
 
@@ -70,6 +164,27 @@ function setProgressBar(curStep) {
   var percent = parseFloat(100 / steps) * curStep;
   percent = percent.toFixed();
   $(".progress-bar").css("width", percent + "%");
+}
+
+function toggleTextField(checkboxVal) {
+  var checkbox = document.getElementsByName("options");
+  var textField = document.getElementById("text-field");
+
+  if (checkboxVal.checked && checkboxVal.value == "yes") {
+    checkbox.forEach((element) => {
+      if (element !== checkboxVal) {
+        element.checked = false;
+      }
+    });
+    textField.style.display = "block";
+  } else {
+    checkbox.forEach((element) => {
+      if (element !== checkboxVal) {
+        element.checked = false;
+      }
+    });
+    textField.style.display = "none";
+  }
 }
 
 function submitBookingDetails() {
@@ -88,8 +203,19 @@ function submitBookingDetails() {
     onsight_meetup: $("#card").val(),
     arrival_time: $("#flghtm").val(),
     total_duration_hours: $("#hour").val(),
-    total_duration_minutes: $("#minutes").val()
+    total_duration_minutes: $("#minutes").val(),
+    stops: [],
   };
+
+  let preRequestLocationsValidator = preSubmitValidation(
+    document.getElementById("ploc").value,
+    document.getElementById("daddress").value,
+    stopInputs
+  );
+
+  if (preRequestLocationsValidator == false) {
+    return;
+  }
 
   $.ajax({
     url: apiUrl + "booking/details/create",
@@ -101,13 +227,28 @@ function submitBookingDetails() {
       // you can use this result to update the UI or perform other operations
       // sendToNextView();
       bookingDetailsId = result.booking_details.id;
+      $("#bookingDetailsId").val(bookingDetailsId);
       handleClickNext();
       setSummaryView(result.booking_details);
       getVehicles();
-      console.log(bookingDetailsId);
+      $('#sedanPrice').text(result.booking_details.sedan_charges);
+      $('#suvPrice').text(result.booking_details.suv_charges);
+      console.log(result.booking_details.sedan_charges);
     },
-    error: function (error) {
-      console.log("Error: " + error);
+    error: function (xhr, status, error) {
+      var errorMessage = "An error occurred.";
+      if (xhr.responseJSON && xhr.responseJSON.error) {
+        // If the error response contains a specific error message
+        errorMessage = xhr.responseJSON.error;
+      } else if (xhr.responseText) {
+        // If the error response is a string
+        errorMessage = xhr.responseText;
+      } else {
+        // Fallback error message
+        errorMessage = error;
+      }
+      console.log(errorMessage);
+      displayErrorMessages(errorMessage);
     },
   });
 }
@@ -132,6 +273,8 @@ function setSummaryView(bookingDetails) {
     bookingDetails.total_charges == undefined
       ? 0
       : "$ " + bookingDetails.total_charges;
+  document.getElementById("total_miles_summary").innerHTML =
+    bookingDetails.total_km + " mi";
 }
 
 function setCheckoutPageSummaryView(bookingDetails) {
@@ -150,8 +293,11 @@ function setCheckoutPageSummaryView(bookingDetails) {
     bookingDetails.kids;
   document.getElementById("bags-number-summary-checkout").innerHTML =
     bookingDetails.bags;
-  document.getElementById("car-selected-summary-checkout").innerHTML =
-    vehicleSelected;
+  document.getElementById("total_miles_summary_checkout").innerHTML =
+    bookingDetails.total_km + " mi";
+  document.getElementById(
+    "car-selected-summary-checkout"
+  ).innerHTML = vehicleSelected;
   document.getElementById("total-charges-checkout").innerHTML =
     bookingDetails.total_charges == undefined
       ? 0
@@ -199,8 +345,20 @@ function selectVehicleType(vehicleType, vehicleId) {
       setCheckoutPageSummaryView(bookingDetails);
       console.log(bookingDetailsId);
     },
-    error: function (error) {
-      console.log("Error: " + JSON.stringify(error));
+    error: function (xhr, status, error) {
+      var errorMessage = "An error occurred.";
+      if (xhr.responseJSON && xhr.responseJSON.error) {
+        // If the error response contains a specific error message
+        errorMessage = xhr.responseJSON.error;
+      } else if (xhr.responseText) {
+        // If the error response is a string
+        errorMessage = xhr.responseText;
+      } else {
+        // Fallback error message
+        errorMessage = error;
+      }
+      console.log(errorMessage);
+      displayErrorMessages(errorMessage);
     },
   });
 }
@@ -229,8 +387,19 @@ function getVehicles() {
         }
       }, 1000);
     },
-    error: function (error) {
-      console.log("Error: " + JSON.stringify(error));
+    error: function (xhr, status, error) {
+      var errorMessage = "An error occurred.";
+      if (xhr.responseJSON && xhr.responseJSON.error) {
+        // If the error response contains a specific error message
+        errorMessage = xhr.responseJSON.error;
+      } else if (xhr.responseText) {
+        // If the error response is a string
+        errorMessage = xhr.responseText;
+      } else {
+        // Fallback error message
+        errorMessage = error;
+      }
+      console.log(errorMessage);
     },
   });
 }
@@ -257,7 +426,7 @@ function proceedToCheckout() {
       expiry_month: $("#month").val(),
       expiry_year: $("#year").val(),
     },
-    specail_instruction: $("#instr").val(),
+    specail_intruction: $("#instr").val(),
   };
 
   $.ajax({
@@ -271,16 +440,33 @@ function proceedToCheckout() {
       // sendToNextView();
 
       console.log(bookingDetailsId);
-      window.location.href = appUrl + 'thankyou_for_booking.php';
+      Swal.fire("Payment Successful");
+      setTimeout(function () {
+        window.location.href = appUrl + "thankyou_for_booking.php";
+      }, 1500);
     },
-    error: function (error) {
-      console.log("Error: " + error);
+    error: function (xhr, status, error) {
+      var errorMessage = "An error occurred.";
+      if (xhr.responseJSON && xhr.responseJSON.error) {
+        // If the error response contains a specific error message
+        errorMessage = xhr.responseJSON.error;
+      } else if (xhr.responseText) {
+        // If the error response is a string
+        errorMessage = xhr.responseText;
+      } else {
+        // Fallback error message
+        errorMessage = error;
+      }
+      console.log(errorMessage);
+      displayErrorMessages(errorMessage);
     },
   });
 }
 
 function myFunction() {
   var text = document.getElementById("text");
+  var transferButton = document.getElementById("transferButton");
+  transferButton.classList.remove("active-option");
   var button = document.getElementById("airportButton");
   var hourlyDiv = document.getElementById("hourlyEnable");
   var hourlyButton = document.getElementById("hourlyButton");
@@ -288,8 +474,6 @@ function myFunction() {
   button.classList.add("active-option");
   hourlyButton.classList.remove("active-option");
   hourlyDiv.style.display = "none";
-
-  
 }
 
 function selectHourlyOption() {
@@ -297,21 +481,35 @@ function selectHourlyOption() {
   var text = document.getElementById("text");
   var hourlyDiv = document.getElementById("hourlyEnable");
   var hourlyButton = document.getElementById("hourlyButton");
+  var transferButton = document.getElementById("transferButton");
+  transferButton.classList.remove("active-option");
   hourlyDiv.style.display = "flex";
   hourlyButton.classList.add("active-option");
   airportButton.classList.remove("active-option");
   text.style.display = "none";
 }
 
+function selectTransferOption() {
+  var airportButton = document.getElementById("airportButton");
+  var text = document.getElementById("text");
+  var hourlyDiv = document.getElementById("hourlyEnable");
+  var hourlyButton = document.getElementById("hourlyButton");
+  var transferButton = document.getElementById("transferButton");
+  transferButton.classList.add("active-option");
+  hourlyDiv.style.display = "none";
+  hourlyButton.classList.remove("active-option");
+  airportButton.classList.remove("active-option");
+  text.style.display = "none";
+}
 
 // Assign to driver.
 
 function assignDriver() {
   let data = {
-    id: $('#booking_id').val(),
-    driver_name: $('#drv_name').val(),
-    driver_payment: $('#drv_payment').val(),
-  }
+    id: $("#booking_id").val(),
+    driver_name: $("#drv_name").val(),
+    driver_payment: $("#drv_payment").val(),
+  };
 
   $.ajax({
     url: apiUrl + "bookings/assign/driver",
@@ -322,13 +520,338 @@ function assignDriver() {
       // result contains the response from the server-side PHP script
       // you can use this result to update the UI or perform other operations
       // sendToNextView();
-      $('#drv_name').val('');
-      $('#drv_payment').val('');
-      $('#exampleModal').modal('hide');
+      $("#drv_name").val("");
+      $("#drv_payment").val("");
+      $("#exampleModal").modal("hide");
+      $(".page-datatable-ajax").DataTable().ajax.reload(null, false);
       console.log(result);
     },
-    error: function (error) {
-      console.log("Error: " + error);
+    error: function (xhr, status, error) {
+      var errorMessage = "An error occurred.";
+      if (xhr.responseJSON && xhr.responseJSON.error) {
+        // If the error response contains a specific error message
+        errorMessage = xhr.responseJSON.error;
+      } else if (xhr.responseText) {
+        // If the error response is a string
+        errorMessage = xhr.responseText;
+      } else {
+        // Fallback error message
+        errorMessage = error;
+      }
+      console.log(errorMessage);
+      displayErrorMessages(errorMessage);
+    },
+  });
+}
+
+function cancelRide(id) {
+  let data = {
+    id: id,
+  };
+
+  $.ajax({
+    url: apiUrl + "bookings/cancel",
+    type: "POST",
+    data: data,
+    dataType: "json",
+    success: function (result) {
+      // result contains the response from the server-side PHP script
+      // you can use this result to update the UI or perform other operations
+      // sendToNextView();
+      $(".user-datatable-ajax").DataTable().ajax.reload(null, false);
+      console.log(result);
+      Swal.fire("warning", "Ride has been cancelled");
+    },
+    error: function (xhr, status, error) {
+      var errorMessage = "An error occurred.";
+      if (xhr.responseJSON && xhr.responseJSON.error) {
+        // If the error response contains a specific error message
+        errorMessage = xhr.responseJSON.error;
+      } else if (xhr.responseText) {
+        // If the error response is a string
+        errorMessage = xhr.responseText;
+      } else {
+        // Fallback error message
+        errorMessage = error;
+      }
+      console.log(errorMessage);
+      displayErrorMessages(errorMessage);
+    },
+  });
+}
+
+function assignSelf() {
+  let data = {
+    id: $("#booking_id").val(),
+    driver_name: $("#drv_name_self").val(),
+    driver_payment: $("#drv_payment_self").val(),
+  };
+
+  $.ajax({
+    url: apiUrl + "bookings/assign/self",
+    type: "POST",
+    data: data,
+    dataType: "json",
+    success: function (result) {
+      // result contains the response from the server-side PHP script
+      // you can use this result to update the UI or perform other operations
+      // sendToNextView();
+      $("#drv_name_self").val("");
+      $("#drv_payment_self").val("");
+      $("#self-assign-modal").modal("hide");
+      $(".page-datatable-ajax").DataTable().ajax.reload(null, false);
+      console.log(result);
+    },
+    error: function (xhr, status, error) {
+      var errorMessage = "An error occurred.";
+      if (xhr.responseJSON && xhr.responseJSON.error) {
+        // If the error response contains a specific error message
+        errorMessage = xhr.responseJSON.error;
+      } else if (xhr.responseText) {
+        // If the error response is a string
+        errorMessage = xhr.responseText;
+      } else {
+        // Fallback error message
+        errorMessage = error;
+      }
+      console.log(errorMessage);
+      displayErrorMessages(errorMessage);
+    },
+  });
+}
+
+function showCurrentUserRides() {
+  console.log("hello");
+  $(".user-datatable-ajax").DataTable().ajax.reload();
+}
+
+function addTipForDriver(event) {
+  let tip = event.target.value;
+  console.log(tip);
+}
+
+function applyCoupon() {
+  let data = {
+    id: bookingDetailsId,
+    code: $("#coupon-code").val(),
+  };
+
+  $.ajax({
+    url: apiUrl + "coupon/apply",
+    type: "POST",
+    data: data,
+    dataType: "json",
+    success: function (result) {
+      // result contains the response from the server-side PHP script
+      // you can use this result to update the UI or perform other operations
+      // sendToNextView();
+      setCheckoutPageSummaryView(result.booking_details);
+      console.log(bookingDetailsId);
+      Swal.fire("warning", "Coupon Applied");
+    },
+    error: function (xhr, status, error) {
+      var errorMessage = "An error occurred.";
+      if (xhr.responseJSON && xhr.responseJSON.error) {
+        // If the error response contains a specific error message
+        errorMessage = xhr.responseJSON.error;
+      } else if (xhr.responseText) {
+        // If the error response is a string
+        errorMessage = xhr.responseText;
+      } else {
+        // Fallback error message
+        errorMessage = error;
+      }
+      console.log(errorMessage);
+      displayErrorMessages(errorMessage);
+    },
+  });
+}
+
+function signin() {
+  let data = {
+    email: $("#signinEmail").val(),
+    password: $("#signinPassword").val(),
+  };
+
+  $.ajax({
+    url: apiUrl + "user/signin",
+    type: "POST",
+    data: data,
+    dataType: "json",
+    success: function (result) {
+      // result contains the response from the server-side PHP script
+      // you can use this result to update the UI or perform other operations
+      // sendToNextView();
+      localStorage.setItem("userEmail", result.user.email);
+      window.location.href = appUrl + "dash_user.php";
+      console.log(result);
+    },
+    error: function (xhr, status, error) {
+      var errorMessage = "An error occurred.";
+      if (xhr.responseJSON && xhr.responseJSON.error) {
+        // If the error response contains a specific error message
+        errorMessage = xhr.responseJSON.error;
+      } else if (xhr.responseText) {
+        // If the error response is a string
+        errorMessage = xhr.responseText;
+      } else {
+        // Fallback error message
+        errorMessage = error;
+      }
+      console.log(errorMessage);
+      displayErrorMessages(errorMessage);
+    },
+  });
+}
+
+function signup() {
+  let data = {
+    email: $("#signupEmail").val(),
+    password: $("#signupPassword").val(),
+    c_password: $("#signupConfirmPassword").val(),
+    full_name: $("#signupName").val(),
+  };
+
+  $.ajax({
+    url: apiUrl + "user/create",
+    type: "POST",
+    data: data,
+    dataType: "json",
+    success: function (result) {
+      // result contains the response from the server-side PHP script
+      // you can use this result to update the UI or perform other operations
+      // sendToNextView();
+      localStorage.setItem("userEmail", result.user.email);
+      window.location.href = appUrl + "dash_user.php";
+      console.log(result);
+    },
+    error: function (xhr, status, error) {
+      var errorMessage = "An error occurred.";
+      if (xhr.responseJSON && xhr.responseJSON.error) {
+        // If the error response contains a specific error message
+        errorMessage = xhr.responseJSON.error;
+      } else if (xhr.responseText) {
+        // If the error response is a string
+        errorMessage = xhr.responseText;
+      } else {
+        // Fallback error message
+        errorMessage = error;
+      }
+      console.log(errorMessage);
+      displayErrorMessages(errorMessage);
+    },
+  });
+}
+
+function openAddCouponModal() {
+  $("#couponModal").modal("show");
+}
+
+function addCoupon() {
+  let data = {
+    code: $("#codeTxt").val(),
+    total_discount: $("#discountTxt").val(),
+    usage_count: $("#usageCountTxt").val(),
+  };
+
+  $.ajax({
+    url: apiUrl + "coupons/add",
+    type: "POST",
+    data: data,
+    dataType: "json",
+    success: function (result) {
+      $("#couponModal").modal("hide");
+      $(".coupon-datatable-ajax").DataTable().ajax.reload();
+    },
+    error: function (xhr, status, error) {
+      var errorMessage = "An error occurred.";
+      if (xhr.responseJSON && xhr.responseJSON.error) {
+        // If the error response contains a specific error message
+        errorMessage = xhr.responseJSON.error;
+      } else if (xhr.responseText) {
+        // If the error response is a string
+        errorMessage = xhr.responseText;
+      } else {
+        // Fallback error message
+        errorMessage = error;
+      }
+      console.log(errorMessage);
+      displayErrorMessages(errorMessage);
+    },
+  });
+}
+
+function redirectToCoupon() {
+  window.location.href = appUrl + "coupon.php";
+}
+
+function showSendEmailModal() {
+  console.log($("#sendEmailModal"));
+  $("#sendEmailModal").modal("show");
+}
+
+function sendPasswordResetEmail() {
+  let data = {
+    email: $("#sendEmailForPasswordReset").val(),
+  };
+
+  $.ajax({
+    url: apiUrl + "user/resetpassword/send/email",
+    type: "POST",
+    data: data,
+    dataType: "json",
+    success: function (result) {
+      document.getElementById("email-div").style.display = "none";
+      document.getElementById("message-div").style.display = "block";
+    },
+    error: function (xhr, status, error) {
+      var errorMessage = "An error occurred.";
+      if (xhr.responseJSON && xhr.responseJSON.error) {
+        // If the error response contains a specific error message
+        errorMessage = xhr.responseJSON.error;
+      } else if (xhr.responseText) {
+        // If the error response is a string
+        errorMessage = xhr.responseText;
+      } else {
+        // Fallback error message
+        errorMessage = error;
+      }
+      console.log(errorMessage);
+      displayErrorMessages(errorMessage);
+    },
+  });
+}
+
+function resetPassword() {
+  let data = {
+    code: $("#resetcode").val(),
+    password: $("#newPassword").val(),
+    confirm_password: $("#confirmNewPassword").val(),
+  };
+
+  $.ajax({
+    url: apiUrl + "user/reset/password",
+    type: "POST",
+    data: data,
+    dataType: "json",
+    success: function (result) {
+      document.getElementById("password-div").style.display = "none";
+      document.getElementById("password-message-div").style.display = "block";
+    },
+    error: function (xhr, status, error) {
+      var errorMessage = "An error occurred.";
+      if (xhr.responseJSON && xhr.responseJSON.error) {
+        // If the error response contains a specific error message
+        errorMessage = xhr.responseJSON.error;
+      } else if (xhr.responseText) {
+        // If the error response is a string
+        errorMessage = xhr.responseText;
+      } else {
+        // Fallback error message
+        errorMessage = error;
+      }
+      console.log(errorMessage);
+      displayErrorMessages(errorMessage);
     },
   });
 }

@@ -1,10 +1,15 @@
+var map;
+var directionsService;
+var directionsRenderer;
+var mapDiv;
+
 function initMaps() {
-  var directionsService = new google.maps.DirectionsService();
-  var directionsRenderer = new google.maps.DirectionsRenderer();
-  var mapDiv = document.getElementById('maps');
-  var map = new google.maps.Map(mapDiv, {
-    center: {lat: 40.0000, lng: -89.0000},
-    zoom: 8
+  directionsService = new google.maps.DirectionsService();
+  directionsRenderer = new google.maps.DirectionsRenderer();
+  mapDiv = document.getElementById("maps");
+  map = new google.maps.Map(mapDiv, {
+    center: { lat: 40.0, lng: -89.0 },
+    zoom: 8,
   });
   directionsRenderer.setMap(map);
 
@@ -24,7 +29,7 @@ function initMaps() {
     }
 
     pickupMarker.setPosition(place.geometry.location);
-    calculateAndDisplayRoute(directionsService, directionsRenderer);
+    window.calculateAndDisplayRoute(directionsService, directionsRenderer, []);
   });
 
   dropAutocomplete.addListener("place_changed", function () {
@@ -35,25 +40,39 @@ function initMaps() {
     }
 
     dropMarker.setPosition(place.geometry.location);
-    calculateAndDisplayRoute(directionsService, directionsRenderer);
+    window.calculateAndDisplayRoute(directionsService, directionsRenderer, []);
   });
 
-  function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+  window.calculateAndDisplayRoute = function (
+    directionsService,
+    directionsRenderer,
+    stopsGeometry
+  ) {
+    if (stopsGeometry.length != 0) {
+      var waypoints = stopsGeometry.map((locations) => {
+        return {
+          location: locations,
+          stopover: true,
+        };
+      });
+    }
+
     directionsService.route(
       {
         origin: pickupMarker.getPosition(),
         destination: dropMarker.getPosition(),
         travelMode: google.maps.TravelMode.DRIVING,
+        waypoints: waypoints,
       },
       function (response, status) {
         if (status === "OK") {
           directionsRenderer.setDirections(response);
           console.log(response);
           let milesDistance = convertMetersToMiles(
-            response.routes[0].legs[0].distance.value
+            response.routes[0].legs
           );
           console.log(milesDistance);
-          document.getElementById('totalkms').value = milesDistance;
+          document.getElementById("totalkms").value = milesDistance;
           console.log(milesDistance);
         } else {
           window.alert("Directions request failed due to " + status);
@@ -64,6 +83,10 @@ function initMaps() {
 }
 
 function convertMetersToMiles(meters) {
-  const miles = meters / 1609.344;
+  let totalMeters = 0;
+  meters.forEach(element => {
+    totalMeters += element.distance.value;
+  });
+  let miles = totalMeters / 1609.344;
   return miles.toFixed(2);
 }

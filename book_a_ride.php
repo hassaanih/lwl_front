@@ -79,17 +79,19 @@
 											</div>
 										</div>
 										<div class="d-flex justify-content-end mb-4">
-											<div class="step-1-button" onclick="myFunction()" id="airportButton"> Airport</div>
-											<div class="step-1-button" onclick="selectHourlyOption()" id="hourlyButton"> Hourly</div>
+											<div class="step-1-button active-option pointer" onclick="selectTransferOption()" id="transferButton"> Transfer</div>
+											<div class="step-1-button pointer" onclick="myFunction()" id="airportButton"> Airport</div>
+											<div class="step-1-button pointer" onclick="selectHourlyOption()" id="hourlyButton"> Hourly</div>
+
 										</div>
 										<div class="row" id="hourlyEnable" style="display: none;">
-														<div class="col-md-6">
-															<input type="number" id="hour" placeholder="Hours" min="0" max="24">
-														</div>
-														<div class="col-md-6">
-															<input type="number" id="minutes" placeholder="Minutes" min="0" max="24">
-														</div>
-													</div>
+											<div class="col-md-6">
+												<input type="number" id="hour" placeholder="Hours" min="0" max="24">
+											</div>
+											<div class="col-md-6">
+												<input type="number" id="minutes" placeholder="Minutes" min="0" max="24">
+											</div>
+										</div>
 										<div class="row in1">
 											<div class="col-md-6">
 												<label for="pickupdate">* Pick Up Date:</label><input type="date" id="pick" name="pick" placeholder="Pick Up Date">
@@ -103,31 +105,120 @@
 											<div class="col-md-12">
 												<div class="for">
 													<label for="exampleInputEmail1">Pickup Location</label>
-													<input type="text" class="form-control" id="ploc" pattern="^\d+\s[a-zA-Z]+\s[a-zA-Z]+\,\s[a-zA-Z]+\,\sIllinois\s\d{5}\,\s[a-zA-Z]+\s*$">
+													<input type="text" class="form-control" id="ploc" pattern="/^(?=.*\b(Illinois|IL)\b).+$/i">
 													<div class="row">
 														<div class="col-md-12">
-															<p id="text" style="display:none"><input type="text" class="form-control" id="flghno" placeholder="Flight No*"><input type="text" class="form-control" id="flghtm" placeholder="Arrival Timing*"><input type="text" class="form-control" id="airlineName" placeholder="Name Of Airline"><input type="text" class="form-control" id="card" placeholder="Inside Meetup"></p>
+															<p id="text" style="display:none"><input type="text" class="form-control" id="flghno" placeholder="Flight No*">
+																<label for="appt">* Flight time:</label><br><input type="time" id="flghtm" name="time">
+																<select class="form-control" id="airlineName">
+																	<option value="Choose Your Airline">Choose Your Airline</option>
+																	<option value="Aer Lingus">Aer Lingus</option>
+																	<option value="AeroMexico">AeroMexico</option>
+																	<option value="Air Canada">Air Canada</option>
+																	<option value="Air France">Air France</option>
+																	<option value="Air India">Air India</option>
+																	<option value="Alaska Airlines">Alaska Airlines</option>
+																	<option value="All Nippon">All Nippon</option>
+																	<option value="American Airlines">American Airlines</option>
+																	<option value="Austrian Airlines">Austrian Airlines</option>
+																	<option value="British Airways">British Airways</option>
+																	<option value="Cape Air">Cape Air</option>
+																	<option value="Cathay Pacific Airways">Cathay Pacific Airways</option>
+																	<option value="Copa Airlines">Copa Airlines</option>
+																	<option value="Delta and Delta Shuttle">Delta and Delta Shuttle</option>
+																	<option value="Denver Air Connection (Key Lime Air)">Denver Air Connection (Key Lime Air)</option>
+																	<option value="EVA Air">EVA Air</option>
+																	<option value="Emirates">Emirates</option>
+																	<option value="Ethiopian Airlines">Ethiopian Airlines</option>
+																	<option value="Etihad Airways">Etihad Airways</option>
+																	<option value="Finnair">Finnair</option>
+																	<option value="Frontier Airlines">Frontier Airlines</option>
+																	<option value="Iberia Airlines">Iberia Airlines</option>
+																	<option value="Icelandair">Icelandair</option>
+																	<option value="Japan Airlines (JAL)">Japan Airlines (JAL)</option>
+																	<option value="JetBlue">JetBlue</option>
+																	<option value="KLM Royal Dutch">KLM Royal Dutch</option>
+																	<option value="Korean Air">Korean Air</option>
+																	<option value="LOT Polish Airlines">LOT Polish Airlines</option>
+																	<option value="Lufthansa">Lufthansa</option>
+																	<option value="Qatar Airways">Qatar Airways</option>
+																	<option value="Royal Jordanian">Royal Jordanian</option>
+																	<option value="SWISS">SWISS</option>
+																	<option value="Scandinavian Airlines (SAS)">Scandinavian Airlines (SAS)</option>
+																	<option value="Southwest Airlines">Southwest Airlines</option>
+																	<option value="Spirit Airlines">Spirit Airlines</option>
+																	<option value="Sun Country">Sun Country</option>
+																	<option value="TAP Air Portugal">TAP Air Portugal</option>
+																	<option value="Turkish Airlines">Turkish Airlines</option>
+																	<option value="United Airlines">United Airlines</option>
+																	<option value="VivaAerobus">VivaAerobus</option>
+																	<option value="Volaris Airlines">Volaris Airlines</option>
+																	<option value="WestJet">WestJet</option>
+																</select>
+
+
+
+																<body>
+																	<label for="checkbox">Inside Meetup:<span style="color: red; font-size: 14px;"> &nbsp; (If you want us to welcome you inside the airport with a Card.)</span></label> <br>
+																	<input type="checkbox" id="checkbox" name="options" value="yes" onclick="toggleTextField(this)"><label for="vehicle1" class="in_yesno"> Yes</label>
+																	<input type="checkbox" id="checkbox" name="options" value="no" onclick="toggleTextField(this)"><label for="vehicle1" class="in_yesno"> No</label>
+
+																	<div class="text-field" id="text-field">
+																		<label for="text-input">Additional Message:</label>
+																		<textarea placeholder="" id="card"></textarea>
+																	</div>
+
+																	<!-- <script>
+																		// Set the default value to "No"
+																		var checkbox = document.getElementById("checkbox");
+																		checkbox.checked = false;
+																		toggleTextField();
+																	</script> -->
+																	<style>
+																		#msform label.in_yesno {
+																			padding: 0 10px 0 10px;
+																			font-family: 'Poppins';
+																			font-size: 18px;
+																			font-weight: 600;
+																		}
+
+																		#msform .text-field {
+																			display: none;
+																		}
+
+																		#msform input#checkbox {
+																			padding: 0 0px 0 0px !IMPORTANT;
+																			margin: unset !important;
+																			box-shadow: unset;
+																			width: auto;
+																		}
+																	</style>
+
+
+															</p>
 														</div>
 
 													</div>
-													
+
 													<input type="hidden" id="totalkms">
+													<input type="hidden" id="bookingDetailsId">
 												</div>
 												<div class="for">
 													<label id="addEmail" class="link" onclick="addStop()">Add Additional Pickup Location</label>
 													<label id="removeEmail" class="link" onclick="removeStop()">Remove Additional Pickup Location</label>
 
 												</div>
-												<div id="more-email"></div>
+
 											</div>
 										</div>
 
 										<div class="row in3">
 											<div class="col-md-12">
 												<label for="address">* Dropoff Location:</label>
-												<br><input type="text" id="daddress" name="daddress" pattern="^\d+\s[a-zA-Z]+\s[a-zA-Z]+\,\s[a-zA-Z]+\,\sIllinois\s\d{5}\,\s[a-zA-Z]+\s*$">
+												<br><input type="text" id="daddress" name="daddress">
 											</div>
 										</div>
+										<div id="more-email"></div>
 										<div class="row in4">
 											<div class="col-md-3">
 												<label for="address">*Travellers:</label>
@@ -139,13 +230,13 @@
 											<div class="col-md-3">
 												<label for="address">*Bags:</label>
 												<div class="quantity buttons_added">
-													<input type="button" value="-" class="minus"><input id="kidsNumber" type="number" step="1" min="0" max="" name="quantity" value="0" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
+													<input type="button" value="-" class="minus"><input id="bagsNumber" type="number" step="1" min="0" max="" name="quantity" value="0" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
 												</div>
 											</div>
 											<div class="col-md-3">
 												<label for="address">Child Seat:</label>
 												<div class="quantity buttons_added">
-													<input type="button" value="-" class="minus"><input id="bagsNumber" type="number" step="1" min="0" max="" name="quantity" value="0" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
+													<input type="button" value="-" class="minus"><input id="kidsNumber" type="number" step="1" min="0" max="" name="quantity" value="0" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
 												</div>
 											</div>
 											<div class="col-md-12 ds">
@@ -243,7 +334,7 @@
 												<div class="row">
 													<div class="col-md-6">
 														<div class="info_pop">
-															<span class="icon"><i class="fa fa-users" aria-hidden="true"></i>5</span>
+															<span class="icon"><i class="fa fa-users" aria-hidden="true"></i>6</span>
 															<span class="icon"><i class="fa fa-suitcase" aria-hidden="true"></i>3</span>
 														</div>
 													</div>
@@ -339,10 +430,10 @@
 													<input type="hidden" value="false" class="_vehicleZeroRateDisableBooking notranslate">
 													<button type="button" class="car picked" onclick="selectVehicleType(1, 0)">
 
-														<div class="pop">
+														<!-- <div class="pop">
 															<a type="popu" class="popp" data-toggle="modal" data-target="#exampleModalCenter"><span class="icon info" title="More Info"><i class="fa fa-info"></i></span></a>
 
-														</div>
+														</div> -->
 
 														<div class="car_img">
 															<img src="assets/images/sedan.png">
@@ -354,7 +445,7 @@
 															<span class="icon"><i class="fa fa-users" aria-hidden="true"></i>4</span>
 															<span class="icon"><i class="fa fa-suitcase" aria-hidden="true"></i>2</span>
 														</div>
-														<div class="car-price _vehiclePrice"><ins>USD</ins>$95</div>
+														<div class="car-price _vehiclePrice"><ins>USD </ins><span id="sedanPrice"></span></div>
 													</button>
 												</div>
 												<div class="col-md-12">
@@ -362,35 +453,35 @@
 													<input type="hidden" value="Sedan" class="_vehicleSummary notranslate">
 													<input type="hidden" value="false" class="_vehicleZeroRateDisableBooking notranslate">
 													<button type="button" class="car picked" onclick="selectVehicleType(2, 0)">
-														<div class="pop">
+														<!-- <div class="pop">
 															<a type="popu" class="popp" data-toggle="modal" data-target="#exampleModalCenterSuv"><span class="icon info" title="More Info"><i class="fa fa-info"></i></span></a>
 
-														</div>
+														</div> -->
 
-														<div class="car_img">
+														<div class="car_img suvv">
 															<img src="assets/images/suv1.jpg">
 														</div>
 														<div class="car-info">
 															<p>SUV</p>
 														</div>
 														<div class="car-volume">
-															<span class="icon"><i class="fa fa-users" aria-hidden="true"></i>5</span>
+															<span class="icon"><i class="fa fa-users" aria-hidden="true"></i>6</span>
 															<span class="icon"><i class="fa fa-suitcase" aria-hidden="true"></i>3</span>
 														</div>
-														<div class="car-price _vehiclePrice"><ins>USD</ins>$115</div>
+														<div class="car-price _vehiclePrice"><ins>USD </ins><span id="suvPrice"></span></div>
 													</button>
 												</div>
 												<div class="col-md-12">
 													<div class="select-dropdown">
 														<select id="vehicles" onchange="handleOnchange(this)">
-															<option value="Option 1" class="op1">Choose Your Own Car</option>
+															<option value="" class="op1">Choose Your Own Car</option>
 
 														</select>
 													</div>
 												</div>
 											</div>
 										</div>
-										<div class="col-md-5">
+										<div class="col-md-5" id="bookingSummaryPg2">
 											<h3>BOOKING SUMMARY</h3>
 											<div class="book">
 												<div class="pdate">
@@ -451,7 +542,7 @@
 												<div class="kid">
 													<div class="row">
 														<div class="col-md-6">
-															<h4>No. Of Childern</h4>
+															<h4>No. Of Child Seat</h4>
 														</div>
 														<div class="col-md-6">
 															<p id="children-number-summary">N/A</p>
@@ -470,14 +561,33 @@
 													</div>
 												</div>
 
+												<div class="bag">
+													<div class="row">
+														<div class="col-md-6">
+															<h4>Total Miles</h4>
+														</div>
+														<div class="col-md-6">
+															<p id="total_miles_summary">N/A</p>
+														</div>
+													</div>
+												</div>
+
 												<div class="lne"></div>
 												<div class="amount">
-													<div class="row">
+													<div class="row d-none">
 														<div class="col-md-6">
 															<h4>Total</h4>
 														</div>
 														<div class="col-md-6">
 															<h4 id="total-charges">N/A</h4>
+														</div>
+													</div>
+													<div class="row">
+														<div class="col-md-12">
+															<span class="font-weight-bold text-danger">Note: </span>
+														</div>
+														<div class="col-md-12">
+															<p class="text-danger text-left">Add-ons will be added as per lightwaterlimo policies <a href="https://lightwaterlimo.com/terms-conditions/">Click Here</a> to view our policies and terms and conditions</p>
 														</div>
 													</div>
 												</div>
@@ -533,7 +643,12 @@
 														<input type="email" name="cemail" id="cemail" placeholder="*Contact Email">
 													</div> -->
 													<div class="col-md-6">
-														<input type="text" name="tip" id="tip" placeholder="*Enter Tip For the Driver">
+														<input type="text" name="tip" id="tip" placeholder="*Enter Tip" onchange="addTipForDriver(event)">
+													</div>
+
+													<div class="col-md-6 d-flex">
+														<input type="text" id="coupon-code" placeholder="Coupon Code" width="100%">
+														<button type="button" id="ccode" onclick="applyCoupon()">Apply</button>
 													</div>
 												</div>
 											</div>
@@ -656,7 +771,7 @@
 												<div class="kid">
 													<div class="row">
 														<div class="col-md-6">
-															<h4>No. Of Childern</h4>
+															<h4>No. Of Child Seat</h4>
 														</div>
 														<div class="col-md-6">
 															<p id="children-number-summary-checkout">N/A</p>
@@ -681,6 +796,16 @@
 														</div>
 														<div class="col-md-6">
 															<p id="car-selected-summary-checkout">N/A</p>
+														</div>
+													</div>
+												</div>
+												<div class="bag">
+													<div class="row">
+														<div class="col-md-6">
+															<h4>Total Miles</h4>
+														</div>
+														<div class="col-md-6">
+															<p id="total_miles_summary_checkout">N/A</p>
 														</div>
 													</div>
 												</div>
@@ -748,6 +873,10 @@
 
 					</div>
 				</div>
+				<section class="footer">
+					<p style="font-weight: 400; text-align: center; font-size: 15px; margin-top: 40px"><a style="color:#000; font-weight:600;" href="https://lightwaterlimo.com/">All Rights Reserved 2023 By Light Water Limo </a><br><a style="color:#000; font-weight:600;" href="https://1solpk.com/">Developed By 1 Sol Digital Services (SMC-Private) Ltd.</a> </p>
+				</section>
+
 			</div>
 		</div>
 	</section>
@@ -796,6 +925,22 @@
 		// STEP FORM 
 		$(document).ready(function() {
 
+			var timeInput = document.getElementById('time');
+			var now = new Date();
+			var hours = now.getHours().toString().padStart(2, '0');
+			var minutes = now.getMinutes().toString().padStart(2, '0');
+			var currentTime = hours + ':' + minutes;
+			timeInput.value = currentTime;
+
+			//date
+			var dateInput = document.getElementById('pick');
+			var now = new Date();
+			var year = now.getFullYear();
+			var month = (now.getMonth() + 1).toString().padStart(2, '0');
+			var day = now.getDate().toString().padStart(2, '0');
+			var currentDate = year + '-' + month + '-' + day;
+			dateInput.value = currentDate;
+
 			var current_fs, next_fs, previous_fs; //fieldsets
 			var opacity;
 			var current = 1;
@@ -812,7 +957,25 @@
 
 				//Remove class active
 				$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+				// bookings/previous
+				$.ajax({
+					url: apiUrl + "bookings/previous",
+					type: "POST",
+					data: {
+						id: $('#bookingDetailsId').val()
+					},
+					dataType: "json",
+					success: function(result) {
+						// result contains the response from the server-side PHP script
+						// you can use this result to update the UI or perform other operations
+						// sendToNextView();
+						$("#vehicles").val("");
+					},
+					error: function(xhr, status, error) {
 
+						console.log(error);
+					},
+				});
 				//show the previous fieldset
 				previous_fs.show();
 
@@ -845,8 +1008,6 @@
 
 		});
 	</script>
-	<script src="assets/js/googlemap.js"></script>
-	<script src="assets/js/apilinking.js"></script>
+	<script src="assets/js/googlemap.js?v=1.1.1"></script>
+	<script src="assets/js/apilinking.js?v=1.2.5"></script>
 </body>
-
-</html>
