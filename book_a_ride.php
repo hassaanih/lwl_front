@@ -100,26 +100,6 @@
 												<label for="appt">* Pickup time:</label><br>
 												<input type="time" id="time" name="time">
 											</div>
-
-											<script>
-												window.onload = function() {
-													var timeInput = document.getElementById('time');
-													var now = new Date();
-													var hours = now.getHours().toString().padStart(2, '0');
-													var minutes = now.getMinutes().toString().padStart(2, '0');
-													var currentTime = hours + ':' + minutes;
-													timeInput.value = currentTime;
-
-													//date
-													var dateInput = document.getElementById('pick');
-													var now = new Date();
-													var year = now.getFullYear();
-													var month = (now.getMonth() + 1).toString().padStart(2, '0');
-													var day = now.getDate().toString().padStart(2, '0');
-													var currentDate = year + '-' + month + '-' + day;
-													dateInput.value = currentDate;
-												};
-											</script>
 										</div>
 										<div class="row in2">
 											<div class="col-md-12">
@@ -944,6 +924,22 @@
 
 		// STEP FORM 
 		$(document).ready(function() {
+
+			var timeInput = document.getElementById('time');
+			var now = new Date();
+			var hours = now.getHours().toString().padStart(2, '0');
+			var minutes = now.getMinutes().toString().padStart(2, '0');
+			var currentTime = hours + ':' + minutes;
+			timeInput.value = currentTime;
+
+			//date
+			var dateInput = document.getElementById('pick');
+			var now = new Date();
+			var year = now.getFullYear();
+			var month = (now.getMonth() + 1).toString().padStart(2, '0');
+			var day = now.getDate().toString().padStart(2, '0');
+			var currentDate = year + '-' + month + '-' + day;
+			dateInput.value = currentDate;
 
 			var current_fs, next_fs, previous_fs; //fieldsets
 			var opacity;
