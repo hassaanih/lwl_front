@@ -100,6 +100,26 @@
 												<label for="appt">* Pickup time:</label><br>
 												<input type="time" id="time" name="time">
 											</div>
+
+											<script>
+												window.onload = function() {
+													var timeInput = document.getElementById('time');
+													var now = new Date();
+													var hours = now.getHours().toString().padStart(2, '0');
+													var minutes = now.getMinutes().toString().padStart(2, '0');
+													var currentTime = hours + ':' + minutes;
+													timeInput.value = currentTime;
+
+													//date
+													var dateInput = document.getElementById('pick');
+													var now = new Date();
+													var year = now.getFullYear();
+													var month = (now.getMonth() + 1).toString().padStart(2, '0');
+													var day = now.getDate().toString().padStart(2, '0');
+													var currentDate = year + '-' + month + '-' + day;
+													dateInput.value = currentDate;
+												};
+											</script>
 										</div>
 										<div class="row in2">
 											<div class="col-md-12">
@@ -941,23 +961,25 @@
 
 				//Remove class active
 				$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
-					// bookings/previous
-					$.ajax({
-						url: apiUrl + "bookings/previous",
-						type: "POST",
-						data: {id: $('#bookingDetailsId').val()},
-						dataType: "json",
-						success: function(result) {
-							// result contains the response from the server-side PHP script
-							// you can use this result to update the UI or perform other operations
-							// sendToNextView();
-							$("#vehicles").val("");
-						},
-						error: function(xhr, status, error) {
-							
-							console.log(error);
-						},
-					});
+				// bookings/previous
+				$.ajax({
+					url: apiUrl + "bookings/previous",
+					type: "POST",
+					data: {
+						id: $('#bookingDetailsId').val()
+					},
+					dataType: "json",
+					success: function(result) {
+						// result contains the response from the server-side PHP script
+						// you can use this result to update the UI or perform other operations
+						// sendToNextView();
+						$("#vehicles").val("");
+					},
+					error: function(xhr, status, error) {
+
+						console.log(error);
+					},
+				});
 				//show the previous fieldset
 				previous_fs.show();
 
