@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Home Page</title>
+    <title>Lightwaterlimo | Admin Dashboard</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

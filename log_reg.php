@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Home Page</title>
+  <title>Login|Signup</title>
   <meta name="keywords" content="">
   <meta name="description" content="">
 
