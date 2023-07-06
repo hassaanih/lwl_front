@@ -266,7 +266,7 @@
         <input type="text" id="signinEmail" placeholder="Enter email or username" />
         <input type="password" id="signinPassword" placeholder="Enter password" />
         <button type="button" class="btn login" onclick="signin()">login</button>
-        <p><a href="javascript:void(0)" onclick="showSendEmailModal()">Forgotten account</a></p>
+        <p><a href="javascript:void(0)" onclick="showSendEmailModal()">Forget Password</a></p>
         <hr />
 
       </form>
