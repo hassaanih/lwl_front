@@ -426,54 +426,67 @@
                 </div>
                 <div class="modal-body">
                     <input type="hidden" id="booking_id">
+                    <input type="hidden" id="booking__details_id">
                     <div class="row">
                         <div class="mb-5 col-3 d-flex align-items-center">
                             <label class="form-label font-weight-bold">First Name:</label>
                         </div>
                         <div class="mb-5 col-9">
-                            <label id="first-name-details"></label>
+                            <input class="form-control" type="text" id="first-name-details">
                         </div>
                         <div class="mb-5 col-3 d-flex align-items-center">
                             <label class="form-label font-weight-bold">Last Name:</label>
                         </div>
                         <div class="mb-5 col-9">
-                            <label id="last-name-details">N/A</label>
+                            <input class="form-control" type="text" id="last-name-details">
                         </div>
                         <div class="mb-5 col-3 d-flex align-items-center">
                             <label class="form-label font-weight-bold">Pickup Location:</label>
                         </div>
                         <div class="mb-5 col-9">
-                            <label id="pickup-location-details">N/A</label>
+                            <input class="form-control" type="text" id="pickup-location-details">
                         </div>
                         <div class="mb-5 col-3 d-flex align-items-center">
                             <label class="form-label font-weight-bold">Drop Location:</label>
                         </div>
                         <div class="mb-5 col-9">
-                            <label id="drop-location-details">N/A</label>
+                            <input class="form-control" type="text" id="drop-location-details">
                         </div>
                         <div class="mb-5 col-3 d-flex align-items-center">
                             <label class="form-label font-weight-bold">Driver Tip:</label>
                         </div>
                         <div class="mb-5 col-9">
-                            <label id="driver-tip-details">N/A</label>
+                            <input class="form-control" type="text" id="driver-tip-details">
+                        </div>
+                        <div class="mb-5 col-3 d-flex align-items-center">
+                            <label class="form-label font-weight-bold">Pickup Date:</label>
+                        </div>
+                        <div class="mb-5 col-9">
+                            <input class="form-control" type="date" id="pickup-date-details">
+                        </div>
+                        <div class="mb-5 col-3 d-flex align-items-center">
+                            <label class="form-label font-weight-bold">Pickup Time:</label>
+                        </div>
+                        <div class="mb-5 col-9">
+                            <input class="form-control" type="time" id="pickup-time-details">
                         </div>
                         <div class="mb-5 col-3 d-flex align-items-center">
                             <label class="form-label font-weight-bold">Driver Name:</label>
                         </div>
                         <div class="mb-5 col-9">
-                            <label id="driver-name-details">N/A</label>
+                            <input class="form-control" type="text" id="driver-name-details">
                         </div>
                         <div class="mb-5 col-3 d-flex align-items-center">
                             <label class="form-label font-weight-bold">Driver Payment:</label>
                         </div>
                         <div class="mb-5 col-9">
-                            <label id="driver-payment-details">N/A</label>
+                            <input class="form-control" type="text" id="driver-payment-details">
                         </div>
                         <div class="mb-5 col-3 d-flex align-items-center">
                             <label class="form-label font-weight-bold">Additional Remarks:</label>
                         </div>
                         <div class="mb-5 col-9">
-                            <label id="additional-remarks-details">N/A</label>
+                            <input class="form-control" type="text" id="additional-remarks-details">
                         </div>
                         <div class="mb-5 col-3 d-flex align-items-center">
                             <label class="form-label font-weight-bold">Vehicle Type:</label>
@@ -530,6 +543,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="updateDetailsModal()">Update</button>
                 </div>
             </div>
         </div>
@@ -542,7 +556,7 @@
     <script type="text/javascript">
         $(function() {
             $('.page-datatable-ajax').dataTable({
-                order: [0, "asc"],
+                order: [0, "desc"],
                 ajax: apiUrl + 'bookings/findAll',
                 lengthMenu: [10, 25, 50, 100, 500],
                 responsive: true,
@@ -732,7 +746,7 @@
                             // Modify the data for the first column
                             return `
                             <button type="button" class="btn btn-dark open-modal-button drv mr-2">Assign To Driver</button>
-                            <button type="button" class="btn btn-dark open-detail-modal-button mt-2 mr-2 drv" style="width: 100%;">View Details</button>
+                            <button type="button" class="btn btn-dark open-detail-modal-button mt-2 mr-2 drv" style="width: 100%;">View/Edit Details</button>
                             <button type="button" class="self mr-2">Self</button>
                             <button type="button" class="complete-ride mr-2 btn btn-dark mt-2" style="width: 100%;">Completed</button>
                             <button type="button" class="btn btn-danger cancel-ride-button drv">Cancel Ride</button>
@@ -902,16 +916,65 @@
                 $("#details-modal").modal('show');
             }
 
+            function updateDetailsModal() {
+                let data = {
+                    booking_id: $('#booking_id').val(),
+                    booking_details_id: $('#booking_details_id').val(),
+                    first_name: $('#first-name-details').val(),
+                    last_name: $('#last-name-details').val(),
+                    pickup_location: $('#pickup-location-details').val(),
+                    drop_location: $('#drop-location-details').val(),
+                    pickup_time: $('#pickup-time-details').val(),
+                    pickup_date: $('#pickup-date-details').val(),
+                    tip_for_driver: $('#driver-tip-details').val(),
+                    diver_name: $('#driver-name-details').val(),
+                    driver_payment: $('#driver-payment-details').val(),
+                    specail_intruction: $('#additional-remarks-details').val(),
+                }
+                $ajax({
+                    url: apiUrl + "booking/details/update",
+                    type: "POST",
+                    data: data,
+                    dataType: "json",
+                    success: function(result) {
+                        // result contains the response from the server-side PHP script
+                        // you can use this result to update the UI or perform other operations
+                        // sendToNextView();
+                        let booking = result.booking;
+                        // setValueToDetailsModal(booking)
+                        console.log(result);
+                    },
+                    error: function(xhr, status, error) {
+                        var errorMessage = "An error occurred.";
+                        if (xhr.responseJSON && xhr.responseJSON.error) {
+                            // If the error response contains a specific error message
+                            errorMessage = xhr.responseJSON.error;
+                        } else if (xhr.responseText) {
+                            // If the error response is a string
+                            errorMessage = xhr.responseText;
+                        } else {
+                            // Fallback error message
+                            errorMessage = error;
+                        }
+                        console.log(errorMessage);
+                        displayErrorMessages(errorMessage);
+                    },
+                });
+                $("#details-modal").modal('hide');
+            }
+
             function setValueToDetailsModal(booking) {
                 console.log(booking)
-                $('#first-name-details').text(booking.first_name);
-                $('#last-name-details').text(booking.last_name);
-                $('#pickup-location-details').text(booking.details.pickup_location);
-                $('#drop-location-details').text(booking.details.drop_location);
-                $('#driver-tip-details').text(booking.tip_for_driver);
-                $('#driver-name-details').text(booking.diver_name);
-                $('#driver-payment-details').text(booking.driver_payment);
-                $('#additional-remarks-details').text(booking.specail_intruction);
+                $('#first-name-details').val(booking.first_name);
+                $('#last-name-details').val(booking.last_name);
+                $('#pickup-location-details').val(booking.details.pickup_location);
+                $('#drop-location-details').val(booking.details.drop_location);
+                $('#driver-tip-details').val(booking.tip_for_driver);
+                $('#driver-name-details').val(booking.diver_name);
+                $('#driver-payment-details').val(booking.driver_payment);
+                $('#additional-remarks-details').val(booking.specail_intruction);
+                $('#pickup-time-details').val(booking.details.pickup_time);
+                $('#pickup-date-details').val(new Date(booking.details.pickup_date).toISOString().slice(0, 10));
                 $('#vehicle-type-detail').text(booking.details.vehicle_type.name);
                 $('#vehicle-detail').text(booking.details.vehicle == null ? 'Any Vehicle' : booking.details.vehicle.company + ' ' + booking.details.vehicle.model);
                 $('#traveller-detail').text(booking.details.travellers);
@@ -919,6 +982,8 @@
                 $('#bags-detail').text(booking.details.bags);
                 $('#inside-meetup-detail').text(booking.details.onsight_meetup == null ? 'No' : 'Yes');
                 $('#total-miles-detail').text(booking.details.total_km);
+                $('#booking_details_id').val(booking.details.id);
+
 
 
 
