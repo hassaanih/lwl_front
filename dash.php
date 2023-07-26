@@ -426,7 +426,7 @@
                 </div>
                 <div class="modal-body">
                     <input type="hidden" id="booking_id">
-                    <input type="hidden" id="booking__details_id">
+                    <input type="hidden" id="booking_details_id">
                     <div class="row">
                         <div class="mb-5 col-3 d-flex align-items-center">
                             <label class="form-label font-weight-bold">First Name:</label>
@@ -543,7 +543,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="updateDetailsModal()">Update</button>
+                    <button type="button" id="updateButton" class="btn btn-primary">Update</button>
                 </div>
             </div>
         </div>
@@ -875,6 +875,10 @@
                 // Open the modal and populate the data
                 openDetailsModal();
             });
+            
+            $('#updateButton').on('click', function(){
+                updateDetailsModal();
+            })
 
             function openModal() {
                 $('#exampleModal').modal('show');
@@ -931,7 +935,7 @@
                     driver_payment: $('#driver-payment-details').val(),
                     specail_intruction: $('#additional-remarks-details').val(),
                 }
-                $ajax({
+                $.ajax({
                     url: apiUrl + "booking/details/update",
                     type: "POST",
                     data: data,
@@ -942,6 +946,7 @@
                         // sendToNextView();
                         let booking = result.booking;
                         // setValueToDetailsModal(booking)
+                        $(".page-datatable-ajax").DataTable().ajax.reload(null, false);
                         console.log(result);
                     },
                     error: function(xhr, status, error) {
